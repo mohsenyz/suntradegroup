@@ -5,7 +5,7 @@ export interface ProductVariant {
   price: number;
   priceModifier: number;
   stock: number;
-  properties: Record<string, string>;
+  properties: Record<string, string> | object;
   images: string[];
   availability: boolean;
   isDefault?: boolean;
@@ -32,8 +32,8 @@ export interface Product {
   mainImage: string;
   shortDescription: string;
   fullDescription: string;
-  properties: Record<string, string>;
-  specifications: Record<string, string>;
+  properties: Record<string, string> | object;
+  specifications: Record<string, string> | object;
   variants?: ProductVariant[];
   availability: boolean;
   featured: boolean;

@@ -146,7 +146,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
               {Object.entries(getDisplayProperties()).map(([key, value]) => (
                 <div key={key} className="bg-gray-50 p-3 rounded-lg">
                   <div className="text-sm text-gray-600">{key}</div>
-                  <div className="font-semibold text-gray-800">{value}</div>
+                  <div className="font-semibold text-gray-800">{value as string}</div>
                 </div>
               ))}
             </div>

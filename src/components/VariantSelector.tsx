@@ -137,7 +137,7 @@ const VariantSelector: React.FC<VariantSelectorProps> = ({
                     }
                   `}
                 >
-                  {variant[groupKey as keyof ProductVariant]}
+                  {String(variant[groupKey as keyof ProductVariant])}
                   {!isAvailable && productCurrency !== "تماس بگیرید" && (
                     <span className="text-xs block text-red-500">
                       ناموجود

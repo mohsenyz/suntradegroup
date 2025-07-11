@@ -9,7 +9,6 @@ import { ProductData } from '@/types';
 
 export default function Home() {
   const productData = data as ProductData;
-  const featuredProducts = productData.products.filter(product => product.featured);
   const allProducts = productData.products;
 
   return (

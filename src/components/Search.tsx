@@ -232,7 +232,8 @@ const Search: React.FC<SearchProps> = ({
     }
   };
 
-  const handleResultClick = (result: SearchResult) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleResultClick = (_result: SearchResult) => {
     setQuery('');
     setResults([]);
     setIsOpen(false);
