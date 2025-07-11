@@ -39,3 +39,21 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# data files and scraped content
+*.json
+product_details/
+products_page.html
+
+# utility scripts
+clean_images.js
+enhanced_parser.js
+fetch_api_data.sh
+fetch_product_details.sh
+final_parser.js
+generate-placeholders.js
+parse_products.js
+download-missing-images.js
+
+# generated mappings
+image-mapping.json

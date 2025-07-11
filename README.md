@@ -1,36 +1,156 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# گروه تجاری آفتاب - وب‌سایت نمونه کار
 
-## Getting Started
+وب‌سایت نمونه کار محصولات برای گروه تجاری آفتاب که با Next.js، React، TypeScript و Tailwind CSS ساخته شده است.
 
-First, run the development server:
+## ویژگی‌های وب‌سایت
 
+### طراحی و ظاهر
+- ✅ طراحی RTL (راست به چپ) برای زبان فارسی
+- ✅ رنگ‌بندی طلایی-قرمز مطابق با محصولات
+- ✅ طراحی واکنش‌گرا (Responsive) برای موبایل و دسکتاپ
+- ✅ انیمیشن‌ها و افکت‌های تعاملی
+- ✅ فونت فارسی Vazirmatn
+
+### صفحات اصلی
+- ✅ **صفحه اصلی** - اسلایدر قهرمان، معرفی شرکت، اسلایدر محصولات
+- ✅ **صفحه محصولات** - لیست کامل محصولات با فیلتر
+- ✅ **صفحه جزئیات محصول** - اسلایدر تصاویر، مشخصات، قیمت، دکمه‌های اشتراک‌گذاری
+- ✅ **صفحه برندها** - لیست برندها و محصولات هر برند
+- ✅ **صفحه دسته‌بندی‌ها** - دسته‌بندی محصولات
+- ✅ **درباره ما** - معرفی شرکت، تاریخچه، ماموریت
+- ✅ **تماس با ما** - فرم تماس، اطلاعات تماس
+
+### ویژگی‌های فنی
+- ✅ **Next.js 15** با App Router
+- ✅ **Static Site Generation (SSG)** - تولید فایل‌های HTML استاتیک
+- ✅ **TypeScript** برای type safety
+- ✅ **Tailwind CSS v4** برای استایل‌دهی
+- ✅ **SEO بهینه** - meta tags، sitemap، robots.txt
+- ✅ **PWA آماده** - manifest.json
+- ✅ **داده‌های JSON محلی** - بدون نیاز به دیتابیس
+
+### کامپوننت‌ها
+- ✅ Header با منوی موبایل
+- ✅ Footer کامل
+- ✅ اسلایدر محصولات (react-slick)
+- ✅ کارت محصول با hover effects
+- ✅ اسلایدر تصاویر محصول
+- ✅ دکمه‌های اشتراک‌گذاری
+- ✅ کامپوننت‌های SEO
+
+## نصب و راه‌اندازی
+
+### پیش‌نیازها
+- Node.js 18 یا بالاتر
+- npm یا yarn
+
+### مراحل نصب
+
+1. **نصب dependencies**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **تولید تصاویر placeholder**
+```bash
+npm run generate-images
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **اجرای محیط توسعه**
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+وب‌سایت در آدرس `http://localhost:3000` در دسترس خواهد بود.
 
-## Learn More
+## تولید فایل‌های استاتیک
 
-To learn more about Next.js, take a look at the following resources:
+### برای تولید فایل‌های آماده deploy:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+فایل‌های استاتیک در پوشه `out/` تولید می‌شوند.
 
-## Deploy on Vercel
+### اجرای فایل‌های استاتیک به صورت محلی:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run serve
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ساختار پروژه
+
+```
+product-portfolio/
+├── src/
+│   ├── app/                    # صفحات Next.js
+│   │   ├── page.tsx           # صفحه اصلی
+│   │   ├── layout.tsx         # Layout کلی
+│   │   ├── products/          # صفحات محصولات
+│   │   ├── brands/            # صفحات برندها
+│   │   ├── categories/        # صفحات دسته‌بندی
+│   │   ├── about/             # درباره ما
+│   │   └── contact/           # تماس با ما
+│   ├── components/            # کامپوننت‌های React
+│   ├── data/                  # فایل‌های JSON
+│   ├── types/                 # TypeScript types
+│   └── utils/                 # توابع کمکی
+├── public/
+│   └── images/               # تصاویر استاتیک
+├── out/                      # فایل‌های استاتیک build شده
+└── ...
+```
+
+## ویرایش محصولات
+
+برای اضافه/ویرایش محصولات، فایل `src/data/products.json` را ویرایش کنید:
+
+```json
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "نام محصول",
+      "slug": "product-slug",
+      "brand": "نام برند",
+      "category": "دسته‌بندی",
+      "price": 100000,
+      "images": ["/images/products/product.jpg"],
+      "description": "توضیحات محصول",
+      ...
+    }
+  ],
+  "brands": [...],
+  "categories": [...],
+  "companyInfo": {...}
+}
+```
+
+## Deploy کردن
+
+### Deploy روی سرور استاتیک:
+1. فایل‌های موجود در پوشه `out/` را به سرور وب کپی کنید
+2. وب سرور باید فایل‌های `.html` را serve کند
+
+### Deploy روی GitHub Pages:
+1. فایل‌های `out/` را به branch `gh-pages` پوش کنید
+2. GitHub Pages را در تنظیمات repository فعال کنید
+
+### Deploy روی Netlify/Vercel:
+1. پوشه `out/` را به صورت مستقیم آپلود کنید
+
+## سفارشی‌سازی
+
+### تغییر رنگ‌ها:
+فایل `tailwind.config.js` و `src/app/globals.css` را ویرایش کنید.
+
+### اضافه کردن صفحات جدید:
+در پوشه `src/app/` صفحه جدید بسازید.
+
+### تغییر اطلاعات شرکت:
+بخش `companyInfo` در فایل `src/data/products.json` را ویرایش کنید.
+
+---
+
+**ساخته شده با ❤️ برای گروه تجاری آفتاب**
