@@ -23,8 +23,8 @@ export class JsonApiClient {
   private async makeRequest(
     endpoint: string, 
     method: string = 'GET', 
-    data?: any
-  ): Promise<any> {
+    data?: unknown
+  ): Promise<unknown> {
     const url = `${this.baseUrl}${endpoint}`;
     
     const options: RequestInit = {
@@ -59,7 +59,7 @@ export class JsonApiClient {
       console.log(`[API Success] ${method} ${url}`);
       return result;
     } catch (error) {
-      if (error instanceof TypeError && error.message.includes('fetch')) {
+      if (error instanceof TypeError && (error as Error).message.includes('fetch')) {
         console.error('[API] Connection failed - is the PHP server running on http://localhost:8080?');
         throw new Error('Cannot connect to API server. Please start the PHP server.');
       }
@@ -69,29 +69,29 @@ export class JsonApiClient {
   }
 
   // List all JSON files
-  async listFiles(): Promise<any[]> {
-    const response = await this.makeRequest('/');
+  async listFiles(): Promise<unknown[]> {
+    const response = await this.makeRequest('/') as { files?: unknown[] };
     return response.files || [];
   }
 
   // Get a specific JSON file
-  async getFile(filename: string): Promise<any> {
+  async getFile(filename: string): Promise<unknown> {
     const response = await this.makeRequest(`/${filename}`);
     return response.data;
   }
 
   // Save/update a JSON file
-  async saveFile(filename: string, data: any): Promise<any> {
+  async saveFile(filename: string, data: unknown): Promise<unknown> {
     return await this.makeRequest('/', 'POST', { filename, data });
   }
 
   // Delete a JSON file
-  async deleteFile(filename: string): Promise<any> {
+  async deleteFile(filename: string): Promise<unknown> {
     return await this.makeRequest(`/${filename}`, 'DELETE');
   }
 
   // Get file info (metadata)
-  async getFileInfo(filename: string): Promise<any> {
+  async getFileInfo(filename: string): Promise<unknown> {
     const response = await this.makeRequest(`/${filename}`);
     return {
       filename: response.filename,
@@ -101,7 +101,7 @@ export class JsonApiClient {
   }
 
   // Initialize backend with data
-  async initializeBackend(data: Record<string, any>): Promise<any> {
+  async initializeBackend(data: Record<string, unknown>): Promise<unknown> {
     return await this.makeRequest('/init', 'POST', { data });
   }
 
@@ -110,14 +110,14 @@ export class JsonApiClient {
     try {
       const files = await this.listFiles();
       const requiredFiles = ['products', 'categories', 'brands', 'texts-common', 'texts-pages', 'texts-forms'];
-      const existingFiles = files.map((f: any) => f.name);
+      const existingFiles = files.map((f: unknown) => f.name);
       const missing = requiredFiles.filter(file => !existingFiles.includes(file));
       
       return {
         initialized: missing.length === 0,
         missing
       };
-    } catch (error) {
+    } catch {
       return {
         initialized: false,
         missing: ['products', 'categories', 'brands', 'texts-common', 'texts-pages', 'texts-forms']
@@ -135,7 +135,7 @@ export const jsonApi = {
   async loadProducts() {
     try {
       return await apiClient.getFile('products');
-    } catch (error) {
+    } catch {
       console.warn('Failed to load products from API, using local fallback');
       // Fallback to local data
       const response = await fetch('/src/data/products.json');
@@ -144,7 +144,7 @@ export const jsonApi = {
   },
 
   // Save products
-  async saveProducts(products: any) {
+  async saveProducts(products: unknown) {
     return await apiClient.saveFile('products', products);
   },
 
@@ -152,7 +152,7 @@ export const jsonApi = {
   async loadTexts(category: string = 'common') {
     try {
       return await apiClient.getFile(`texts-${category}`);
-    } catch (error) {
+    } catch {
       console.warn(`Failed to load texts-${category} from API, using local fallback`);
       // Fallback to local data
       const response = await fetch(`/src/data/texts/${category}.json`);
@@ -161,7 +161,7 @@ export const jsonApi = {
   },
 
   // Save texts
-  async saveTexts(category: string, texts: any) {
+  async saveTexts(category: string, texts: unknown) {
     return await apiClient.saveFile(`texts-${category}`, texts);
   },
 
@@ -169,7 +169,7 @@ export const jsonApi = {
   async loadCategories() {
     try {
       return await apiClient.getFile('categories');
-    } catch (error) {
+    } catch {
       console.warn('Failed to load categories from API, using local fallback');
       // Return default categories if not found
       return {
@@ -185,7 +185,7 @@ export const jsonApi = {
   },
 
   // Save categories
-  async saveCategories(categories: any) {
+  async saveCategories(categories: unknown) {
     return await apiClient.saveFile('categories', categories);
   },
 
@@ -193,7 +193,7 @@ export const jsonApi = {
   async loadBrands() {
     try {
       return await apiClient.getFile('brands');
-    } catch (error) {
+    } catch {
       console.warn('Failed to load brands from API, using local fallback');
       // Return default brands if not found
       return {
@@ -206,7 +206,7 @@ export const jsonApi = {
   },
 
   // Save brands
-  async saveBrands(brands: any) {
+  async saveBrands(brands: unknown) {
     return await apiClient.saveFile('brands', brands);
   }
 };

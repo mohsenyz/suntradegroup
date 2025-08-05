@@ -5,7 +5,7 @@ import { jsonApi } from '@/utils/apiClient';
 
 // Frontend data provider hooks
 export function useProducts() {
-  const [products, setProducts] = useState<any>(null);
+  const [products, setProducts] = useState<unknown>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -15,7 +15,7 @@ export function useProducts() {
         setLoading(true);
         const data = await jsonApi.loadProducts();
         setProducts(data);
-      } catch (err) {
+      } catch {
         console.warn('Failed to load products from backend, using fallback');
         setError('Failed to load from backend');
         // Fallback to local data
@@ -38,7 +38,7 @@ export function useProducts() {
 }
 
 export function useTexts(category: string = 'common') {
-  const [texts, setTexts] = useState<any>(null);
+  const [texts, setTexts] = useState<unknown>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -48,7 +48,7 @@ export function useTexts(category: string = 'common') {
         setLoading(true);
         const data = await jsonApi.loadTexts(category);
         setTexts(data);
-      } catch (err) {
+      } catch {
         console.warn(`Failed to load texts-${category} from backend, using fallback`);
         setError('Failed to load from backend');
         // Fallback to local data
@@ -71,7 +71,7 @@ export function useTexts(category: string = 'common') {
 }
 
 export function useCategories() {
-  const [categories, setCategories] = useState<any>(null);
+  const [categories, setCategories] = useState<unknown>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -81,7 +81,7 @@ export function useCategories() {
         setLoading(true);
         const data = await jsonApi.loadCategories();
         setCategories(data);
-      } catch (err) {
+      } catch {
         console.warn('Failed to load categories from backend, using fallback');
         setError('Failed to load from backend');
         // Fallback to default categories
@@ -106,7 +106,7 @@ export function useCategories() {
 }
 
 export function useBrands() {
-  const [brands, setBrands] = useState<any>(null);
+  const [brands, setBrands] = useState<unknown>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -116,7 +116,7 @@ export function useBrands() {
         setLoading(true);
         const data = await jsonApi.loadBrands();
         setBrands(data);
-      } catch (err) {
+      } catch {
         console.warn('Failed to load brands from backend, using fallback');
         setError('Failed to load from backend');
         // Fallback to default brands

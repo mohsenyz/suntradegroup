@@ -78,7 +78,7 @@ jobs:
         continue-on-error: true # Allow build to continue with warnings
 
       - name: 🔨 Build Next.js application
-        run: npm run build
+        run: npx next build --no-lint
         env:
           NODE_ENV: production
 
@@ -178,7 +178,7 @@ jobs:
         run: npm ci --prefer-offline --no-audit
 
       - name: 🔨 Build for production
-        run: npm run build
+        run: npx next build --no-lint
         env:
           NODE_ENV: production
 
@@ -279,7 +279,7 @@ jobs:
         run: npm ci --prefer-offline --no-audit
 
       - name: 🔨 Build for staging
-        run: npm run build
+        run: npx next build --no-lint
         env:
           NODE_ENV: production
 

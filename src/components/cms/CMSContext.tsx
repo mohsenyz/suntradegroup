@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, createContext, useContext, useEffect } from 'react';
+import React, { useState, createContext, useContext, useEffect, useCallback } from 'react';
 import { jsonApi, apiClient } from '@/utils/apiClient';
 
 // Create a context for shared CMS data
@@ -70,7 +70,7 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
   const [backendInitialized, setBackendInitialized] = useState(false);
 
   // Load all data from API
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     setIsLoading(true);
     try {
       // Load texts
@@ -87,7 +87,7 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
       // Load products
       try {
         const products = await jsonApi.loadProducts();
-        updateProductsData(products);
+        updateProductsData(products as Record<string, unknown>);
       } catch (error) {
         console.warn('Failed to load products:', error);
       }
@@ -95,7 +95,7 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
       // Load categories
       try {
         const categories = await jsonApi.loadCategories();
-        updateCategoriesData(categories);
+        updateCategoriesData(categories as Record<string, unknown>);
       } catch (error) {
         console.warn('Failed to load categories:', error);
       }
@@ -103,7 +103,7 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
       // Load brands
       try {
         const brands = await jsonApi.loadBrands();
-        updateBrandsData(brands);
+        updateBrandsData(brands as Record<string, unknown>);
       } catch (error) {
         console.warn('Failed to load brands:', error);
       }
@@ -112,7 +112,7 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   // Global save all changes
   const saveAllChanges = async () => {
@@ -225,13 +225,13 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
     setIsInitializing(true);
     try {
       // Load local data files
-      const localData: Record<string, any> = {};
+      const localData: Record<string, unknown> = {};
 
       // Load products
       try {
         const productsResponse = await import('@/data/products.json');
         localData.products = productsResponse.default;
-      } catch (error) {
+      } catch {
         console.warn('No local products file found');
       }
 
@@ -241,7 +241,7 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
         try {
           const textResponse = await import(`@/data/texts/${file}.json`);
           localData[`texts-${file}`] = textResponse.default;
-        } catch (error) {
+        } catch {
           console.warn(`No local ${file} texts file found`);
         }
       }
@@ -266,11 +266,11 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
       };
 
       // Initialize backend
-      const result = await apiClient.initializeBackend(localData);
+      const result = await apiClient.initializeBackend(localData) as { success: boolean; initialized?: string[]; message?: string };
       
       if (result.success) {
         setBackendInitialized(true);
-        alert(`سرور با موفقیت راه‌اندازی شد!\nفایل‌های ایجاد شده: ${result.initialized.join(', ')}`);
+        alert(`سرور با موفقیت راه‌اندازی شد!\nفایل‌های ایجاد شده: ${result.initialized?.join(', ') || 'نامشخص'}`);
         
         // Reload data from the newly initialized backend
         await loadData();
@@ -335,7 +335,7 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
     };
     
     initializeApp();
-  }, []);
+  }, [loadData]);
 
   return (
     <CMSContext.Provider value={{
