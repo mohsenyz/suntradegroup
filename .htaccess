@@ -1,7 +1,14 @@
 RewriteEngine On
 
-# Handle API routes - redirect to api/ directory
+# Handle specific API endpoints first
+RewriteRule ^api/products$ api/products.php [QSA,L]
+RewriteRule ^api/brands$ api/brands.php [QSA,L]
+RewriteRule ^api/categories$ api/categories.php [QSA,L]
+RewriteRule ^api/test-api$ api/test-api.php [QSA,L]
+
+# Handle other API routes - redirect to main API handler
 RewriteCond %{REQUEST_URI} ^/api/(.*)$
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^api/(.*)$ api/index.php [QSA,L]
 
 # Handle Next.js static routes
