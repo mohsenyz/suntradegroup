@@ -1,0 +1,26 @@
+[
+  {
+    "image": "/images/category-banners/tools-banner.png",
+    "category": "بیل و کلنگ",
+    "url": "/categories/shovels-pickaxes",
+    "alt": "بیل و کلنگ"
+  },
+  {
+    "image": "/images/category-banners/samurai-saw-banner.jpeg",
+    "category": "میخ و اره",
+    "url": "/categories/nails-saws",
+    "alt": "میخ و اره"
+  },
+  {
+    "image": "/images/category-banners/locks-banner.jpeg",
+    "category": "قفل و سیلندر",
+    "url": "/categories/locks-cylinders",
+    "alt": "قفل و سیلندر"
+  },
+  {
+    "image": "/images/category-banners/wire-chain-banner.jpeg",
+    "category": "توری و زنجیر",
+    "url": "/categories/mesh-chains",
+    "alt": "توری و زنجیر"
+  }
+]

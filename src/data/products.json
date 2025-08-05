@@ -1,0 +1,1315 @@
+{
+  "products": [
+    {
+      "id": "12",
+      "name": "اره سامورایی غلاف دار سان سایز ۳۸ سان",
+      "slug": "samurai-saw-with-sheath-sun-38cm",
+      "brand": "سان",
+      "category": "nails-saws",
+      "keywords": [
+        "سامورائی",
+        "اره",
+        "سامورایی",
+        "سان"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-12-1.jpg"
+      ],
+      "mainImage": "/images/products/product-12-1.jpg",
+      "shortDescription": "اره سامورائی 38 سانت ساخته شده از فنر ESKA750",
+      "fullDescription": "اره سامورائی 38 سانت ساخته شده از فنر ESKA750 با تیغه های سه بعدی و دسته های ساخته شده ازمواد نو",
+      "properties": {
+        "رنگ": "غیرقابل انتخاب",
+        "جنس بدنه": "فنر ESKA750",
+        "اقلام همراه": "غلاف",
+        "درجه بندی": "۱"
+      },
+      "specifications": {
+        "کد محصول": "SUN-12",
+        "رنگ": "غیرقابل انتخاب",
+        "جنس بدنه": "فنر ESKA750",
+        "اقلام همراه": "غلاف",
+        "درجه بندی": "۱"
+      },
+      "variants": [
+        {
+          "id": "12-standard",
+          "name": "استاندارد",
+          "sku": "SUN-12-STD",
+          "color": "غیرقابل انتخاب",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "رنگ": "غیرقابل انتخاب",
+            "جنس بدنه": "فنر ESKA750",
+            "اقلام همراه": "غلاف"
+          },
+          "images": [
+            "/images/products/product-12-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "اره سامورایی غلاف دار سان سایز ۳۸ - سان ترد گروپ",
+      "seoDescription": "خرید اره سامورائی 38 سانت با غلاف از برند سان - فنر ESKA750 با کیفیت بالا",
+      "seoKeywords": "اره سامورایی, سان, فنر ESKA750, ابزار ساختمانی",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739646098_52083.jpg"
+      ]
+    },
+    {
+      "id": "14",
+      "name": "سیلندر ۷ سانت سان",
+      "slug": "cylinder-7cm-sun",
+      "brand": "سان",
+      "category": "locks-cylinders",
+      "keywords": [
+        "فول برنج",
+        "قفل",
+        "سیلندر"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-14-1.jpg"
+      ],
+      "mainImage": "/images/products/product-14-1.jpg",
+      "shortDescription": "سیلندر ۷ سانت سان با بدنه فول برنج",
+      "fullDescription": "سیلندر ۷ سانت سان، با بدنه فول برنج می باشد که به همراه ۵ کلید کامپیوتری در بسته بندی شکیل کادویی ارائه میگردد.",
+      "properties": {
+        "جنس بدنه": "فول برنج",
+        "اقلام همراه": "۵ کلید کامپیوتری",
+        "درجه بندی": "درجه یک"
+      },
+      "specifications": {
+        "کد محصول": "SUN-14",
+        "جنس بدنه": "فول برنج",
+        "اقلام همراه": "۵ کلید کامپیوتری",
+        "درجه بندی": "درجه یک"
+      },
+      "variants": [
+        {
+          "id": "14-standard",
+          "name": "استاندارد",
+          "sku": "SUN-14-STD",
+          "material": "فول برنج",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "جنس بدنه": "فول برنج",
+            "اقلام همراه": "۵ کلید کامپیوتری"
+          },
+          "images": [
+            "/images/products/product-14-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        }
+      ],
+      "availability": false,
+      "featured": true,
+      "seoTitle": "سیلندر ۷ سانت فول برنج سان - سان ترد گروپ",
+      "seoDescription": "خرید سیلندر 7 سانت با بدنه فول برنج همراه 5 کلید کامپیوتری از برند سان",
+      "seoKeywords": "سیلندر, فول برنج, قفل, سان, کلید کامپیوتری",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739646213_50549.jpg"
+      ]
+    },
+    {
+      "id": "16",
+      "name": "میخ سیاه بنفش سان",
+      "slug": "black-purple-nails-sun",
+      "brand": "سان",
+      "category": "nails-saws",
+      "keywords": [
+        "میخ فولادی",
+        "میخ کفش",
+        "میخ",
+        "میخ سیاه بنفش"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-16-1.jpg",
+        "/images/products/product-16-2.jpg"
+      ],
+      "mainImage": "/images/products/product-16-1.jpg",
+      "shortDescription": "میخ های سیاه بنفش سان در سایز های مختلف",
+      "fullDescription": "میخ های سیاه بنفش سان در سایز های 1/2 و 5/8 و 3/4 می باشد که در هر کارتن 56 بسته 450 گرمی قرار دارد.",
+      "properties": {
+        "سایز": "1/2 / 3/4 / 5/8",
+        "وزن": "450 گرم",
+        "جنس بدنه": "فولاد",
+        "درجه بندی": "یک"
+      },
+      "specifications": {
+        "کد محصول": "SUN-16",
+        "سایز": "1/2 / 3/4 / 5/8",
+        "وزن": "450 گرم",
+        "جنس بدنه": "فولاد",
+        "درجه بندی": "یک"
+      },
+      "variants": [
+        {
+          "id": "16-half",
+          "name": "سایز 1/2",
+          "sku": "SUN-16-HALF",
+          "size": "1/2",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "1/2",
+            "وزن": "450 گرم",
+            "جنس بدنه": "فولاد"
+          },
+          "images": [
+            "/images/products/product-16-1.jpg"
+          ],
+          "availability": false
+        },
+        {
+          "id": "16-five-eighth",
+          "name": "سایز 5/8",
+          "sku": "SUN-16-5-8",
+          "size": "5/8",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "5/8",
+            "وزن": "450 گرم",
+            "جنس بدنه": "فولاد"
+          },
+          "images": [
+            "/images/products/product-16-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        },
+        {
+          "id": "16-three-quarter",
+          "name": "سایز 3/4",
+          "sku": "SUN-16-3-4",
+          "size": "3/4",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "3/4",
+            "وزن": "450 گرم",
+            "جنس بدنه": "فولاد"
+          },
+          "images": [
+            "/images/products/product-16-2.jpg"
+          ],
+          "availability": false
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "میخ سیاه بنفش سان - انواع سایز - سان ترد گروپ",
+      "seoDescription": "خرید میخ فولادی سیاه بنفش در سایزهای مختلف از برند سان - کیفیت درجه یک",
+      "seoKeywords": "میخ سیاه بنفش, میخ فولادی, سان, ابزار ساختمانی",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739646296_93160.jpg",
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739646300_53508.jpg"
+      ]
+    },
+    {
+      "id": "17",
+      "name": "میخ گالوانیزه فولادی سان",
+      "slug": "galvanized-steel-nails-sun",
+      "brand": "سان",
+      "category": "nails-saws",
+      "keywords": [
+        "میخ سان",
+        "میخ فولادی",
+        "میخ",
+        "میخ گالوانیزه"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-17-1.jpg",
+        "/images/products/product-17-2.jpg",
+        "/images/products/product-17-3.jpg",
+        "/images/products/product-17-4.jpg"
+      ],
+      "mainImage": "/images/products/product-17-1.jpg",
+      "shortDescription": "میخ های فولادی گالوانیزه سان در سایز های مختلف",
+      "fullDescription": "میخ های فولادی گالوانیزه سان در سایز ها 3 و 4 و 5 و 7 و 8 و 10 سانت در بسته های 20 تایی موجود می باشد.",
+      "properties": {
+        "سایز": "3 سانت / 4 سانت / 5 سانت / 6 سانت / 7 سانت / 8 سانت / 10 سانت",
+        "جنس بدنه": "گالوانیزه",
+        "تعداد درکارتن": "20"
+      },
+      "specifications": {
+        "کد محصول": "SUN-17",
+        "سایز": "3 سانت / 4 سانت / 5 سانت / 6 سانت / 7 سانت / 8 سانت / 10 سانت",
+        "جنس بدنه": "گالوانیزه",
+        "تعداد درکارتن": "20"
+      },
+      "variants": [
+        {
+          "id": "17-3cm",
+          "name": "3 سانت",
+          "sku": "SUN-17-3CM",
+          "size": "3 سانت",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "3 سانت",
+            "جنس بدنه": "گالوانیزه"
+          },
+          "images": [
+            "/images/products/product-17-1.jpg"
+          ],
+          "availability": false
+        },
+        {
+          "id": "17-4cm",
+          "name": "4 سانت",
+          "sku": "SUN-17-4CM",
+          "size": "4 سانت",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "4 سانت",
+            "جنس بدنه": "گالوانیزه"
+          },
+          "images": [
+            "/images/products/product-17-2.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        },
+        {
+          "id": "17-5cm",
+          "name": "5 سانت",
+          "sku": "SUN-17-5CM",
+          "size": "5 سانت",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "5 سانت",
+            "جنس بدنه": "گالوانیزه"
+          },
+          "images": [
+            "/images/products/product-17-3.jpg"
+          ],
+          "availability": false
+        },
+        {
+          "id": "17-6cm",
+          "name": "6 سانت",
+          "sku": "SUN-17-6CM",
+          "size": "6 سانت",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "6 سانت",
+            "جنس بدنه": "گالوانیزه"
+          },
+          "images": [
+            "/images/products/product-17-4.jpg"
+          ],
+          "availability": false
+        },
+        {
+          "id": "17-7cm",
+          "name": "7 سانت",
+          "sku": "SUN-17-7CM",
+          "size": "7 سانت",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "7 سانت",
+            "جنس بدنه": "گالوانیزه"
+          },
+          "images": [
+            "/images/products/product-17-1.jpg"
+          ],
+          "availability": false
+        },
+        {
+          "id": "17-8cm",
+          "name": "8 سانت",
+          "sku": "SUN-17-8CM",
+          "size": "8 سانت",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "8 سانت",
+            "جنس بدنه": "گالوانیزه"
+          },
+          "images": [
+            "/images/products/product-17-1.jpg"
+          ],
+          "availability": false
+        },
+        {
+          "id": "17-10cm",
+          "name": "10 سانت",
+          "sku": "SUN-17-10CM",
+          "size": "10 سانت",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "10 سانت",
+            "جنس بدنه": "گالوانیزه"
+          },
+          "images": [
+            "/images/products/product-17-1.jpg"
+          ],
+          "availability": false
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "میخ گالوانیزه فولادی سان - انواع سایز - سان ترد گروپ",
+      "seoDescription": "خرید میخ فولادی گالوانیزه در سایزهای 3 تا 10 سانت از برند سان - بسته 20 عددی",
+      "seoKeywords": "میخ گالوانیزه, میخ فولادی, سان, ابزار ساختمانی",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1738144489_25630.jpg",
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1738144502_27214.jpg",
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1738994278_22338.jpg",
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739646731_8541.jpg"
+      ]
+    },
+    {
+      "id": "19",
+      "name": "قفل حیاتی مشکی سان",
+      "slug": "black-yard-lock-sun",
+      "brand": "سان",
+      "category": "locks-cylinders",
+      "keywords": [
+        "قفل درب حیاط",
+        "قفل درب",
+        "قفل حیاطی"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-19-1.jpg"
+      ],
+      "mainImage": "/images/products/product-19-1.jpg",
+      "shortDescription": "قفل حیاتی مشکی 3کلید ساده زبانه برنجی",
+      "fullDescription": "قفل حیاتی مشکی 3کلید ساده زبانه برنجی 9 ساچمه",
+      "properties": {
+        "رنگ": "مشکی",
+        "اقلام همراه": "۳ کلید ساده"
+      },
+      "specifications": {
+        "کد محصول": "SUN-19",
+        "رنگ": "مشکی",
+        "اقلام همراه": "۳ کلید ساده"
+      },
+      "variants": [
+        {
+          "id": "19-standard",
+          "name": "استاندارد",
+          "sku": "SUN-19-STD",
+          "color": "مشکی",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "رنگ": "مشکی",
+            "اقلام همراه": "۳ کلید ساده"
+          },
+          "images": [
+            "/images/products/product-19-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "قفل حیاتی مشکی سان - 3 کلید ساده - سان ترد گروپ",
+      "seoDescription": "خرید قفل حیاطی مشکی با زبانه برنجی و 3 کلید ساده از برند سان",
+      "seoKeywords": "قفل حیاطی, قفل درب, سان, زبانه برنجی",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739646354_34699.jpg"
+      ]
+    },
+    {
+      "id": "21",
+      "name": "بیل فولادی مشکی سان",
+      "slug": "steel-shovel-black-sun",
+      "brand": "سان",
+      "category": "shovels-pickaxes",
+      "keywords": [
+        "بیل سان",
+        "بیل مشکی",
+        "بیل فولادی"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-21-1.jpg"
+      ],
+      "mainImage": "/images/products/product-21-1.jpg",
+      "shortDescription": "بیل فولادی مشکی سان در دو سایز ۲ و ۳",
+      "fullDescription": "بیل فولادی مشکی سان در دوسایز2و3 بسته بندی 12عددی کارتونی",
+      "properties": {
+        "سایز": "۲ / ۳"
+      },
+      "specifications": {
+        "کد محصول": "SUN-21",
+        "سایز": "۲ / ۳"
+      },
+      "variants": [
+        {
+          "id": "21-size-2",
+          "name": "سایز ۲",
+          "sku": "SUN-21-S2",
+          "size": "۲",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "۲"
+          },
+          "images": [
+            "/images/products/product-21-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        },
+        {
+          "id": "21-size-3",
+          "name": "سایز ۳",
+          "sku": "SUN-21-S3",
+          "size": "۳",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "۳"
+          },
+          "images": [
+            "/images/products/product-21-1.jpg"
+          ],
+          "availability": false
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "بیل فولادی مشکی سان - سایز 2 و 3 - سان ترد گروپ",
+      "seoDescription": "خرید بیل فولادی مشکی برند سان در سایزهای 2 و 3، با کیفیت بالا و مناسب برای کارهای ساختمانی.",
+      "seoKeywords": "بیل فولادی, بیل مشکی, سان, ابزار ساختمانی, بیل سایز 2, بیل سایز 3",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739646385_65166.jpg"
+      ]
+    },
+    {
+      "id": "22",
+      "name": "بیل پارویی فولادی مشکی و طلایی سان",
+      "slug": "steel-spade-shovel-black-gold-sun",
+      "brand": "سان",
+      "category": "shovels-pickaxes",
+      "keywords": [
+        "بیل پارویی",
+        "بیل فولادی",
+        "بیل سان"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-22-1.jpg"
+      ],
+      "mainImage": "/images/products/product-22-1.jpg",
+      "shortDescription": "بیل پارویی فولادی در رنگ های مشکی و طلایی",
+      "fullDescription": "بیل پاروئی فولادی مشکی و طلایی در بسته بندی 12تایی کارتونی",
+      "properties": {
+        "رنگ": "مشکی / طلایی",
+        "درجه بندی": "یک",
+        "جنس بدنه": "فولاد"
+      },
+      "specifications": {
+        "کد محصول": "SUN-22",
+        "رنگ": "مشکی / طلایی",
+        "درجه بندی": "یک",
+        "جنس بدنه": "فولاد"
+      },
+      "variants": [
+        {
+          "id": "22-black",
+          "name": "مشکی",
+          "sku": "SUN-22-BLK",
+          "color": "مشکی",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "رنگ": "مشکی"
+          },
+          "images": [
+            "/images/products/product-22-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        },
+        {
+          "id": "22-gold",
+          "name": "طلایی",
+          "sku": "SUN-22-GLD",
+          "color": "طلایی",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "رنگ": "طلایی"
+          },
+          "images": [
+            "/images/products/product-22-1.jpg"
+          ],
+          "availability": false
+        }
+      ],
+      "availability": false,
+      "featured": true,
+      "seoTitle": "بیل پارویی فولادی مشکی و طلایی سان - سان ترد گروپ",
+      "seoDescription": "خرید بیل پارویی فولادی درجه یک از برند سان در رنگ های مشکی و طلایی.",
+      "seoKeywords": "بیل پارویی, بیل فولادی, سان, ابزار ساختمانی, بیل طلایی, بیل مشکی",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739646416_73640.jpg"
+      ]
+    },
+    {
+      "id": "25",
+      "name": "قفل حیاطی فول برنج سان",
+      "slug": "full-brass-yard-lock-sun",
+      "brand": "سان",
+      "category": "locks-cylinders",
+      "keywords": [
+        "قفل درب حیاط",
+        "قفل درب",
+        "قفل حیاطی"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-25-1.jpg",
+        "/images/products/product-25-2.jpg",
+        "/images/products/product-25-3.jpg"
+      ],
+      "mainImage": "/images/products/product-25-1.jpg",
+      "shortDescription": "قفل حیاطی فول برنج با 5 کلید برنجی",
+      "fullDescription": "قفل حیاتی فول برنج دارای 5 کلید برنجی سیلندر و زبانه برنجی دارای 9ساچمه دربسته بندی دارای محافظ",
+      "properties": {
+        "اقلام همراه": "۵ کلید برنجی",
+        "جنس بدنه": "فول برنج"
+      },
+      "specifications": {
+        "کد محصول": "SUN-25",
+        "اقلام همراه": "۵ کلید برنجی",
+        "جنس بدنه": "فول برنج"
+      },
+      "variants": [
+        {
+          "id": "25-standard",
+          "name": "استاندارد",
+          "sku": "SUN-25-STD",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "اقلام همراه": "۵ کلید برنجی"
+          },
+          "images": [
+            "/images/products/product-25-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "قفل حیاطی فول برنج سان - 5 کلید - سان ترد گروپ",
+      "seoDescription": "خرید قفل حیاطی فول برنج برند سان، دارای 5 کلید، سیلندر و زبانه برنجی با امنیت بالا.",
+      "seoKeywords": "قفل حیاطی, فول برنج, قفل درب, سان, 5 کلید",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1738994511_15896.jpg",
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739646462_84653.jpg",
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1738994530_18003.jpg"
+      ]
+    },
+    {
+      "id": "26",
+      "name": "قفل حیاطی برقی 3 کلید سان",
+      "slug": "electric-yard-lock-3-keys-sun",
+      "brand": "سان",
+      "category": "locks-cylinders",
+      "keywords": [
+        "قفل درب",
+        "قفل درب حیاط",
+        "قفل حیاطی"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-26-1.jpg",
+        "/images/products/product-26-2.jpg"
+      ],
+      "mainImage": "/images/products/product-26-1.jpg",
+      "shortDescription": "قفل حیاطی برقی با 3 کلید و زبانه برنجی",
+      "fullDescription": "قفل برقی دارای 3 کلید سیلندر و زبانه برنجی در بسته بندی محکم دارای محافظ",
+      "properties": {
+        "قفل سوئیچ": "500",
+        "اقلام همراه": "۳ کلید"
+      },
+      "specifications": {
+        "کد محصول": "SUN-26",
+        "قفل سوئیچ": "500",
+        "اقلام همراه": "۳ کلید"
+      },
+      "variants": [
+        {
+          "id": "26-standard",
+          "name": "استاندارد",
+          "sku": "SUN-26-STD",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "اقلام همراه": "۳ کلید"
+          },
+          "images": [
+            "/images/products/product-26-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "قفل حیاطی برقی 3 کلید سان - سان ترد گروپ",
+      "seoDescription": "خرید قفل حیاطی برقی برند سان با 3 کلید، مناسب برای درب های ورودی ساختمان.",
+      "seoKeywords": "قفل برقی, قفل حیاطی, سان, قفل درب",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1738996402_32691.jpg",
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739646503_78593.jpg"
+      ]
+    },
+    {
+      "id": "27",
+      "name": "سیلندر7سانت فول برنج 5 کلید سان",
+      "slug": "cylinder-7cm-full-brass-5-keys-sun",
+      "brand": "سان",
+      "category": "locks-cylinders",
+      "keywords": [
+        "سیلندر ۷ سانت",
+        "سیلندر",
+        "سیلندر فول برنج"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-27-1.jpg",
+        "/images/products/product-27-2.jpg",
+        "/images/products/product-27-3.jpg"
+      ],
+      "mainImage": "/images/products/product-27-1.jpg",
+      "shortDescription": "سیلندر 7 سانت فول برنج با 5 کلید کامپیوتری",
+      "fullDescription": "سیلندر 7سانت فول برنج با5کلیدکامپیوتری برنجی داخل بسته بندی کادوئی",
+      "properties": {
+        "جنس بدنه": "برنجی",
+        "اقلام همراه": "۵ کلید کامپیوتری"
+      },
+      "specifications": {
+        "کد محصول": "SUN-27",
+        "جنس بدنه": "برنجی",
+        "اقلام همراه": "۵ کلید کامپیوتری"
+      },
+      "variants": [
+        {
+          "id": "27-standard",
+          "name": "استاندارد",
+          "sku": "SUN-27-STD",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "اقلام همراه": "۵ کلید کامپیوتری"
+          },
+          "images": [
+            "/images/products/product-27-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "سیلندر 7 سانت فول برنج 5 کلید سان - سان ترد گروپ",
+      "seoDescription": "خرید سیلندر 7 سانت فول برنج برند سان با 5 کلید کامپیوتری برنجی و کیفیت بالا.",
+      "seoKeywords": "سیلندر, فول برنج, سان, کلید کامپیوتری, قفل",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1738995874_87484.jpg",
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1738995855_24969.jpg",
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739646775_18925.jpg"
+      ]
+    },
+    {
+      "id": "28",
+      "name": "قفل 2/5سانت درب آهنی سان",
+      "slug": "lock-2-5cm-iron-door-sun",
+      "brand": "سان",
+      "category": "locks-cylinders",
+      "keywords": [
+        "قفل درب آهنی",
+        "قفل درب",
+        "قفل ۲۵ سانت"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-28-1.jpg"
+      ],
+      "mainImage": "/images/products/product-28-1.jpg",
+      "shortDescription": "قفل 2.5 سانت مخصوص درب آهنی با زبانه برنجی",
+      "fullDescription": "قفل 2/5سانت درب آهنی سان زبانه برنجی سیلندر فول برنج همراه 3 کلید برنجی",
+      "properties": {
+        "اقلام همراه": "۳ کلید برنجی"
+      },
+      "specifications": {
+        "کد محصول": "SUN-28",
+        "اقلام همراه": "۳ کلید برنجی"
+      },
+      "variants": [
+        {
+          "id": "28-standard",
+          "name": "استاندارد",
+          "sku": "SUN-28-STD",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "اقلام همراه": "۳ کلید برنجی"
+          },
+          "images": [
+            "/images/products/product-28-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "قفل 2.5 سانت درب آهنی سان - سان ترد گروپ",
+      "seoDescription": "خرید قفل 2.5 سانت سان برای درب آهنی، با سیلندر فول برنج و 3 کلید برنجی.",
+      "seoKeywords": "قفل درب آهنی, قفل 2.5 سانت, سان, قفل درب",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1740394050_67271.jpg"
+      ]
+    },
+    {
+      "id": "29",
+      "name": "سیلندر سایز 6 سان",
+      "slug": "cylinder-size-6cm-sun",
+      "brand": "سان",
+      "category": "locks-cylinders",
+      "keywords": [
+        "سیلندر فول برنج",
+        "سیلندر",
+        "سیلندر ۶ سانت"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-29-1.jpg",
+        "/images/products/product-29-2.jpg"
+      ],
+      "mainImage": "/images/products/product-29-1.jpg",
+      "shortDescription": "سیلندر برنجی سایز 6 سانت با سه کلید ساده",
+      "fullDescription": "سیلندرسایز6 سانت برنجی با سه کلید ساده برای درب های آلمینیومی",
+      "properties": {
+        "اقلام همراه": "۳ کلید"
+      },
+      "specifications": {
+        "کد محصول": "SUN-29",
+        "اقلام همراه": "۳ کلید"
+      },
+      "variants": [
+        {
+          "id": "29-standard",
+          "name": "استاندارد",
+          "sku": "SUN-29-STD",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "اقلام همراه": "۳ کلید"
+          },
+          "images": [
+            "/images/products/product-29-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "سیلندر سایز 6 سان - سان ترد گروپ",
+      "seoDescription": "خرید سیلندر 6 سانت برنجی برند سان، همراه با 3 کلید ساده، مناسب برای درب های آلومینیومی.",
+      "seoKeywords": "سیلندر 6 سانت, سیلندر برنجی, سان, قفل",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739000779_88427.jpg",
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739646543_42249.jpg"
+      ]
+    },
+    {
+      "id": "30",
+      "name": "ریسمانکار سان",
+      "slug": "mason-line-sun",
+      "brand": "سان",
+      "category": "ropes-threads",
+      "keywords": [
+        "ریسمانکار",
+        "ریسمانکار سان",
+        "ریسمانکار سفید"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-30-1.jpg",
+        "/images/products/product-30-2.jpg"
+      ],
+      "mainImage": "/images/products/product-30-1.jpg",
+      "shortDescription": "ریسمانکار سان در رنگ های سفید و آبی و سایزهای مختلف",
+      "fullDescription": "ریسمانکارسان رنگی سفید وآبی در سایز های 100/200/300/400/500",
+      "properties": {
+        "رنگ": "سفید / آبی",
+        "سایز": "۱۰۰ / ۲۰۰ / ۳۰۰ / ۴۰۰ / ۵۰۰"
+      },
+      "specifications": {
+        "کد محصول": "SUN-30",
+        "رنگ": "سفید / آبی",
+        "سایز": "۱۰۰ / ۲۰۰ / ۳۰۰ / ۴۰۰ / ۵۰۰"
+      },
+      "variants": [
+        {
+          "id": "30-100",
+          "name": "سایز ۱۰۰",
+          "sku": "SUN-30-100",
+          "size": "۱۰۰",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "۱۰۰"
+          },
+          "images": [
+            "/images/products/product-30-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        },
+        {
+          "id": "30-200",
+          "name": "سایز ۲۰۰",
+          "sku": "SUN-30-200",
+          "size": "۲۰۰",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "۲۰۰"
+          },
+          "images": [
+            "/images/products/product-30-2.jpg"
+          ],
+          "availability": false
+        },
+        {
+          "id": "30-300",
+          "name": "سایز ۳۰۰",
+          "sku": "SUN-30-300",
+          "size": "۳۰۰",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "۳۰۰"
+          },
+          "images": [
+            "/images/products/product-30-1.jpg"
+          ],
+          "availability": false
+        },
+        {
+          "id": "30-400",
+          "name": "سایز ۴۰۰",
+          "sku": "SUN-30-400",
+          "size": "۴۰۰",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "۴۰۰"
+          },
+          "images": [
+            "/images/products/product-30-1.jpg"
+          ],
+          "availability": false
+        },
+        {
+          "id": "30-500",
+          "name": "سایز ۵۰۰",
+          "sku": "SUN-30-500",
+          "size": "۵۰۰",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "۵۰۰"
+          },
+          "images": [
+            "/images/products/product-30-1.jpg"
+          ],
+          "availability": false
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "ریسمانکار سان - انواع سایز و رنگ - سان ترد گروپ",
+      "seoDescription": "خرید ریسمانکار با کیفیت برند سان در سایزهای 100 تا 500 و رنگ های سفید و آبی.",
+      "seoKeywords": "ریسمانکار, نخ بنایی, ابزار ساختمانی, سان",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1739646580_45855.jpg",
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1740394098_8477.jpg"
+      ]
+    },
+    {
+      "id": "33",
+      "name": "قفل آویز سان",
+      "slug": "padlock-sun",
+      "brand": "سان",
+      "category": "locks-cylinders",
+      "keywords": [
+        "قفل سان",
+        "قفل طلایی",
+        "قفل آویز"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-33-1.jpg"
+      ],
+      "mainImage": "/images/products/product-33-1.jpg",
+      "shortDescription": "قفل آویز برنجی سان با سه کلید.",
+      "fullDescription": "قفل آویز برنجی سان با بدنه مستحکم و سه کلید، مناسب برای امنیت انبار، درب و ...",
+      "properties": {
+        "جنس بدنه": "برنج",
+        "اقلام همراه": "۳ کلید"
+      },
+      "specifications": {
+        "کد محصول": "SUN-33",
+        "جنس بدنه": "برنج",
+        "اقلام همراه": "۳ کلید"
+      },
+      "variants": [
+        {
+          "id": "33-standard",
+          "name": "استاندارد",
+          "sku": "SUN-33-STD",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "جنس بدنه": "برنج"
+          },
+          "images": [
+            "/images/products/product-33-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "قفل آویز سان - برنجی - سان ترد گروپ",
+      "seoDescription": "خرید قفل آویز برنجی برند سان با کیفیت بالا و سه کلید همراه.",
+      "seoKeywords": "قفل آویز, قفل برنجی, سان, padlock",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1740394186_55672.jpg"
+      ]
+    },
+    {
+      "id": "34",
+      "name": "قفل کتابی سان",
+      "slug": "shrouded-padlock-sun",
+      "brand": "سان",
+      "category": "locks-cylinders",
+      "keywords": [
+        "قفل کتابی",
+        "قفل سان"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-34-1.jpg"
+      ],
+      "mainImage": "/images/products/product-34-1.jpg",
+      "shortDescription": "قفل کتابی سان با امنیت بالا.",
+      "fullDescription": "قفل کتابی سان با امنیت بالا، مناسب برای مصارف عمومی و صنعتی و حفاظت از اموال شما.",
+      "properties": {},
+      "specifications": {
+        "کد محصول": "SUN-34"
+      },
+      "variants": [
+        {
+          "id": "34-standard",
+          "name": "استاندارد",
+          "sku": "SUN-34-STD",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {},
+          "images": [
+            "/images/products/product-34-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "قفل کتابی سان - سان ترد گروپ",
+      "seoDescription": "خرید قفل کتابی با کیفیت و امنیت بالای برند سان.",
+      "seoKeywords": "قفل کتابی, قفل, سان, shrouded padlock",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1740394396_59306.jpg"
+      ]
+    },
+    {
+      "id": "35",
+      "name": "توری فایبرگلاس نسوز سان",
+      "slug": "fireproof-fiberglass-mesh-sun",
+      "brand": "سان",
+      "category": "mesh-chains",
+      "keywords": [
+        "توری فایبرگلاس",
+        "توری سان",
+        "توری نسوز"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-35-1.jpg"
+      ],
+      "mainImage": "/images/products/product-35-1.jpg",
+      "shortDescription": "توری فایبرگلاس نسوز در عرض های مختلف.",
+      "fullDescription": "توری فایبرگلاس نسوز برند سان، مناسب برای مسلح کردن گچ و سیمان و جلوگیری از ترک خوردگی در عرض های ۹۰، ۱۰۰، ۱۲۰ و ۱۵۰ سانتی متر.",
+      "properties": {
+        "سایز": "۹۰ / ۱۰۰ / ۱۲۰ / ۱۵۰"
+      },
+      "specifications": {
+        "کد محصول": "SUN-35",
+        "سایز": "۹۰ / ۱۰۰ / ۱۲۰ / ۱۵۰"
+      },
+      "variants": [
+        {
+          "id": "35-90",
+          "name": "عرض ۹۰",
+          "sku": "SUN-35-90",
+          "size": "۹۰",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "۹۰"
+          },
+          "images": [
+            "/images/products/product-35-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        },
+        {
+          "id": "35-100",
+          "name": "عرض ۱۰۰",
+          "sku": "SUN-35-100",
+          "size": "۱۰۰",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "۱۰۰"
+          },
+          "images": [
+            "/images/products/product-35-1.jpg"
+          ],
+          "availability": false
+        },
+        {
+          "id": "35-120",
+          "name": "عرض ۱۲۰",
+          "sku": "SUN-35-120",
+          "size": "۱۲۰",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "۱۲۰"
+          },
+          "images": [
+            "/images/products/product-35-1.jpg"
+          ],
+          "availability": false
+        },
+        {
+          "id": "35-150",
+          "name": "عرض ۱۵۰",
+          "sku": "SUN-35-150",
+          "size": "۱۵۰",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {
+            "سایز": "۱۵۰"
+          },
+          "images": [
+            "/images/products/product-35-1.jpg"
+          ],
+          "availability": false
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "توری فایبرگلاس نسوز سان - سان ترد گروپ",
+      "seoDescription": "خرید توری فایبرگلاس نسوز برند سان در عرض های مختلف برای مصارف ساختمانی.",
+      "seoKeywords": "توری فایبرگلاس, توری نسوز, مش فایبرگلاس, سان",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1740394529_31009.jpg"
+      ]
+    },
+    {
+      "id": "36",
+      "name": "توری گالوانیزه (مرغی) سان",
+      "slug": "galvanized-chicken-wire-mesh-sun",
+      "brand": "سان",
+      "category": "mesh-chains",
+      "keywords": [
+        "توری سان",
+        "توری مرغی",
+        "توری گالوانیزه",
+        "توری فلزی"
+      ],
+      "basePrice": 0,
+      "currency": "تماس بگیرید",
+      "images": [
+        "/images/products/product-36-1.jpg"
+      ],
+      "mainImage": "/images/products/product-36-1.jpg",
+      "shortDescription": "توری گالوانیزه مرغی با کیفیت بالا.",
+      "fullDescription": "توری گالوانیزه مرغی برند سان، با کیفیت بالا و مقاومت در برابر زنگ‌زدگی، مناسب برای حصارکشی و مصارف ساختمانی.",
+      "properties": {},
+      "specifications": {
+        "کد محصول": "SUN-36",
+        "جنس": "گالوانیزه"
+      },
+      "variants": [
+        {
+          "id": "36-standard",
+          "name": "استاندارد",
+          "sku": "SUN-36-STD",
+          "price": 0,
+          "priceModifier": 0,
+          "stock": 0,
+          "properties": {},
+          "images": [
+            "/images/products/product-36-1.jpg"
+          ],
+          "availability": false,
+          "isDefault": true
+        }
+      ],
+      "availability": false,
+      "featured": false,
+      "seoTitle": "توری گالوانیزه مرغی سان - سان ترد گروپ",
+      "seoDescription": "خرید توری گالوانیزه (مرغی) با کیفیت و ضد زنگ از برند سان.",
+      "seoKeywords": "توری مرغی, توری گالوانیزه, حصارکشی, سان",
+      "absoluteImages": [
+        "https://suntradegroup.ir/shop-resources/wgqghgebcw/product-images/1740394796_10366.jpg"
+      ]
+    }
+  ],
+  "brands": [
+    {
+      "id": "sun-brand",
+      "name": "سان",
+      "slug": "sun-brand",
+      "description": "برند سان ترد گروپ وارد کننده و تولید کننده انواع قفل و دستگیره و ابزارآلات ساختمانی",
+      "logo": "/images/brands/sun-brand-logo.png",
+      "founded": "1380",
+      "country": "ایران"
+    }
+  ],
+  "categories": [
+    {
+      "id": "nails-saws",
+      "name": "میخ و اره",
+      "slug": "nails-saws",
+      "description": "انواع میخ و اره های ساختمانی",
+      "image": "/images/categories/nails-saws.jpg"
+    },
+    {
+      "id": "locks-cylinders",
+      "name": "قفل و سیلندر",
+      "slug": "locks-cylinders",
+      "description": "انواع قفل و سیلندر برای درب و ساختمان",
+      "image": "/images/categories/locks-cylinders.jpg"
+    },
+    {
+      "id": "shovels-pickaxes",
+      "name": "بیل و کلنگ",
+      "slug": "shovels-pickaxes",
+      "description": "ابزارآلات کشاورزی و ساختمانی",
+      "image": "/images/categories/shovels-pickaxes.jpg"
+    },
+    {
+      "id": "ropes-threads",
+      "name": "ریسمانکار و سر رزوه",
+      "slug": "ropes-threads",
+      "description": "ریسمانکار و لوازم جانبی ساختمانی",
+      "image": "/images/categories/ropes-threads.jpg"
+    },
+    {
+      "id": "mesh-chains",
+      "name": "توری و زنجیر",
+      "slug": "mesh-chains",
+      "description": "انواع توری و زنجیرهای ساختمانی",
+      "image": "/images/categories/mesh-chains.jpg"
+    }
+  ],
+  "companyInfo": {
+    "name": "سان ترد گروپ",
+    "description": "برند سان ترد گروپ وارد کننده و تولید کننده انواع قفل و دستگیره و ابزارآلات ساختمانی به صورت تک و عمده در سراسر کشور خدمتگزار شما عزیزان می باشد.",
+    "mission": "ارائه محصولات باکیفیت و خدمات بی‌نظیر به مشتریان",
+    "vision": "پیشرو در صنعت تولید و توزیع ابزارآلات ساختمانی ایرانی",
+    "founded": "1380",
+    "employees": "50+",
+    "headquarters": "تهران، ایران",
+    "phone": "+98 21 1234 5678",
+    "email": "info@suntradegroup.ir",
+    "website": "www.suntradegroup.ir"
+  }
+}
