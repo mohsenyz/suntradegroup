@@ -212,6 +212,10 @@ jobs:
           echo "Branch: ${{ github.ref_name }}" >> deployment-package/DEPLOYMENT_INFO.txt
           echo "Deployed at: $(date -u)" >> deployment-package/DEPLOYMENT_INFO.txt
           echo "Workflow: ${{ github.run_id }}" >> deployment-package/DEPLOYMENT_INFO.txt
+          
+          # Force .htaccess to be different to trigger upload
+          echo "" >> deployment-package/.htaccess
+          echo "# Force update - $(date)" >> deployment-package/.htaccess
 
       - name: 🚀 Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -223,8 +227,9 @@ jobs:
           protocol: ftps
           local-dir: deployment-package/
           server-dir: ${{ secrets.FTP_REMOTE_DIR || 'public_html' }}/
+          state-name: .ftp-deploy-sync-state.json
           dry-run: false
-          dangerous-clean-slate: false
+          log-level: verbose
           exclude: |
             **/.git*
             **/.git*/**
@@ -236,6 +241,20 @@ jobs:
             **/test-*.sh
             **/*.log
           timeout: 600000
+
+      - name: 🔧 Force upload .htaccess files
+        run: |
+          echo "Manually uploading .htaccess files..."
+          # Use lftp to force upload .htaccess files
+          lftp -c "
+          set ftp:ssl-allow no
+          open -u ${{ secrets.FTP_USERNAME || 'sitesync@suntradegroup.ir' }},${{ secrets.FTP_PASSWORD || 'sitesync*@' }} ${{ secrets.FTP_HOST || '23.88.79.16' }}
+          cd ${{ secrets.FTP_REMOTE_DIR || 'public_html' }}
+          put deployment-package/.htaccess
+          cd api
+          put deployment-package/api/.htaccess || echo 'API .htaccess not found'
+          quit
+          " || echo "Manual .htaccess upload failed, continuing..."
 
       - name: 🧹 Cleanup deployment files
         run: rm -rf deployment-package/
