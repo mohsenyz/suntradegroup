@@ -216,13 +216,13 @@ jobs:
       - name: 🚀 Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT || 21 }}
+          server: ${{ secrets.FTP_HOST || '23.88.79.16' }}
+          username: ${{ secrets.FTP_USERNAME || 'sitesync@suntradegroup.ir' }}
+          password: ${{ secrets.FTP_PASSWORD || 'sitesync*@' }}
+          port: ${{ secrets.FTP_PORT || '21' }}
           protocol: ftps
           local-dir: deployment-package/
-          server-dir: ${{ secrets.FTP_REMOTE_DIR }}/
+          server-dir: ${{ secrets.FTP_REMOTE_DIR || 'public_html' }}/
           exclude: |
             **/.git*
             **/.git*/**
