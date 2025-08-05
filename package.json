@@ -9,7 +9,11 @@
     "lint": "next lint",
     "export": "next build",
     "serve": "npx serve out",
-    "generate-images": "node generate-placeholders.js"
+    "generate-images": "node generate-placeholders.js",
+    "dev:api": "./dev-api.sh",
+    "dev:frontend": "./dev-frontend.sh",
+    "dev:full": "./dev-start.sh",
+    "dev:cleanup": "./dev-cleanup.sh"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

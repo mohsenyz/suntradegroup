@@ -1,18 +1,42 @@
-import { Metadata } from 'next';
+'use client';
+
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductGrid from '@/components/ProductGrid';
-import data from '@/data/products.json';
 import { ProductData } from '@/types';
-
-export const metadata: Metadata = {
-  title: 'همه محصولات - گروه تجاری آفتاب',
-  description: 'مشاهده تمامی محصولات گروه تجاری آفتاب با کیفیت بالا و قیمت مناسب',
-  keywords: 'محصولات، گروه تجاری آفتاب، کیفیت بالا، ایرانی'
-};
+import { useProducts } from '@/hooks/useData';
 
 export default function ProductsPage() {
-  const productData = data as ProductData;
+  const { products, loading, error } = useProducts();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">در حال بارگذاری محصولات...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !products) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">خطا در بارگذاری محصولات</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+          >
+            تلاش مجدد
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const productData = products as ProductData;
 
   return (
     <div className="min-h-screen bg-white">

@@ -6,9 +6,23 @@ import Image from 'next/image';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Search from './Search';
 import productsData from '@/data/products.json';
+import { useTexts } from '@/hooks/useTexts';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t, loading } = useTexts();
+
+  if (loading) {
+    return (
+      <header className="bg-white shadow-lg sticky top-0 z-50">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            <div className="animate-pulse bg-gray-200 h-8 w-32 rounded"></div>
+          </div>
+        </div>
+      </header>
+    );
+  }
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -22,33 +36,33 @@ const Header = () => {
             <Link href="/" className="flex items-center">
               <Image
                 src="/images/logo.png"
-                alt="سان ترد گروپ"
+                alt={t('company.name')}
                 width={48}
                 height={48}
                 className="w-12 h-12 object-contain"
               />
               <div className="mr-3">
-                <h1 className="text-xl font-bold text-gray-800">سان ترد گروپ</h1>
-                <p className="text-sm text-gray-600">ابزار و یراق آلات</p>
+                <h1 className="text-xl font-bold text-gray-800">{t('company.name')}</h1>
+                <p className="text-sm text-gray-600">{t('company.tagline')}</p>
               </div>
             </Link>
           </div>
 
           <nav className="hidden md:flex items-center space-x-8">
             <Link href="/" className="text-gray-700 hover:text-golden-600 transition-colors">
-              خانه
+              {t('navigation.home')}
             </Link>
             <Link href="/products" className="text-gray-700 hover:text-golden-600 transition-colors">
-              محصولات
+              {t('navigation.products')}
             </Link>
             <Link href="/categories" className="text-gray-700 hover:text-golden-600 transition-colors">
-              دسته‌بندی‌ها
+              {t('navigation.categories')}
             </Link>
             <Link href="/about" className="text-gray-700 hover:text-golden-600 transition-colors">
-              درباره ما
+              {t('navigation.about')}
             </Link>
             <Link href="/contact" className="text-gray-700 hover:text-golden-600 transition-colors">
-              تماس با ما
+              {t('navigation.contact')}
             </Link>
           </nav>
 
@@ -92,42 +106,42 @@ const Header = () => {
                 className="block px-3 py-2 text-gray-700 hover:text-golden-600 hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                خانه
+                {t('navigation.home')}
               </Link>
               <Link
                 href="/products"
                 className="block px-3 py-2 text-gray-700 hover:text-golden-600 hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                محصولات
+                {t('navigation.products')}
               </Link>
               <Link
                 href="/brands"
                 className="block px-3 py-2 text-gray-700 hover:text-golden-600 hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                برندها
+                {t('navigation.brands')}
               </Link>
               <Link
                 href="/categories"
                 className="block px-3 py-2 text-gray-700 hover:text-golden-600 hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                دسته‌بندی‌ها
+                {t('navigation.categories')}
               </Link>
               <Link
                 href="/about"
                 className="block px-3 py-2 text-gray-700 hover:text-golden-600 hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                درباره ما
+                {t('navigation.about')}
               </Link>
               <Link
                 href="/contact"
                 className="block px-3 py-2 text-gray-700 hover:text-golden-600 hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                تماس با ما
+                {t('navigation.contact')}
               </Link>
             </div>
           </div>
