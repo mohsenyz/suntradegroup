@@ -1,0 +1,23 @@
+RewriteEngine On
+
+# Handle API routes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Set proper headers for JSON API
+<FilesMatch "\.(php)$">
+    Header set Content-Type "application/json"
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Password"
+</FilesMatch>
+
+# Protect data directory
+<Directory "data">
+    Order deny,allow
+    Deny from all
+    <Files "*.json">
+        Allow from all
+    </Files>
+</Directory>
