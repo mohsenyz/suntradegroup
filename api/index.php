@@ -113,7 +113,11 @@ switch ($method) {
             echo json_encode(['files' => $fileList]);
         } else {
             // Get specific file
-            authenticate();
+            // Public endpoints don't require authentication
+            $publicEndpoints = ['products', 'categories', 'brands'];
+            if (!in_array($path, $publicEndpoints)) {
+                authenticate();
+            }
             $filename = $path . '.json';
             $filepath = $DATA_DIR . '/' . $filename;
             
