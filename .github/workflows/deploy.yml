@@ -223,6 +223,8 @@ jobs:
           protocol: ftps
           local-dir: deployment-package/
           server-dir: ${{ secrets.FTP_REMOTE_DIR || 'public_html' }}/
+          dry-run: false
+          dangerous-clean-slate: false
           exclude: |
             **/.git*
             **/.git*/**

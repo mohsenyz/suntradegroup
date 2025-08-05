@@ -1,10 +1,14 @@
 RewriteEngine On
 
+# Route all ACME challenge requests to the PHP handler (preserve existing)
+RewriteRule ^\.well-known/acme-challenge/([-_a-zA-Z0-9]+)$ acme-challenge.php?token=$1 [L]
+
 # Handle specific API endpoints first
 RewriteRule ^api/products$ api/products.php [QSA,L]
 RewriteRule ^api/brands$ api/brands.php [QSA,L]
 RewriteRule ^api/categories$ api/categories.php [QSA,L]
 RewriteRule ^api/test-api$ api/test-api.php [QSA,L]
+RewriteRule ^api/debug$ api/debug.php [QSA,L]
 
 # Handle other API routes - redirect to main API handler
 RewriteCond %{REQUEST_URI} ^/api/(.*)$

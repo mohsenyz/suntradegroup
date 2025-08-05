@@ -131,10 +131,12 @@ export const apiClient = new JsonApiClient();
 
 // Utility functions for common operations
 export const jsonApi = {
-  // Load products
+  // Load products - use direct PHP file
   async loadProducts() {
     try {
-      return await apiClient.getFile('products');
+      const response = await fetch('/api/products.php');
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.json();
     } catch {
       console.warn('Failed to load products from API, using local fallback');
       // Fallback to local data
