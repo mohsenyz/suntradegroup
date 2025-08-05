@@ -76,7 +76,7 @@ export class JsonApiClient {
 
   // Get a specific JSON file
   async getFile(filename: string): Promise<unknown> {
-    const response = await this.makeRequest(`/${filename}`);
+    const response = await this.makeRequest(`/${filename}`) as { data?: unknown };
     return response.data;
   }
 
@@ -92,7 +92,7 @@ export class JsonApiClient {
 
   // Get file info (metadata)
   async getFileInfo(filename: string): Promise<unknown> {
-    const response = await this.makeRequest(`/${filename}`);
+    const response = await this.makeRequest(`/${filename}`) as { filename?: string; modified?: string; data?: unknown };
     return {
       filename: response.filename,
       modified: response.modified,
@@ -110,7 +110,7 @@ export class JsonApiClient {
     try {
       const files = await this.listFiles();
       const requiredFiles = ['products', 'categories', 'brands', 'texts-common', 'texts-pages', 'texts-forms'];
-      const existingFiles = files.map((f: unknown) => f.name);
+      const existingFiles = files.map((f: unknown) => (f as { name?: string }).name);
       const missing = requiredFiles.filter(file => !existingFiles.includes(file));
       
       return {
