@@ -22,7 +22,7 @@ const Footer = () => {
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 bg-gradient-to-r from-golden-500 to-secondary-600 rounded-full flex items-center justify-center overflow-hidden">
                 <Image 
-                  src="/images/logo.png" 
+                  src="/images/logo.webp" 
                   alt="سان ترد گروپ لوگو" 
                   width={32} 
                   height={32}

@@ -35,7 +35,7 @@ const Header = () => {
           <div className="flex items-center space-x-4 space-x-reverse">
             <Link href="/" className="flex items-center">
               <Image
-                src="/images/logo.png"
+                src="/images/logo.webp"
                 alt={t('company.name')}
                 width={48}
                 height={48}

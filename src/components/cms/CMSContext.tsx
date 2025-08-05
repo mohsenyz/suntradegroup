@@ -260,8 +260,8 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
       // Add default brands
       localData.brands = {
         brands: [
-          { id: 'sun-brand', name: 'سان', slug: 'sun-brand', logo: '/images/brands/sun-brand-logo.png' },
-          { id: 'moon-brand', name: 'مون', slug: 'moon-brand', logo: '/images/brands/moon-brand-logo.png' }
+          { id: 'sun-brand', name: 'سان', slug: 'sun-brand', logo: '/images/brands/sun-brand-logo.webp' },
+          { id: 'moon-brand', name: 'مون', slug: 'moon-brand', logo: '/images/brands/moon-brand-logo.webp' }
         ]
       };
 

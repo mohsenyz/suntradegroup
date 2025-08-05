@@ -12,7 +12,7 @@ const Hero = () => {
       title: 'ابزار و یراق آلات',
       subtitle: 'بیش از ربع قرن تجربه در تولید و توزیع',
       description: 'با سان ترد گروپ، بالاترین کیفیت و تضمین محصولات را تجربه کنید',
-      image: '/images/hero/slider-1.jpg',
+      image: '/images/hero/slider-1.webp',
       cta: 'مشاهده محصولات',
       link: '/products'
     },
