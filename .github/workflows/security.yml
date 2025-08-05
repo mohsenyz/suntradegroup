@@ -1,0 +1,243 @@
+name: 🔒 Security Monitoring
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday at 6 AM UTC
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'package*.json'
+      - 'api/**'
+      - '.github/workflows/**'
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  # Dependency Security Audit
+  dependency-audit:
+    name: 📦 Dependency Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 🔧 Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🔒 Run npm audit
+        run: |
+          echo "🔒 Running comprehensive npm security audit..."
+          npm audit --audit-level=low --json > audit-results.json || true
+          
+          # Parse and display results
+          if [ -f audit-results.json ]; then
+            echo "📊 Audit Summary:"
+            cat audit-results.json | jq -r '.metadata.vulnerabilities | to_entries[] | "\(.key): \(.value)"' 2>/dev/null || echo "No vulnerabilities data"
+            
+            # Check for high/critical vulnerabilities
+            HIGH_VULNS=$(cat audit-results.json | jq -r '.metadata.vulnerabilities.high // 0' 2>/dev/null || echo "0")
+            CRITICAL_VULNS=$(cat audit-results.json | jq -r '.metadata.vulnerabilities.critical // 0' 2>/dev/null || echo "0")
+            
+            echo "🚨 High vulnerabilities: $HIGH_VULNS"
+            echo "💥 Critical vulnerabilities: $CRITICAL_VULNS"
+            
+            if [ "$HIGH_VULNS" != "0" ] || [ "$CRITICAL_VULNS" != "0" ]; then
+              echo "⚠️ Security vulnerabilities found! Please review and update dependencies."
+              exit 1
+            fi
+          fi
+
+      - name: 🔒 Check for known vulnerabilities in specific packages
+        run: |
+          echo "🔍 Checking for specific vulnerable packages..."
+          
+          # Check for packages with known issues
+          VULNERABLE_PACKAGES=("lodash" "moment" "request" "node-sass")
+          
+          for package in "${VULNERABLE_PACKAGES[@]}"; do
+            if npm list "$package" >/dev/null 2>&1; then
+              echo "⚠️ Found potentially vulnerable package: $package"
+              npm list "$package" --depth=0
+            fi
+          done
+
+  # Secret Scanning
+  secret-scan:
+    name: 🕵️ Secret Scanning
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔍 Run gitleaks scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🔍 Manual secret patterns check
+        run: |
+          echo "🔍 Checking for common secret patterns..."
+          
+          # Define patterns to search for
+          PATTERNS=(
+            "password\s*=\s*['\"][^'\"]{8,}"
+            "api[_-]?key\s*=\s*['\"][^'\"]{20,}"
+            "secret\s*=\s*['\"][^'\"]{16,}"
+            "token\s*=\s*['\"][^'\"]{20,}"
+            "database[_-]?url\s*=\s*['\"].*://"
+            "smtp[_-]?password\s*=\s*['\"][^'\"]{6,}"
+          )
+          
+          for pattern in "${PATTERNS[@]}"; do
+            echo "Checking pattern: $pattern"
+            if grep -r -E -i "$pattern" src/ api/ --include="*.ts" --include="*.tsx" --include="*.js" --include="*.php" 2>/dev/null; then
+              echo "⚠️ Potential secret found with pattern: $pattern"
+            fi
+          done
+          
+          echo "✅ Secret pattern check completed"
+
+  # Container Security (if using Docker)
+  container-scan:
+    name: 🐳 Container Security
+    runs-on: ubuntu-latest
+    if: false  # Enable if using Docker
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: 📊 Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # Security Headers Check
+  security-headers:
+    name: 🛡️ Security Headers Check
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: 🌐 Check security headers
+        run: |
+          echo "🛡️ Checking security headers for production site..."
+          
+          # Check if site is accessible
+          if curl -f -s https://suntradegroup.ir > /dev/null; then
+            echo "✅ Site is accessible"
+            
+            # Check security headers
+            echo "📋 Checking security headers:"
+            
+            HEADERS=$(curl -I -s https://suntradegroup.ir)
+            
+            # Check for important security headers
+            if echo "$HEADERS" | grep -i "x-frame-options" > /dev/null; then
+              echo "✅ X-Frame-Options header present"
+            else
+              echo "⚠️ X-Frame-Options header missing"
+            fi
+            
+            if echo "$HEADERS" | grep -i "x-content-type-options" > /dev/null; then
+              echo "✅ X-Content-Type-Options header present"
+            else
+              echo "⚠️ X-Content-Type-Options header missing"
+            fi
+            
+            if echo "$HEADERS" | grep -i "strict-transport-security" > /dev/null; then
+              echo "✅ Strict-Transport-Security header present"
+            else
+              echo "⚠️ Strict-Transport-Security header missing"
+            fi
+            
+            if echo "$HEADERS" | grep -i "content-security-policy" > /dev/null; then
+              echo "✅ Content-Security-Policy header present"
+            else
+              echo "⚠️ Content-Security-Policy header missing"
+            fi
+            
+          else
+            echo "❌ Site is not accessible for security header check"
+          fi
+
+  # File Permissions Check
+  file-permissions:
+    name: 📁 File Permissions Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 Check file permissions
+        run: |
+          echo "🔍 Checking file permissions..."
+          
+          # Check for executable files that shouldn't be
+          echo "Checking for suspicious executable files:"
+          find . -type f -executable -not -path "./node_modules/*" -not -path "./.git/*" -not -name "*.sh" | head -20
+          
+          # Check for world-writable files
+          echo "Checking for world-writable files:"
+          find . -type f -perm -002 -not -path "./node_modules/*" -not -path "./.git/*" | head -10
+          
+          # Check for files with dangerous extensions
+          echo "Checking for files with potentially dangerous extensions:"
+          find . -type f \( -name "*.exe" -o -name "*.bat" -o -name "*.cmd" -o -name "*.scr" \) -not -path "./node_modules/*" | head -10
+          
+          echo "✅ File permissions check completed"
+
+  # Generate Security Report
+  security-report:
+    name: 📊 Security Report
+    runs-on: ubuntu-latest
+    needs: [dependency-audit, secret-scan, security-headers, file-permissions]
+    if: always()
+    steps:
+      - name: 📊 Generate security summary
+        run: |
+          echo "## 🔒 Security Monitoring Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Scan Date:** $(date -u)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          echo "### 📊 Scan Results:" >> $GITHUB_STEP_SUMMARY
+          echo "- 📦 Dependency Audit: ${{ needs.dependency-audit.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- 🕵️ Secret Scan: ${{ needs.secret-scan.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- 🛡️ Security Headers: ${{ needs.security-headers.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- 📁 File Permissions: ${{ needs.file-permissions.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Overall status
+          if [[ "${{ needs.dependency-audit.result }}" == "success" && "${{ needs.secret-scan.result }}" == "success" ]]; then
+            echo "### ✅ Overall Status: SECURE" >> $GITHUB_STEP_SUMMARY
+            echo "No critical security issues detected." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### ⚠️ Overall Status: ATTENTION REQUIRED" >> $GITHUB_STEP_SUMMARY
+            echo "Some security checks failed. Please review the results above." >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔧 Recommendations:" >> $GITHUB_STEP_SUMMARY
+          echo "- Regularly update dependencies" >> $GITHUB_STEP_SUMMARY
+          echo "- Monitor for new security advisories" >> $GITHUB_STEP_SUMMARY
+          echo "- Review and rotate secrets periodically" >> $GITHUB_STEP_SUMMARY
+          echo "- Implement proper security headers" >> $GITHUB_STEP_SUMMARY

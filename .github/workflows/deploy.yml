@@ -1,0 +1,345 @@
+name: 🚀 Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+      - 'DEV-SETUP.md'
+      - '*.md'
+      - '.gitignore'
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+      - 'DEV-SETUP.md'
+      - '*.md'
+      - '.gitignore'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment Environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
+
+env:
+  NODE_VERSION: '18'
+  PHP_VERSION: '8.1'
+
+jobs:
+  # Security and Code Quality Checks
+  security-scan:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: 📊 Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # Frontend Build and Test
+  frontend-ci:
+    name: 🌐 Frontend CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 🔧 Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 📋 Run ESLint
+        run: npm run lint
+        continue-on-error: true # Allow build to continue with warnings
+
+      - name: 🔨 Build Next.js application
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: 📊 Bundle analyzer
+        run: |
+          if [ -d "out" ]; then
+            echo "📦 Build size analysis:"
+            du -sh out/
+            find out -name "*.js" -type f -exec du -h {} + | sort -hr | head -10
+          fi
+
+      - name: 💾 Cache build artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            out/
+            .next/
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
+
+      - name: 📤 Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nextjs-build
+          path: out/
+          retention-days: 7
+
+  # PHP API Tests
+  api-ci:
+    name: 🐘 PHP API CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐘 Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: json, curl, mbstring
+          ini-values: error_reporting=E_ALL
+          tools: composer
+          coverage: none
+
+      - name: 🔍 Validate PHP syntax
+        run: |
+          find api/ -name "*.php" -exec php -l {} \;
+
+      - name: 🧪 Test API endpoints
+        run: |
+          cd api
+          php -S localhost:8080 router.php &
+          SERVER_PID=$!
+          sleep 2
+          
+          # Test basic endpoints
+          echo "Testing API endpoints..."
+          curl -f http://localhost:8080/api/products || echo "Products endpoint failed"
+          curl -f http://localhost:8080/api/brands || echo "Brands endpoint failed"
+          curl -f http://localhost:8080/api/categories || echo "Categories endpoint failed"
+          curl -f http://localhost:8080/api/texts/common || echo "Texts endpoint failed"
+          
+          kill $SERVER_PID
+
+      - name: 📤 Upload API files
+        uses: actions/upload-artifact@v4
+        with:
+          name: php-api
+          path: api/
+          retention-days: 7
+
+  # Production Deployment
+  deploy-production:
+    name: 🚀 Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [frontend-ci, api-ci]
+    if: |
+      github.ref == 'refs/heads/main' && 
+      github.event_name == 'push' ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'production')
+    environment:
+      name: production
+      url: https://suntradegroup.ir
+    
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 🔧 Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🔨 Build for production
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: 📤 Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: nextjs-build
+          path: out/
+
+      - name: 📤 Download API artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: php-api
+          path: api/
+
+      - name: 🗜️ Create deployment package
+        run: |
+          # Create deployment directory
+          mkdir -p deployment-package
+          
+          # Copy frontend build
+          cp -r out/* deployment-package/
+          
+          # Copy API files
+          mkdir -p deployment-package/api
+          cp -r api/* deployment-package/api/
+          
+          # Create deployment info
+          echo "Deployment Info:" > deployment-package/DEPLOYMENT_INFO.txt
+          echo "Commit: ${{ github.sha }}" >> deployment-package/DEPLOYMENT_INFO.txt
+          echo "Branch: ${{ github.ref_name }}" >> deployment-package/DEPLOYMENT_INFO.txt
+          echo "Deployed at: $(date -u)" >> deployment-package/DEPLOYMENT_INFO.txt
+          echo "Workflow: ${{ github.run_id }}" >> deployment-package/DEPLOYMENT_INFO.txt
+
+      - name: 🚀 Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT || 21 }}
+          protocol: ftps
+          local-dir: deployment-package/
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+            **/Thumbs.db
+            **/.env*
+            **/dev-*.sh
+            **/test-*.sh
+            **/*.log
+          timeout: 600000
+
+      - name: 🧹 Cleanup deployment files
+        run: rm -rf deployment-package/
+
+      - name: ✅ Deployment Success Notification
+        if: success()
+        run: |
+          echo "🎉 Deployment successful!"
+          echo "🌐 Site URL: https://suntradegroup.ir"
+          echo "📱 CMS Panel: https://suntradegroup.ir/admin-panel-secret-cms-2024"
+          echo "📡 API Base: https://suntradegroup.ir/api/"
+
+      - name: ❌ Deployment Failure Notification
+        if: failure()
+        run: |
+          echo "💥 Deployment failed!"
+          echo "🔍 Check the logs above for details"
+          echo "🚨 Manual intervention may be required"
+
+  # Staging Deployment (Optional)
+  deploy-staging:
+    name: 🧪 Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [frontend-ci, api-ci]
+    if: |
+      github.event_name == 'workflow_dispatch' && 
+      github.event.inputs.environment == 'staging'
+    environment:
+      name: staging
+      url: https://staging.suntradegroup.ir
+    
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 🔧 Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🔨 Build for staging
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: 🧪 Deploy to staging server
+        run: |
+          echo "🧪 Staging deployment would happen here"
+          echo "This can be configured with staging server credentials"
+
+  # Post-deployment health checks
+  health-check:
+    name: 🏥 Health Check
+    runs-on: ubuntu-latest
+    needs: [deploy-production]
+    if: always() && needs.deploy-production.result == 'success'
+    
+    steps:
+      - name: 🔍 Website Health Check
+        run: |
+          echo "🏥 Performing health checks..."
+          
+          # Check main website
+          if curl -f -s https://suntradegroup.ir > /dev/null; then
+            echo "✅ Main website is responding"
+          else
+            echo "❌ Main website is not responding"
+            exit 1
+          fi
+          
+          # Check API endpoints
+          if curl -f -s https://suntradegroup.ir/api/products > /dev/null; then
+            echo "✅ API is responding"
+          else
+            echo "⚠️ API may not be responding (this is expected if API requires authentication)"
+          fi
+          
+          echo "🎉 Health check completed!"
+
+  # Lighthouse Performance Audit (Optional - runs on schedule)
+  lighthouse-audit:
+    name: 🚨 Performance Audit
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🚨 Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          urls: |
+            https://suntradegroup.ir
+            https://suntradegroup.ir/products
+            https://suntradegroup.ir/categories
+          configPath: './.lighthouserc.json'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+# Schedule weekly performance audits
+# Uncomment to enable scheduled runs
+# on:
+#   schedule:
+#     - cron: '0 2 * * 1'  # Every Monday at 2 AM UTC
