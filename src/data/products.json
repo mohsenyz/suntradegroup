@@ -15,9 +15,9 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-12-1.jpg"
+        "/images/products/product-12-1.webp"
       ],
-      "mainImage": "/images/products/product-12-1.jpg",
+      "mainImage": "/images/products/product-12-1.webp",
       "shortDescription": "اره سامورائی 38 سانت ساخته شده از فنر ESKA750",
       "fullDescription": "اره سامورائی 38 سانت ساخته شده از فنر ESKA750 با تیغه های سه بعدی و دسته های ساخته شده ازمواد نو",
       "properties": {
@@ -48,7 +48,7 @@
             "اقلام همراه": "غلاف"
           },
           "images": [
-            "/images/products/product-12-1.jpg"
+            "/images/products/product-12-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -77,9 +77,9 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-14-1.jpg"
+        "/images/products/product-14-1.webp"
       ],
-      "mainImage": "/images/products/product-14-1.jpg",
+      "mainImage": "/images/products/product-14-1.webp",
       "shortDescription": "سیلندر ۷ سانت سان با بدنه فول برنج",
       "fullDescription": "سیلندر ۷ سانت سان، با بدنه فول برنج می باشد که به همراه ۵ کلید کامپیوتری در بسته بندی شکیل کادویی ارائه میگردد.",
       "properties": {
@@ -107,7 +107,7 @@
             "اقلام همراه": "۵ کلید کامپیوتری"
           },
           "images": [
-            "/images/products/product-14-1.jpg"
+            "/images/products/product-14-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -137,10 +137,10 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-16-1.jpg",
-        "/images/products/product-16-2.jpg"
+        "/images/products/product-16-1.webp",
+        "/images/products/product-16-2.webp"
       ],
-      "mainImage": "/images/products/product-16-1.jpg",
+      "mainImage": "/images/products/product-16-1.webp",
       "shortDescription": "میخ های سیاه بنفش سان در سایز های مختلف",
       "fullDescription": "میخ های سیاه بنفش سان در سایز های 1/2 و 5/8 و 3/4 می باشد که در هر کارتن 56 بسته 450 گرمی قرار دارد.",
       "properties": {
@@ -171,7 +171,7 @@
             "جنس بدنه": "فولاد"
           },
           "images": [
-            "/images/products/product-16-1.jpg"
+            "/images/products/product-16-1.webp"
           ],
           "availability": false
         },
@@ -189,7 +189,7 @@
             "جنس بدنه": "فولاد"
           },
           "images": [
-            "/images/products/product-16-1.jpg"
+            "/images/products/product-16-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -208,7 +208,7 @@
             "جنس بدنه": "فولاد"
           },
           "images": [
-            "/images/products/product-16-2.jpg"
+            "/images/products/product-16-2.webp"
           ],
           "availability": false
         }
@@ -238,12 +238,12 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-17-1.jpg",
-        "/images/products/product-17-2.jpg",
-        "/images/products/product-17-3.jpg",
-        "/images/products/product-17-4.jpg"
+        "/images/products/product-17-1.webp",
+        "/images/products/product-17-2.webp",
+        "/images/products/product-17-3.webp",
+        "/images/products/product-17-4.webp"
       ],
-      "mainImage": "/images/products/product-17-1.jpg",
+      "mainImage": "/images/products/product-17-1.webp",
       "shortDescription": "میخ های فولادی گالوانیزه سان در سایز های مختلف",
       "fullDescription": "میخ های فولادی گالوانیزه سان در سایز ها 3 و 4 و 5 و 7 و 8 و 10 سانت در بسته های 20 تایی موجود می باشد.",
       "properties": {
@@ -271,7 +271,7 @@
             "جنس بدنه": "گالوانیزه"
           },
           "images": [
-            "/images/products/product-17-1.jpg"
+            "/images/products/product-17-1.webp"
           ],
           "availability": false
         },
@@ -288,7 +288,7 @@
             "جنس بدنه": "گالوانیزه"
           },
           "images": [
-            "/images/products/product-17-2.jpg"
+            "/images/products/product-17-2.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -306,7 +306,7 @@
             "جنس بدنه": "گالوانیزه"
           },
           "images": [
-            "/images/products/product-17-3.jpg"
+            "/images/products/product-17-3.webp"
           ],
           "availability": false
         },
@@ -323,7 +323,7 @@
             "جنس بدنه": "گالوانیزه"
           },
           "images": [
-            "/images/products/product-17-4.jpg"
+            "/images/products/product-17-4.webp"
           ],
           "availability": false
         },
@@ -340,7 +340,7 @@
             "جنس بدنه": "گالوانیزه"
           },
           "images": [
-            "/images/products/product-17-1.jpg"
+            "/images/products/product-17-1.webp"
           ],
           "availability": false
         },
@@ -357,7 +357,7 @@
             "جنس بدنه": "گالوانیزه"
           },
           "images": [
-            "/images/products/product-17-1.jpg"
+            "/images/products/product-17-1.webp"
           ],
           "availability": false
         },
@@ -374,7 +374,7 @@
             "جنس بدنه": "گالوانیزه"
           },
           "images": [
-            "/images/products/product-17-1.jpg"
+            "/images/products/product-17-1.webp"
           ],
           "availability": false
         }
@@ -405,9 +405,9 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-19-1.jpg"
+        "/images/products/product-19-1.webp"
       ],
-      "mainImage": "/images/products/product-19-1.jpg",
+      "mainImage": "/images/products/product-19-1.webp",
       "shortDescription": "قفل حیاتی مشکی 3کلید ساده زبانه برنجی",
       "fullDescription": "قفل حیاتی مشکی 3کلید ساده زبانه برنجی 9 ساچمه",
       "properties": {
@@ -433,7 +433,7 @@
             "اقلام همراه": "۳ کلید ساده"
           },
           "images": [
-            "/images/products/product-19-1.jpg"
+            "/images/products/product-19-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -462,9 +462,9 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-21-1.jpg"
+        "/images/products/product-21-1.webp"
       ],
-      "mainImage": "/images/products/product-21-1.jpg",
+      "mainImage": "/images/products/product-21-1.webp",
       "shortDescription": "بیل فولادی مشکی سان در دو سایز ۲ و ۳",
       "fullDescription": "بیل فولادی مشکی سان در دوسایز2و3 بسته بندی 12عددی کارتونی",
       "properties": {
@@ -487,7 +487,7 @@
             "سایز": "۲"
           },
           "images": [
-            "/images/products/product-21-1.jpg"
+            "/images/products/product-21-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -504,7 +504,7 @@
             "سایز": "۳"
           },
           "images": [
-            "/images/products/product-21-1.jpg"
+            "/images/products/product-21-1.webp"
           ],
           "availability": false
         }
@@ -532,9 +532,9 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-22-1.jpg"
+        "/images/products/product-22-1.webp"
       ],
-      "mainImage": "/images/products/product-22-1.jpg",
+      "mainImage": "/images/products/product-22-1.webp",
       "shortDescription": "بیل پارویی فولادی در رنگ های مشکی و طلایی",
       "fullDescription": "بیل پاروئی فولادی مشکی و طلایی در بسته بندی 12تایی کارتونی",
       "properties": {
@@ -561,7 +561,7 @@
             "رنگ": "مشکی"
           },
           "images": [
-            "/images/products/product-22-1.jpg"
+            "/images/products/product-22-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -578,7 +578,7 @@
             "رنگ": "طلایی"
           },
           "images": [
-            "/images/products/product-22-1.jpg"
+            "/images/products/product-22-1.webp"
           ],
           "availability": false
         }
@@ -606,11 +606,11 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-25-1.jpg",
-        "/images/products/product-25-2.jpg",
-        "/images/products/product-25-3.jpg"
+        "/images/products/product-25-1.webp",
+        "/images/products/product-25-2.webp",
+        "/images/products/product-25-3.webp"
       ],
-      "mainImage": "/images/products/product-25-1.jpg",
+      "mainImage": "/images/products/product-25-1.webp",
       "shortDescription": "قفل حیاطی فول برنج با 5 کلید برنجی",
       "fullDescription": "قفل حیاتی فول برنج دارای 5 کلید برنجی سیلندر و زبانه برنجی دارای 9ساچمه دربسته بندی دارای محافظ",
       "properties": {
@@ -634,7 +634,7 @@
             "اقلام همراه": "۵ کلید برنجی"
           },
           "images": [
-            "/images/products/product-25-1.jpg"
+            "/images/products/product-25-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -665,10 +665,10 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-26-1.jpg",
-        "/images/products/product-26-2.jpg"
+        "/images/products/product-26-1.webp",
+        "/images/products/product-26-2.webp"
       ],
-      "mainImage": "/images/products/product-26-1.jpg",
+      "mainImage": "/images/products/product-26-1.webp",
       "shortDescription": "قفل حیاطی برقی با 3 کلید و زبانه برنجی",
       "fullDescription": "قفل برقی دارای 3 کلید سیلندر و زبانه برنجی در بسته بندی محکم دارای محافظ",
       "properties": {
@@ -692,7 +692,7 @@
             "اقلام همراه": "۳ کلید"
           },
           "images": [
-            "/images/products/product-26-1.jpg"
+            "/images/products/product-26-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -722,11 +722,11 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-27-1.jpg",
-        "/images/products/product-27-2.jpg",
-        "/images/products/product-27-3.jpg"
+        "/images/products/product-27-1.webp",
+        "/images/products/product-27-2.webp",
+        "/images/products/product-27-3.webp"
       ],
-      "mainImage": "/images/products/product-27-1.jpg",
+      "mainImage": "/images/products/product-27-1.webp",
       "shortDescription": "سیلندر 7 سانت فول برنج با 5 کلید کامپیوتری",
       "fullDescription": "سیلندر 7سانت فول برنج با5کلیدکامپیوتری برنجی داخل بسته بندی کادوئی",
       "properties": {
@@ -750,7 +750,7 @@
             "اقلام همراه": "۵ کلید کامپیوتری"
           },
           "images": [
-            "/images/products/product-27-1.jpg"
+            "/images/products/product-27-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -781,9 +781,9 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-28-1.jpg"
+        "/images/products/product-28-1.webp"
       ],
-      "mainImage": "/images/products/product-28-1.jpg",
+      "mainImage": "/images/products/product-28-1.webp",
       "shortDescription": "قفل 2.5 سانت مخصوص درب آهنی با زبانه برنجی",
       "fullDescription": "قفل 2/5سانت درب آهنی سان زبانه برنجی سیلندر فول برنج همراه 3 کلید برنجی",
       "properties": {
@@ -805,7 +805,7 @@
             "اقلام همراه": "۳ کلید برنجی"
           },
           "images": [
-            "/images/products/product-28-1.jpg"
+            "/images/products/product-28-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -834,10 +834,10 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-29-1.jpg",
-        "/images/products/product-29-2.jpg"
+        "/images/products/product-29-1.webp",
+        "/images/products/product-29-2.webp"
       ],
-      "mainImage": "/images/products/product-29-1.jpg",
+      "mainImage": "/images/products/product-29-1.webp",
       "shortDescription": "سیلندر برنجی سایز 6 سانت با سه کلید ساده",
       "fullDescription": "سیلندرسایز6 سانت برنجی با سه کلید ساده برای درب های آلمینیومی",
       "properties": {
@@ -859,7 +859,7 @@
             "اقلام همراه": "۳ کلید"
           },
           "images": [
-            "/images/products/product-29-1.jpg"
+            "/images/products/product-29-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -889,10 +889,10 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-30-1.jpg",
-        "/images/products/product-30-2.jpg"
+        "/images/products/product-30-1.webp",
+        "/images/products/product-30-2.webp"
       ],
-      "mainImage": "/images/products/product-30-1.jpg",
+      "mainImage": "/images/products/product-30-1.webp",
       "shortDescription": "ریسمانکار سان در رنگ های سفید و آبی و سایزهای مختلف",
       "fullDescription": "ریسمانکارسان رنگی سفید وآبی در سایز های 100/200/300/400/500",
       "properties": {
@@ -917,7 +917,7 @@
             "سایز": "۱۰۰"
           },
           "images": [
-            "/images/products/product-30-1.jpg"
+            "/images/products/product-30-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -934,7 +934,7 @@
             "سایز": "۲۰۰"
           },
           "images": [
-            "/images/products/product-30-2.jpg"
+            "/images/products/product-30-2.webp"
           ],
           "availability": false
         },
@@ -950,7 +950,7 @@
             "سایز": "۳۰۰"
           },
           "images": [
-            "/images/products/product-30-1.jpg"
+            "/images/products/product-30-1.webp"
           ],
           "availability": false
         },
@@ -966,7 +966,7 @@
             "سایز": "۴۰۰"
           },
           "images": [
-            "/images/products/product-30-1.jpg"
+            "/images/products/product-30-1.webp"
           ],
           "availability": false
         },
@@ -982,7 +982,7 @@
             "سایز": "۵۰۰"
           },
           "images": [
-            "/images/products/product-30-1.jpg"
+            "/images/products/product-30-1.webp"
           ],
           "availability": false
         }
@@ -1011,9 +1011,9 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-33-1.jpg"
+        "/images/products/product-33-1.webp"
       ],
-      "mainImage": "/images/products/product-33-1.jpg",
+      "mainImage": "/images/products/product-33-1.webp",
       "shortDescription": "قفل آویز برنجی سان با سه کلید.",
       "fullDescription": "قفل آویز برنجی سان با بدنه مستحکم و سه کلید، مناسب برای امنیت انبار، درب و ...",
       "properties": {
@@ -1037,7 +1037,7 @@
             "جنس بدنه": "برنج"
           },
           "images": [
-            "/images/products/product-33-1.jpg"
+            "/images/products/product-33-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -1065,9 +1065,9 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-34-1.jpg"
+        "/images/products/product-34-1.webp"
       ],
-      "mainImage": "/images/products/product-34-1.jpg",
+      "mainImage": "/images/products/product-34-1.webp",
       "shortDescription": "قفل کتابی سان با امنیت بالا.",
       "fullDescription": "قفل کتابی سان با امنیت بالا، مناسب برای مصارف عمومی و صنعتی و حفاظت از اموال شما.",
       "properties": {},
@@ -1084,7 +1084,7 @@
           "stock": 0,
           "properties": {},
           "images": [
-            "/images/products/product-34-1.jpg"
+            "/images/products/product-34-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -1113,9 +1113,9 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-35-1.jpg"
+        "/images/products/product-35-1.webp"
       ],
-      "mainImage": "/images/products/product-35-1.jpg",
+      "mainImage": "/images/products/product-35-1.webp",
       "shortDescription": "توری فایبرگلاس نسوز در عرض های مختلف.",
       "fullDescription": "توری فایبرگلاس نسوز برند سان، مناسب برای مسلح کردن گچ و سیمان و جلوگیری از ترک خوردگی در عرض های ۹۰، ۱۰۰، ۱۲۰ و ۱۵۰ سانتی متر.",
       "properties": {
@@ -1138,7 +1138,7 @@
             "سایز": "۹۰"
           },
           "images": [
-            "/images/products/product-35-1.jpg"
+            "/images/products/product-35-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -1155,7 +1155,7 @@
             "سایز": "۱۰۰"
           },
           "images": [
-            "/images/products/product-35-1.jpg"
+            "/images/products/product-35-1.webp"
           ],
           "availability": false
         },
@@ -1171,7 +1171,7 @@
             "سایز": "۱۲۰"
           },
           "images": [
-            "/images/products/product-35-1.jpg"
+            "/images/products/product-35-1.webp"
           ],
           "availability": false
         },
@@ -1187,7 +1187,7 @@
             "سایز": "۱۵۰"
           },
           "images": [
-            "/images/products/product-35-1.jpg"
+            "/images/products/product-35-1.webp"
           ],
           "availability": false
         }
@@ -1216,9 +1216,9 @@
       "basePrice": 0,
       "currency": "تماس بگیرید",
       "images": [
-        "/images/products/product-36-1.jpg"
+        "/images/products/product-36-1.webp"
       ],
-      "mainImage": "/images/products/product-36-1.jpg",
+      "mainImage": "/images/products/product-36-1.webp",
       "shortDescription": "توری گالوانیزه مرغی با کیفیت بالا.",
       "fullDescription": "توری گالوانیزه مرغی برند سان، با کیفیت بالا و مقاومت در برابر زنگ‌زدگی، مناسب برای حصارکشی و مصارف ساختمانی.",
       "properties": {},
@@ -1236,7 +1236,7 @@
           "stock": 0,
           "properties": {},
           "images": [
-            "/images/products/product-36-1.jpg"
+            "/images/products/product-36-1.webp"
           ],
           "availability": false,
           "isDefault": true
@@ -1258,7 +1258,7 @@
       "name": "سان",
       "slug": "sun-brand",
       "description": "برند سان ترد گروپ وارد کننده و تولید کننده انواع قفل و دستگیره و ابزارآلات ساختمانی",
-      "logo": "/images/brands/sun-brand-logo.png",
+      "logo": "/images/brands/sun-brand-logo.webp",
       "founded": "1380",
       "country": "ایران"
     }
@@ -1269,35 +1269,35 @@
       "name": "میخ و اره",
       "slug": "nails-saws",
       "description": "انواع میخ و اره های ساختمانی",
-      "image": "/images/categories/nails-saws.jpg"
+      "image": "/images/categories/nails-saws.webp"
     },
     {
       "id": "locks-cylinders",
       "name": "قفل و سیلندر",
       "slug": "locks-cylinders",
       "description": "انواع قفل و سیلندر برای درب و ساختمان",
-      "image": "/images/categories/locks-cylinders.jpg"
+      "image": "/images/categories/locks-cylinders.webp"
     },
     {
       "id": "shovels-pickaxes",
       "name": "بیل و کلنگ",
       "slug": "shovels-pickaxes",
       "description": "ابزارآلات کشاورزی و ساختمانی",
-      "image": "/images/categories/shovels-pickaxes.jpg"
+      "image": "/images/categories/shovels-pickaxes.webp"
     },
     {
       "id": "ropes-threads",
       "name": "ریسمانکار و سر رزوه",
       "slug": "ropes-threads",
       "description": "ریسمانکار و لوازم جانبی ساختمانی",
-      "image": "/images/categories/ropes-threads.jpg"
+      "image": "/images/categories/ropes-threads.webp"
     },
     {
       "id": "mesh-chains",
       "name": "توری و زنجیر",
       "slug": "mesh-chains",
       "description": "انواع توری و زنجیرهای ساختمانی",
-      "image": "/images/categories/mesh-chains.jpg"
+      "image": "/images/categories/mesh-chains.webp"
     }
   ],
   "companyInfo": {

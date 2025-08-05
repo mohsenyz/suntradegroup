@@ -1,24 +1,24 @@
 [
   {
-    "image": "/images/category-banners/tools-banner.png",
+    "image": "/images/category-banners/tools-banner.webp",
     "category": "بیل و کلنگ",
     "url": "/categories/shovels-pickaxes",
     "alt": "بیل و کلنگ"
   },
   {
-    "image": "/images/category-banners/samurai-saw-banner.jpeg",
+    "image": "/images/category-banners/samurai-saw-banner.webp",
     "category": "میخ و اره",
     "url": "/categories/nails-saws",
     "alt": "میخ و اره"
   },
   {
-    "image": "/images/category-banners/locks-banner.jpeg",
+    "image": "/images/category-banners/locks-banner.webp",
     "category": "قفل و سیلندر",
     "url": "/categories/locks-cylinders",
     "alt": "قفل و سیلندر"
   },
   {
-    "image": "/images/category-banners/wire-chain-banner.jpeg",
+    "image": "/images/category-banners/wire-chain-banner.webp",
     "category": "توری و زنجیر",
     "url": "/categories/mesh-chains",
     "alt": "توری و زنجیر"
