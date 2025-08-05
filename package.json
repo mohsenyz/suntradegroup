@@ -13,7 +13,10 @@
     "dev:api": "./dev-api.sh",
     "dev:frontend": "./dev-frontend.sh",
     "dev:full": "./dev-start.sh",
-    "dev:cleanup": "./dev-cleanup.sh"
+    "dev:cleanup": "./dev-cleanup.sh",
+    "optimize:images": "node optimize-images.js",
+    "convert:webp": "node convert-to-webp.js",
+    "optimize:all": "npm run optimize:images && npm run convert:webp"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -32,6 +35,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
+    "sharp": "^0.33.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
