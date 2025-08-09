@@ -1,5 +1,9 @@
 # 🔧 SunTradeGroup - Advanced CMS & E-commerce Platform
 
+[![Deploy](https://github.com/mohsenyz/suntradegroup/actions/workflows/deploy.yml/badge.svg)](https://github.com/mohsenyz/suntradegroup/actions/workflows/deploy.yml)
+[![CI](https://github.com/mohsenyz/suntradegroup/actions/workflows/ci.yml/badge.svg)](https://github.com/mohsenyz/suntradegroup/actions/workflows/ci.yml)
+[![Security](https://github.com/mohsenyz/suntradegroup/actions/workflows/security.yml/badge.svg)](https://github.com/mohsenyz/suntradegroup/actions/workflows/security.yml)
+
 A sophisticated, bilingual (Persian/English) content management system and e-commerce platform built with Next.js 15.3.5 + Turbopack and PHP backend API, featuring real-time data synchronization and comprehensive testing.
 
 ![Homepage](screenshots/frontend-homepage.png)
