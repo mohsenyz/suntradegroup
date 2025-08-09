@@ -9,7 +9,7 @@ A sophisticated, bilingual (Persian/English) content management system and e-com
 ### 🛠️ **Advanced CMS Admin Panel**
 - **🔐 Secure Authentication** - Password-protected admin interface
 - **📝 Dynamic Text Management** - Real-time editing of all website texts
-- **🏷️ Product Management** - Complete CRUD operations for 17+ products
+- **🏷️ Product Management** - Complete CRUD operations for 19+ products
 - **📂 Category Management** - Organize products into 5 major categories
 - **🏆 Brand Management** - Manage product brands and specifications
 - **📤 Export & Import** - JSON file management with preview and download
@@ -43,7 +43,7 @@ A sophisticated, bilingual (Persian/English) content management system and e-com
 
 #### Products Management
 ![Products Management](screenshots/cms-products-management.png)
-*Complete product catalog management with 17 products, edit/delete functionality, and easy addition of new products*
+*Complete product catalog management with 19 products, edit/delete functionality, and easy addition of new products*
 
 #### Categories Management
 ![Categories Management](screenshots/cms-categories-management.png)
@@ -103,15 +103,16 @@ Frontend (Next.js 15.3.5)     Backend (PHP 8.x)        Storage (JSON)
 ## 🚀 **Getting Started**
 
 ### 📋 **Prerequisites**
-- Node.js 18+ 
-- PHP 8.x
-- npm or yarn
+- **Node.js 18.0+** (required for Next.js 15.3.5 compatibility)
+- **PHP 8.0+** (for backend API server)
+- **npm or yarn** (package management)
+- **Playwright browsers** (auto-installed with `npx playwright install`)
 
 ### ⚡ **Quick Setup**
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/suntradegroup/suntradegroup.git
+   git clone git@github.com:mohsenyz/suntradegroup.git
    cd suntradegroup
    ```
 
@@ -122,11 +123,18 @@ Frontend (Next.js 15.3.5)     Backend (PHP 8.x)        Storage (JSON)
 
 3. **Start the development servers**
    ```bash
+   # Option 1: Start both servers automatically
+   npm run dev:full
+
+   # Option 2: Manual setup (2 terminals)
    # Terminal 1: Start Next.js frontend
    npm run dev
-
-   # Terminal 2: Start PHP API server
+   # Terminal 2: Start PHP API server  
    php -S localhost:8080 -t api
+
+   # Option 3: Individual servers
+   npm run dev:frontend  # Frontend only
+   npm run dev:api      # API server only
    ```
 
 4. **Access the applications**
@@ -136,6 +144,38 @@ Frontend (Next.js 15.3.5)     Backend (PHP 8.x)        Storage (JSON)
 
 ### 🔑 **CMS Login Credentials**
 - **Password**: `suntradegroup2024`
+
+### 🔧 **Additional Development Tools**
+
+#### **Image Optimization Workflow**
+```bash
+# Optimize existing images for better performance
+npm run optimize:images
+
+# Convert images to WebP format (significant size reduction)
+npm run convert:webp
+
+# Complete optimization pipeline (recommended)
+npm run optimize:all
+```
+
+#### **Development Cleanup**
+```bash
+# Clean development artifacts and temporary files
+npm run dev:cleanup
+```
+
+#### **Build & Export Options**
+```bash
+# Production build
+npm run build
+
+# Static export for hosting
+npm run export
+
+# Serve static files locally
+npm run serve
+```
 
 ---
 
@@ -174,16 +214,33 @@ We have implemented a comprehensive testing suite with **perfect 100% pass rate*
 
 ### 🚀 **Running Tests**
 
+#### **Interactive Testing (Recommended for Development)**
 ```bash
-# Run all tests
-npx playwright test
+# Playwright UI mode - interactive test runner
+npm run test:e2e:ui
 
-# Run specific test suites
-npx playwright test cms-admin-panel.spec.ts
-npx playwright test cms-integration.spec.ts
+# Headed mode - watch tests run in browser
+npm run test:e2e:headed
+```
 
-# Generate test report
+#### **Automated Testing (CI/CD)**
+```bash
+# Run all tests (headless)
+npm run test:e2e
+
+# Targeted test suites
+npm run test:cms              # CMS admin panel tests only
+npm run test:cms-integration  # CMS→Frontend integration tests
+npm run test:cms-all          # Complete CMS test suite
+```
+
+#### **Test Reports & Analysis**
+```bash
+# Generate HTML test report
 npx playwright test --reporter=html
+
+# Show test results in browser
+npx playwright show-report
 ```
 
 ---
@@ -357,11 +414,11 @@ Response: {
 - **Lazy Loading**: On-demand resource loading for better performance
 
 ### 📊 **Current Statistics**
-- **17 Products** across 5 categories
+- **19 Products** across 5 categories
 - **2 Major Brands** (Sun, Moon)
 - **5 Product Categories** with organized structure  
-- **100% Test Coverage** with perfect pass rate
-- **25+ Languages Elements** fully localized in Persian
+- **100% Test Coverage** with perfect pass rate (42/42 tests)
+- **25+ Language Elements** fully localized in Persian
 
 ---
 
@@ -443,4 +500,4 @@ This project is proprietary software owned by SunTradeGroup. All rights reserved
 
 **Built with ❤️ by the SunTradeGroup Development Team**
 
-*Last Updated: August 2025*
+*Last Updated: January 2025*
