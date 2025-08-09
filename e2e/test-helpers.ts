@@ -32,10 +32,11 @@ export async function loginToCMS(page: Page, retries: number = 3): Promise<void>
       return;
       
     } catch (error) {
-      console.log(`❌ CMS login attempt ${attempt} failed:`, error.message);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.log(`❌ CMS login attempt ${attempt} failed:`, errorMessage);
       
       if (attempt === retries) {
-        throw new Error(`Failed to login to CMS after ${retries} attempts. Last error: ${error.message}`);
+        throw new Error(`Failed to login to CMS after ${retries} attempts. Last error: ${errorMessage}`);
       }
       
       // Wait before retry

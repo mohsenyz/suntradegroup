@@ -16,7 +16,7 @@ export const TextsEditor: React.FC<TextsEditorProps> = ({ category }) => {
   const saveTextsMutation = useSaveTexts(category);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { register, watch, setValue, handleSubmit } = useForm({
+  const { register, watch, setValue, handleSubmit } = useForm<Record<string, string>>({
     defaultValues: {},
   });
 
