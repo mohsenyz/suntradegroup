@@ -33,47 +33,70 @@ A sophisticated, bilingual (Persian/English) content management system and e-com
 
 ---
 
-## 📸 **Screenshots Gallery**
+## 📸 **Live Demo & Screenshots**
 
-### 🔑 **CMS Admin Panel Interface**
+### 🎯 **Key Interface Highlights**
 
-#### Login & Authentication
-![CMS Login](screenshots/cms-login-interface.png)
-*Secure password-protected access to the content management system*
+<table>
+<tr>
+<td width="50%" align="center">
+<b>🔐 CMS Admin Login</b><br/>
+<img src="screenshots/cms-login-interface.png" width="400" alt="CMS Login Interface"/>
+<br/><em>Secure authentication with Persian interface</em>
+</td>
+<td width="50%" align="center">
+<b>🏠 Frontend Homepage</b><br/>
+<img src="screenshots/frontend-homepage.png" width="400" alt="Frontend Homepage"/>
+<br/><em>Beautiful RTL design with product showcase</em>
+</td>
+</tr>
+</table>
 
-#### Text Management Dashboard
-![Text Management](screenshots/cms-text-management.png)
-*Comprehensive text editing interface with organized sections for company info, navigation, buttons, labels, and status messages*
+### 🛠️ **CMS Management Interfaces**
 
-#### Products Management
-![Products Management](screenshots/cms-products-management.png)
-*Complete product catalog management with 19 products, edit/delete functionality, and easy addition of new products*
+<table>
+<tr>
+<td width="33%" align="center">
+<img src="screenshots/cms-text-management.png" width="250" alt="Text Management"/>
+<br/><b>📝 Text Management</b>
+<br/><em>Dynamic content editing</em>
+</td>
+<td width="33%" align="center">
+<img src="screenshots/cms-products-management.png" width="250" alt="Products Management"/>
+<br/><b>🏷️ Products (19 items)</b>
+<br/><em>Full CRUD operations</em>
+</td>
+<td width="33%" align="center">
+<img src="screenshots/cms-categories-management.png" width="250" alt="Categories Management"/>
+<br/><b>📂 Categories (5 types)</b>
+<br/><em>Organized structure</em>
+</td>
+</tr>
+<tr>
+<td width="33%" align="center">
+<img src="screenshots/cms-brands-management.png" width="250" alt="Brands Management"/>
+<br/><b>🏆 Brands</b>
+<br/><em>Sun & Moon brands</em>
+</td>
+<td width="33%" align="center">
+<img src="screenshots/cms-export-interface.png" width="250" alt="Export Interface"/>
+<br/><b>📤 Export Tools</b>
+<br/><em>JSON data management</em>
+</td>
+<td width="33%" align="center">
+<img src="screenshots/frontend-products-page.png" width="250" alt="Products Page"/>
+<br/><b>🛍️ Product Catalog</b>
+<br/><em>Frontend display</em>
+</td>
+</tr>
+</table>
 
-#### Categories Management
-![Categories Management](screenshots/cms-categories-management.png)
-*Organized category system with 5 main categories: Locks & Cylinders, Mesh & Chains, Nails & Saws, Ropes & Threads, Shovels & Pickaxes*
+### 🌟 **Complete System Overview**
 
-#### Brands Management  
-![Brands Management](screenshots/cms-brands-management.png)
-*Brand management system for organizing products by manufacturer (Sun, Moon brands)*
-
-#### Export & Data Management
-![Export Interface](screenshots/cms-export-interface.png)
-*Advanced export functionality with JSON preview, file download, and comprehensive usage guide*
-
-### 🌐 **Frontend User Experience**
-
-#### Homepage
-![Frontend Homepage](screenshots/frontend-homepage.png)
-*Beautiful, responsive homepage with Persian/RTL support, product carousel, company information, and contact details*
-
-#### Products Catalog
-![Products Page](screenshots/frontend-products-page.png)
-*Comprehensive product catalog with filtering, special product highlighting, and detailed product information*
-
-#### Categories Overview
-![Categories Page](screenshots/frontend-categories-page.png)
-*Well-organized category system with product counts and direct navigation to category pages*
+<div align="center">
+<img src="screenshots/frontend-categories-page.png" width="600" alt="Categories Overview"/>
+<br/><b>📊 Categories System</b> - <em>Comprehensive product organization with counts and navigation</em>
+</div>
 
 ---
 
