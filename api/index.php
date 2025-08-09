@@ -114,7 +114,7 @@ switch ($method) {
         } else {
             // Get specific file
             // Public endpoints don't require authentication
-            $publicEndpoints = ['products', 'categories', 'brands'];
+            $publicEndpoints = ['products', 'categories', 'brands', 'texts-common', 'texts-pages', 'texts-forms'];
             if (!in_array($path, $publicEndpoints)) {
                 authenticate();
             }

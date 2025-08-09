@@ -1,18 +1,47 @@
+'use client';
+
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import data from '@/data/products.json';
 import { ProductData } from '@/types';
-
-export const metadata: Metadata = {
-  title: 'برندهای ما - گروه تجاری آفتاب',
-  description: 'آشنایی با برندهای معتبر همکار گروه تجاری آفتاب',
-  keywords: 'برندها، گروه تجاری آفتاب، همکاران، کیفیت'
-};
+import { useProducts, useBrands } from '@/hooks/useData';
 
 export default function BrandsPage() {
-  const productData = data as ProductData;
+  const { products, loading: productsLoading } = useProducts();
+  const { brands, loading: brandsLoading } = useBrands();
+  
+  const loading = productsLoading || brandsLoading;
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">در حال بارگذاری برندها...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!products || !brands) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">خطا در بارگذاری برندها</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+          >
+            تلاش مجدد
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const productData = products as ProductData;
+  const brandData = brands as { brands: Array<{ id: string; name: string; slug: string; description?: string; founded?: string; country?: string; logo?: string; }> };
 
   return (
     <div className="min-h-screen bg-white">
@@ -29,7 +58,7 @@ export default function BrandsPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {productData.brands.map((brand) => {
+          {brandData.brands.map((brand) => {
             const brandProducts = productData.products.filter(
               product => product.brand === brand.name
             );

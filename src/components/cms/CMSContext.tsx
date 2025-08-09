@@ -169,11 +169,8 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
       }
 
       if (errors.length === 0) {
-        // Update original data to reflect current state
-        setOriginalTextsData({...textsData});
-        setOriginalProductsData({...productsData});
-        setOriginalCategoriesData({...categoriesData});
-        setOriginalBrandsData({...brandsData});
+        // Reload fresh data from server after successful save
+        await loadData();
         
         alert('تمام تغییرات با موفقیت در سرور ذخیره شد!');
       } else {

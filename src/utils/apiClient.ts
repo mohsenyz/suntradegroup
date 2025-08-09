@@ -138,7 +138,7 @@ export const jsonApi = {
     } catch {
       console.warn('Failed to load products from API, using local fallback');
       // Fallback to local data
-      const response = await fetch('/src/data/products.json');
+      const response = await fetch('/data/products.json');
       return await response.json();
     }
   },
@@ -155,7 +155,7 @@ export const jsonApi = {
     } catch {
       console.warn(`Failed to load texts-${category} from API, using local fallback`);
       // Fallback to local data
-      const response = await fetch(`/src/data/texts/${category}.json`);
+      const response = await fetch(`/data/texts/${category}.json`);
       return await response.json();
     }
   },

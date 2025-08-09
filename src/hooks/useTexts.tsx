@@ -110,14 +110,29 @@ export function useTexts() {
       try {
         setLoading(true);
         
-        // Load all text files in parallel
-        const [commonResponse, pageResponse, formResponse] = await Promise.all([
-          import('../data/texts/common.json'),
+        // Try to load from API first, then fall back to static files
+        try {
+          const apiResponse = await fetch('http://localhost:8080/api/texts-common');
+          if (apiResponse.ok) {
+            const responseData = await apiResponse.json();
+            const commonData = responseData.data || responseData;
+            console.log('[useTexts] Loaded common texts from API successfully');
+            setCommonTexts(commonData);
+          } else {
+            throw new Error('API response not ok');
+          }
+        } catch (apiErr) {
+          console.warn('[useTexts] API failed, falling back to static files');
+          const commonResponse = await import('../data/texts/common.json');
+          setCommonTexts(commonResponse.default);
+        }
+
+        // Load pages and forms from static files (CMS doesn't manage these yet)
+        const [pageResponse, formResponse] = await Promise.all([
           import('../data/texts/pages.json'),
           import('../data/texts/forms.json')
         ]);
 
-        setCommonTexts(commonResponse.default);
         setPageTexts(pageResponse.default);
         setFormTexts(formResponse.default);
         setError(null);
