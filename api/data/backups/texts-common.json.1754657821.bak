@@ -1,0 +1,81 @@
+{
+    "company": {
+        "name": "سان ترد گروپ",
+        "tagline": "ابزار و یراق آلات",
+        "description": "شرکت سان ترد گروپ با بیش از ربع قرن تجربه در تولید و توزیع ابزار و یراق آلات",
+        "fullDescription": "سان ترد گروپ لوگو",
+        "website": "www.suntradegroup.ir"
+    },
+    "navigation": {
+        "home": "خانه",
+        "products": "محصولات",
+        "categories": "دسته‌بندی‌ها",
+        "about": "درباره ما",
+        "contact": "تماس با ما",
+        "brands": "برندها"
+    },
+    "buttons": {
+        "viewProducts": "مشاهده محصولات تست",
+        "contactUs": "تماس با ما",
+        "sendMessage": "ارسال پیام",
+        "view": "مشاهده",
+        "share": "اشتراک‌گذاری",
+        "selectOption": "انتخاب گزینه",
+        "copyLink": "کپی لینک",
+        "viewAllProducts": "مشاهده همه محصولات",
+        "cooperateWithUs": "همکاری با ما"
+    },
+    "labels": {
+        "brand": "برند:",
+        "category": "دسته:",
+        "basePrice": "قیمت پایه:",
+        "productCode": "کد محصول:",
+        "from": "از",
+        "to": "تا",
+        "product": "محصول",
+        "availableProducts": "محصول موجود",
+        "keyFeatures": "ویژگی‌های کلیدی",
+        "keywords": "کلمات کلیدی",
+        "fullDescription": "توضیحات کامل",
+        "technicalSpecs": "مشخصات فنی",
+        "brandInfo": "اطلاعات برند",
+        "selected": "انتخاب شده:",
+        "inventory": "موجودی:",
+        "establishedYear": "تأسیس",
+        "country": "کشور",
+        "productCount": "تعداد محصولات"
+    },
+    "status": {
+        "special": "ویژه",
+        "unavailable": "ناموجود",
+        "available": "موجود",
+        "limitedStock": "تنها {count} عدد باقیمانده",
+        "limitedEdition": "ادیشن محدود - تنها {count} عدد تولید شده",
+        "callForPrice": "تماس بگیرید"
+    },
+    "search": {
+        "placeholder": "جستجو...",
+        "types": {
+            "page": "صفحه",
+            "brand": "برند",
+            "category": "دسته‌بندی",
+            "product": "محصول"
+        }
+    },
+    "sharing": {
+        "title": "اشتراک‌گذاری",
+        "telegram": "تلگرام",
+        "whatsapp": "واتساپ",
+        "linkCopied": "لینک کپی شد!"
+    },
+    "emptyStates": {
+        "noProducts": "هیچ محصولی یافت نشد",
+        "noProductsFound": "محصولی یافت نشد",
+        "productNotFound": "محصول یافت نشد",
+        "categoryNotFound": "دسته‌بندی یافت نشد",
+        "brandNotFound": "برند یافت نشد",
+        "noCategoryProducts": "هنوز محصولی در این دسته‌بندی اضافه نشده است",
+        "notifyNewProducts": "اطلاع از محصولات جدید"
+    },
+    "copyright": "© ۱۴۰۳ سان ترد گروپ. تمامی حقوق محفوظ است."
+}

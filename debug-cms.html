@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CMS Debug Test</title>
+</head>
+<body>
+    <h1>CMS API Debug Test</h1>
+    <div id="result"></div>
+    
+    <script>
+    async function testCMSSave() {
+        const resultDiv = document.getElementById('result');
+        
+        try {
+            // Test API connection
+            resultDiv.innerHTML += '<p>Testing API connection...</p>';
+            const listResponse = await fetch('http://localhost:8080/api/', {
+                headers: { 'X-Password': 'suntradegroup2024' }
+            });
+            const files = await listResponse.json();
+            resultDiv.innerHTML += `<p>✅ API connection OK. Files: ${files.files.length}</p>`;
+            
+            // Get current texts-common
+            const getCurrentResponse = await fetch('http://localhost:8080/api/texts-common', {
+                headers: { 'X-Password': 'suntradegroup2024' }
+            });
+            const currentData = await getCurrentResponse.json();
+            resultDiv.innerHTML += `<p>✅ Current data loaded. Modified: ${new Date(currentData.modified * 1000)}</p>`;
+            
+            // Try to save a test change
+            const testData = {
+                ...currentData.data,
+                company: {
+                    ...currentData.data.company,
+                    name: `Test ${Date.now()}`
+                }
+            };
+            
+            const saveResponse = await fetch('http://localhost:8080/api/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Password': 'suntradegroup2024'
+                },
+                body: JSON.stringify({
+                    filename: 'texts-common',
+                    data: testData
+                })
+            });
+            
+            const saveResult = await saveResponse.json();
+            if (saveResult.success) {
+                resultDiv.innerHTML += `<p>✅ Test save successful. New modified: ${new Date(saveResult.modified * 1000)}</p>`;
+            } else {
+                resultDiv.innerHTML += `<p>❌ Save failed: ${JSON.stringify(saveResult)}</p>`;
+            }
+            
+        } catch (error) {
+            resultDiv.innerHTML += `<p>❌ Error: ${error.message}</p>`;
+        }
+    }
+    
+    testCMSSave();
+    </script>
+</body>
+</html>

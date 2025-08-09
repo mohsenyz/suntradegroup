@@ -1,0 +1,338 @@
+# Page snapshot
+
+```yaml
+- heading "پنل مدیریت محتوا" [level=1]
+- paragraph: سیستم مدیریت فایل‌های JSON
+- text: "🟢 سرور متصل آخرین بروزرسانی: ۱۴۰۴/۵/۱۷"
+- button "ذخیره همه تغییرات" [disabled]
+- button "بازگشت به سایت"
+- navigation:
+  - button "مدیریت متون"
+  - button "مدیریت محصولات"
+  - button "مدیریت دسته‌بندی‌ها"
+  - button "مدیریت برندها"
+  - button "خروجی و پیش‌نمایش"
+- heading "مدیریت متون" [level=2]
+- combobox:
+  - option "متون عمومی (common.json)" [selected]
+  - option "متون صفحات (pages.json)"
+  - option "متون فرم‌ها (forms.json)"
+- button "دانلود فایل"
+- heading "📂 company" [level=3]
+- text: نام شرکت
+- paragraph: 💡 نام رسمی شرکت که در سراسر سایت نمایش داده می‌شود
+- 'textbox "مثال: سان ترد گروپ"': سان ترد گروپ
+- text: "مسیر فیلد:"
+- code: company.name
+- text: شعار شرکت
+- paragraph: 💡 شعار کوتاه شرکت که زیر نام در هدر نمایش داده می‌شود
+- 'textbox "مثال: ابزار و یراق آلات"': ابزار و یراق آلات
+- text: "مسیر فیلد:"
+- code: company.tagline
+- text: توضیحات شرکت
+- paragraph: 💡 توضیح کامل شرکت برای متا دیتا و SEO
+- textbox "توضیح کاملی از فعالیت‌های شرکت...": شرکت سان ترد گروپ با بیش از ربع قرن تجربه در تولید و توزیع ابزار و یراق آلات
+- text: "مسیر فیلد:"
+- code: company.description
+- text: company.fullDescription
+- paragraph: 💡 ویرایش فیلد company.fullDescription
+- textbox "متن مورد نظر را وارد کنید...": سان ترد گروپ لوگو
+- text: "مسیر فیلد:"
+- code: company.fullDescription
+- text: company.website
+- paragraph: 💡 ویرایش فیلد company.website
+- textbox "متن مورد نظر را وارد کنید...": www.suntradegroup.ir
+- text: "مسیر فیلد:"
+- code: company.website
+- heading "📂 navigation" [level=3]
+- text: منوی خانه
+- paragraph: 💡 متن لینک صفحه اصلی در منوی ناوبری
+- 'textbox "مثال: خانه"': خانه
+- text: "مسیر فیلد:"
+- code: navigation.home
+- text: منوی محصولات
+- paragraph: 💡 متن لینک صفحه محصولات در منوی ناوبری
+- 'textbox "مثال: محصولات"': محصولات
+- text: "مسیر فیلد:"
+- code: navigation.products
+- text: منوی دسته‌بندی‌ها
+- paragraph: 💡 متن لینک صفحه دسته‌بندی‌ها در منوی ناوبری
+- 'textbox "مثال: دسته‌بندی‌ها"': دسته‌بندی‌ها
+- text: "مسیر فیلد:"
+- code: navigation.categories
+- text: منوی درباره ما
+- paragraph: 💡 متن لینک صفحه درباره ما در منوی ناوبری
+- 'textbox "مثال: درباره ما"': درباره ما
+- text: "مسیر فیلد:"
+- code: navigation.about
+- text: منوی تماس
+- paragraph: 💡 متن لینک صفحه تماس در منوی ناوبری
+- 'textbox "مثال: تماس با ما"': تماس با ما
+- text: "مسیر فیلد:"
+- code: navigation.contact
+- text: منوی برندها
+- paragraph: 💡 متن لینک صفحه برندها در منوی ناوبری
+- 'textbox "مثال: برندها"': برندها
+- text: "مسیر فیلد:"
+- code: navigation.brands
+- heading "📂 buttons" [level=3]
+- text: دکمه مشاهده محصولات
+- paragraph: 💡 متن دکمه‌ای که کاربر را به صفحه محصولات هدایت می‌کند
+- 'textbox "مثال: مشاهده محصولات"': مشاهده محصولات
+- text: "مسیر فیلد:"
+- code: buttons.viewProducts
+- text: دکمه تماس با ما
+- paragraph: 💡 متن دکمه‌ای که کاربر را به صفحه تماس هدایت می‌کند
+- 'textbox "مثال: تماس با ما"': تماس با ما
+- text: "مسیر فیلد:"
+- code: buttons.contactUs
+- text: buttons.sendMessage
+- paragraph: 💡 ویرایش فیلد buttons.sendMessage
+- textbox "متن مورد نظر را وارد کنید...": ارسال پیام
+- text: "مسیر فیلد:"
+- code: buttons.sendMessage
+- text: buttons.view
+- paragraph: 💡 ویرایش فیلد buttons.view
+- textbox "متن مورد نظر را وارد کنید...": مشاهده
+- text: "مسیر فیلد:"
+- code: buttons.view
+- text: buttons.share
+- paragraph: 💡 ویرایش فیلد buttons.share
+- textbox "متن مورد نظر را وارد کنید...": اشتراک‌گذاری
+- text: "مسیر فیلد:"
+- code: buttons.share
+- text: buttons.selectOption
+- paragraph: 💡 ویرایش فیلد buttons.selectOption
+- textbox "متن مورد نظر را وارد کنید...": انتخاب گزینه
+- text: "مسیر فیلد:"
+- code: buttons.selectOption
+- text: buttons.copyLink
+- paragraph: 💡 ویرایش فیلد buttons.copyLink
+- textbox "متن مورد نظر را وارد کنید...": کپی لینک
+- text: "مسیر فیلد:"
+- code: buttons.copyLink
+- text: buttons.viewAllProducts
+- paragraph: 💡 ویرایش فیلد buttons.viewAllProducts
+- textbox "متن مورد نظر را وارد کنید...": مشاهده همه محصولات
+- text: "مسیر فیلد:"
+- code: buttons.viewAllProducts
+- text: buttons.cooperateWithUs
+- paragraph: 💡 ویرایش فیلد buttons.cooperateWithUs
+- textbox "متن مورد نظر را وارد کنید...": همکاری با ما
+- text: "مسیر فیلد:"
+- code: buttons.cooperateWithUs
+- heading "📂 labels" [level=3]
+- text: labels.brand
+- paragraph: 💡 ویرایش فیلد labels.brand
+- textbox "متن مورد نظر را وارد کنید...": "برند:"
+- text: "مسیر فیلد:"
+- code: labels.brand
+- text: labels.category
+- paragraph: 💡 ویرایش فیلد labels.category
+- textbox "متن مورد نظر را وارد کنید...": "دسته:"
+- text: "مسیر فیلد:"
+- code: labels.category
+- text: labels.basePrice
+- paragraph: 💡 ویرایش فیلد labels.basePrice
+- textbox "متن مورد نظر را وارد کنید...": "قیمت پایه:"
+- text: "مسیر فیلد:"
+- code: labels.basePrice
+- text: labels.productCode
+- paragraph: 💡 ویرایش فیلد labels.productCode
+- textbox "متن مورد نظر را وارد کنید...": "کد محصول:"
+- text: "مسیر فیلد:"
+- code: labels.productCode
+- text: labels.from
+- paragraph: 💡 ویرایش فیلد labels.from
+- textbox "متن مورد نظر را وارد کنید...": از
+- text: "مسیر فیلد:"
+- code: labels.from
+- text: labels.to
+- paragraph: 💡 ویرایش فیلد labels.to
+- textbox "متن مورد نظر را وارد کنید...": تا
+- text: "مسیر فیلد:"
+- code: labels.to
+- text: labels.product
+- paragraph: 💡 ویرایش فیلد labels.product
+- textbox "متن مورد نظر را وارد کنید...": محصول
+- text: "مسیر فیلد:"
+- code: labels.product
+- text: labels.availableProducts
+- paragraph: 💡 ویرایش فیلد labels.availableProducts
+- textbox "متن مورد نظر را وارد کنید...": محصول موجود
+- text: "مسیر فیلد:"
+- code: labels.availableProducts
+- text: labels.keyFeatures
+- paragraph: 💡 ویرایش فیلد labels.keyFeatures
+- textbox "متن مورد نظر را وارد کنید...": ویژگی‌های کلیدی
+- text: "مسیر فیلد:"
+- code: labels.keyFeatures
+- text: labels.keywords
+- paragraph: 💡 ویرایش فیلد labels.keywords
+- textbox "متن مورد نظر را وارد کنید...": کلمات کلیدی
+- text: "مسیر فیلد:"
+- code: labels.keywords
+- text: labels.fullDescription
+- paragraph: 💡 ویرایش فیلد labels.fullDescription
+- textbox "متن مورد نظر را وارد کنید...": توضیحات کامل
+- text: "مسیر فیلد:"
+- code: labels.fullDescription
+- text: labels.technicalSpecs
+- paragraph: 💡 ویرایش فیلد labels.technicalSpecs
+- textbox "متن مورد نظر را وارد کنید...": مشخصات فنی
+- text: "مسیر فیلد:"
+- code: labels.technicalSpecs
+- text: labels.brandInfo
+- paragraph: 💡 ویرایش فیلد labels.brandInfo
+- textbox "متن مورد نظر را وارد کنید...": اطلاعات برند
+- text: "مسیر فیلد:"
+- code: labels.brandInfo
+- text: labels.selected
+- paragraph: 💡 ویرایش فیلد labels.selected
+- textbox "متن مورد نظر را وارد کنید...": "انتخاب شده:"
+- text: "مسیر فیلد:"
+- code: labels.selected
+- text: labels.inventory
+- paragraph: 💡 ویرایش فیلد labels.inventory
+- textbox "متن مورد نظر را وارد کنید...": "موجودی:"
+- text: "مسیر فیلد:"
+- code: labels.inventory
+- text: labels.establishedYear
+- paragraph: 💡 ویرایش فیلد labels.establishedYear
+- textbox "متن مورد نظر را وارد کنید...": تأسیس
+- text: "مسیر فیلد:"
+- code: labels.establishedYear
+- text: labels.country
+- paragraph: 💡 ویرایش فیلد labels.country
+- textbox "متن مورد نظر را وارد کنید...": کشور
+- text: "مسیر فیلد:"
+- code: labels.country
+- text: labels.productCount
+- paragraph: 💡 ویرایش فیلد labels.productCount
+- textbox "متن مورد نظر را وارد کنید...": تعداد محصولات
+- text: "مسیر فیلد:"
+- code: labels.productCount
+- heading "📂 status" [level=3]
+- text: status.special
+- paragraph: 💡 ویرایش فیلد status.special
+- textbox "متن مورد نظر را وارد کنید...": ویژه
+- text: "مسیر فیلد:"
+- code: status.special
+- text: status.unavailable
+- paragraph: 💡 ویرایش فیلد status.unavailable
+- textbox "متن مورد نظر را وارد کنید...": ناموجود
+- text: "مسیر فیلد:"
+- code: status.unavailable
+- text: status.available
+- paragraph: 💡 ویرایش فیلد status.available
+- textbox "متن مورد نظر را وارد کنید...": موجود
+- text: "مسیر فیلد:"
+- code: status.available
+- text: status.limitedStock
+- paragraph: 💡 ویرایش فیلد status.limitedStock
+- textbox "متن مورد نظر را وارد کنید...": "تنها {count} عدد باقیمانده"
+- text: "مسیر فیلد:"
+- code: status.limitedStock
+- text: status.limitedEdition
+- paragraph: 💡 ویرایش فیلد status.limitedEdition
+- textbox "متن مورد نظر را وارد کنید...": "ادیشن محدود - تنها {count} عدد تولید شده"
+- text: "مسیر فیلد:"
+- code: status.limitedEdition
+- text: status.callForPrice
+- paragraph: 💡 ویرایش فیلد status.callForPrice
+- textbox "متن مورد نظر را وارد کنید...": تماس بگیرید
+- text: "مسیر فیلد:"
+- code: status.callForPrice
+- heading "📂 search" [level=3]
+- text: متن جستجو
+- paragraph: 💡 متن راهنمای کادر جستجو که قبل از تایپ نمایش داده می‌شود
+- 'textbox "مثال: جستجو..."': جستجو...
+- text: "مسیر فیلد:"
+- code: search.placeholder
+- heading "📂 types" [level=3]
+- text: search.types.page
+- paragraph: 💡 ویرایش فیلد search.types.page
+- textbox "متن مورد نظر را وارد کنید...": صفحه
+- text: "مسیر فیلد:"
+- code: search.types.page
+- text: search.types.brand
+- paragraph: 💡 ویرایش فیلد search.types.brand
+- textbox "متن مورد نظر را وارد کنید...": برند
+- text: "مسیر فیلد:"
+- code: search.types.brand
+- text: search.types.category
+- paragraph: 💡 ویرایش فیلد search.types.category
+- textbox "متن مورد نظر را وارد کنید...": دسته‌بندی
+- text: "مسیر فیلد:"
+- code: search.types.category
+- text: search.types.product
+- paragraph: 💡 ویرایش فیلد search.types.product
+- textbox "متن مورد نظر را وارد کنید...": محصول
+- text: "مسیر فیلد:"
+- code: search.types.product
+- heading "📂 sharing" [level=3]
+- text: sharing.title
+- paragraph: 💡 ویرایش فیلد sharing.title
+- textbox "متن مورد نظر را وارد کنید...": اشتراک‌گذاری
+- text: "مسیر فیلد:"
+- code: sharing.title
+- text: sharing.telegram
+- paragraph: 💡 ویرایش فیلد sharing.telegram
+- textbox "متن مورد نظر را وارد کنید...": تلگرام
+- text: "مسیر فیلد:"
+- code: sharing.telegram
+- text: sharing.whatsapp
+- paragraph: 💡 ویرایش فیلد sharing.whatsapp
+- textbox "متن مورد نظر را وارد کنید...": واتساپ
+- text: "مسیر فیلد:"
+- code: sharing.whatsapp
+- text: sharing.linkCopied
+- paragraph: 💡 ویرایش فیلد sharing.linkCopied
+- textbox "متن مورد نظر را وارد کنید...": لینک کپی شد!
+- text: "مسیر فیلد:"
+- code: sharing.linkCopied
+- heading "📂 emptyStates" [level=3]
+- text: emptyStates.noProducts
+- paragraph: 💡 ویرایش فیلد emptyStates.noProducts
+- textbox "متن مورد نظر را وارد کنید...": هیچ محصولی یافت نشد
+- text: "مسیر فیلد:"
+- code: emptyStates.noProducts
+- text: emptyStates.noProductsFound
+- paragraph: 💡 ویرایش فیلد emptyStates.noProductsFound
+- textbox "متن مورد نظر را وارد کنید...": محصولی یافت نشد
+- text: "مسیر فیلد:"
+- code: emptyStates.noProductsFound
+- text: emptyStates.productNotFound
+- paragraph: 💡 ویرایش فیلد emptyStates.productNotFound
+- textbox "متن مورد نظر را وارد کنید...": محصول یافت نشد
+- text: "مسیر فیلد:"
+- code: emptyStates.productNotFound
+- text: emptyStates.categoryNotFound
+- paragraph: 💡 ویرایش فیلد emptyStates.categoryNotFound
+- textbox "متن مورد نظر را وارد کنید...": دسته‌بندی یافت نشد
+- text: "مسیر فیلد:"
+- code: emptyStates.categoryNotFound
+- text: emptyStates.brandNotFound
+- paragraph: 💡 ویرایش فیلد emptyStates.brandNotFound
+- textbox "متن مورد نظر را وارد کنید...": برند یافت نشد
+- text: "مسیر فیلد:"
+- code: emptyStates.brandNotFound
+- text: emptyStates.noCategoryProducts
+- paragraph: 💡 ویرایش فیلد emptyStates.noCategoryProducts
+- textbox "متن مورد نظر را وارد کنید...": هنوز محصولی در این دسته‌بندی اضافه نشده است
+- text: "مسیر فیلد:"
+- code: emptyStates.noCategoryProducts
+- text: emptyStates.notifyNewProducts
+- paragraph: 💡 ویرایش فیلد emptyStates.notifyNewProducts
+- textbox "متن مورد نظر را وارد کنید...": اطلاع از محصولات جدید
+- text: "مسیر فیلد:"
+- code: emptyStates.notifyNewProducts
+- text: متن کپی‌رایت
+- paragraph: 💡 متن کپی‌رایت که در پایین صفحه نمایش داده می‌شود
+- 'textbox "مثال: © ۱۴۰۳ سان ترد گروپ. تمامی حقوق محفوظ است."': © ۱۴۰۳ سان ترد گروپ. تمامی حقوق محفوظ است.
+- text: "مسیر فیلد:"
+- code: copyright
+- alert
+- button "Open Next.js Dev Tools":
+  - img
+```
