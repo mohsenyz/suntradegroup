@@ -39,6 +39,164 @@ $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $path = str_replace('/api', '', $path);
 $path = trim($path, '/');
 
+// Rate limiting function
+function checkRateLimit($ip, $endpoint = 'contact', $limit = 5, $windowMinutes = 60) {
+    global $DATA_DIR;
+    
+    $rateLimitFile = $DATA_DIR . '/rate_limits.json';
+    $now = time();
+    $windowStart = $now - ($windowMinutes * 60);
+    
+    // Load existing rate limit data
+    $rateLimits = [];
+    if (file_exists($rateLimitFile)) {
+        $content = file_get_contents($rateLimitFile);
+        $rateLimits = json_decode($content, true) ?: [];
+    }
+    
+    // Initialize endpoint if not exists
+    if (!isset($rateLimits[$endpoint])) {
+        $rateLimits[$endpoint] = [];
+    }
+    
+    // Initialize IP if not exists
+    if (!isset($rateLimits[$endpoint][$ip])) {
+        $rateLimits[$endpoint][$ip] = [];
+    }
+    
+    // Clean old timestamps
+    $rateLimits[$endpoint][$ip] = array_filter(
+        $rateLimits[$endpoint][$ip], 
+        function($timestamp) use ($windowStart) {
+            return $timestamp > $windowStart;
+        }
+    );
+    
+    // Check if limit exceeded
+    if (count($rateLimits[$endpoint][$ip]) >= $limit) {
+        return false;
+    }
+    
+    // Add current request timestamp
+    $rateLimits[$endpoint][$ip][] = $now;
+    
+    // Save updated rate limits
+    file_put_contents($rateLimitFile, json_encode($rateLimits, JSON_PRETTY_PRINT));
+    
+    return true;
+}
+
+// Validate and sanitize input
+function validateContactInput($input) {
+    $errors = [];
+    
+    // Required fields
+    if (empty($input['name']) || strlen(trim($input['name'])) < 2) {
+        $errors[] = 'Name is required (minimum 2 characters)';
+    }
+    
+    if (empty($input['email']) || !filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Valid email is required';
+    }
+    
+    if (empty($input['message']) || strlen(trim($input['message'])) < 10) {
+        $errors[] = 'Message is required (minimum 10 characters)';
+    }
+    
+    // Length limits
+    if (strlen($input['name']) > 100) {
+        $errors[] = 'Name too long (maximum 100 characters)';
+    }
+    
+    if (strlen($input['email']) > 255) {
+        $errors[] = 'Email too long (maximum 255 characters)';
+    }
+    
+    if (strlen($input['message']) > 2000) {
+        $errors[] = 'Message too long (maximum 2000 characters)';
+    }
+    
+    return $errors;
+}
+
+// Contact form submission endpoint
+if ($path === 'contact' && $method === 'POST') {
+    // Get client IP
+    $clientIP = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_X_REAL_IP'] ?? $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    if (strpos($clientIP, ',') !== false) {
+        $clientIP = trim(explode(',', $clientIP)[0]);
+    }
+    
+    // Check rate limit (5 submissions per hour)
+    if (!checkRateLimit($clientIP, 'contact', 5, 60)) {
+        http_response_code(429);
+        echo json_encode([
+            'error' => 'Rate limit exceeded',
+            'message' => 'Too many contact form submissions. Please try again later.'
+        ]);
+        exit();
+    }
+    
+    $input = json_decode(file_get_contents('php://input'), true);
+    
+    if (!$input) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid request', 'message' => 'Invalid JSON data']);
+        exit();
+    }
+    
+    // Validate input
+    $validationErrors = validateContactInput($input);
+    if (!empty($validationErrors)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Validation failed', 'messages' => $validationErrors]);
+        exit();
+    }
+    
+    // Sanitize input
+    $contactData = [
+        'id' => uniqid(time() . '_', true),
+        'name' => htmlspecialchars(trim($input['name']), ENT_QUOTES, 'UTF-8'),
+        'email' => filter_var(trim($input['email']), FILTER_SANITIZE_EMAIL),
+        'message' => htmlspecialchars(trim($input['message']), ENT_QUOTES, 'UTF-8'),
+        'subject' => isset($input['subject']) ? htmlspecialchars(trim($input['subject']), ENT_QUOTES, 'UTF-8') : '',
+        'phone' => isset($input['phone']) ? htmlspecialchars(trim($input['phone']), ENT_QUOTES, 'UTF-8') : '',
+        'timestamp' => date('Y-m-d H:i:s'),
+        'ip' => $clientIP,
+        'status' => 'new',
+        'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown'
+    ];
+    
+    // Load existing contacts
+    $contactsFile = $DATA_DIR . '/contacts.json';
+    $contacts = ['contacts' => []];
+    
+    if (file_exists($contactsFile)) {
+        $content = file_get_contents($contactsFile);
+        $contacts = json_decode($content, true) ?: ['contacts' => []];
+    }
+    
+    // Add new contact
+    array_unshift($contacts['contacts'], $contactData);
+    
+    // Keep only last 1000 contacts to prevent file from growing too large
+    $contacts['contacts'] = array_slice($contacts['contacts'], 0, 1000);
+    
+    // Save contacts
+    $jsonData = json_encode($contacts, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    if (file_put_contents($contactsFile, $jsonData) !== false) {
+        echo json_encode([
+            'success' => true,
+            'message' => 'Contact form submitted successfully',
+            'id' => $contactData['id']
+        ]);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Failed to save contact form']);
+    }
+    exit();
+}
+
 // Special initialization route
 if ($path === 'init' && $method === 'POST') {
     authenticate();
@@ -115,6 +273,7 @@ switch ($method) {
             // Get specific file
             // Public endpoints don't require authentication
             $publicEndpoints = ['products', 'categories', 'brands', 'texts-common', 'texts-pages', 'texts-forms'];
+            // Contacts require authentication for admin access
             if (!in_array($path, $publicEndpoints)) {
                 authenticate();
             }

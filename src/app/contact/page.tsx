@@ -1,4 +1,6 @@
-import { Metadata } from 'next';
+'use client';
+
+import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { 
@@ -7,14 +9,96 @@ import {
   MapPinIcon,
   ClockIcon 
 } from '@heroicons/react/24/outline';
-
-export const metadata: Metadata = {
-  title: 'تماس با ما - سان ترد گروپ',
-  description: 'راه‌های تماس با سان ترد گروپ - تلفن، ایمیل، آدرس فروشگاه',
-  keywords: 'تماس با ما، سان ترد گروپ، ابزار، یراق آلات، اصفهان'
-};
+import { jsonApi } from '@/utils/apiClient';
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  });
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Basic validation
+    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'لطفاً تمام فیلدهای الزامی را پر کنید.'
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      await jsonApi.submitContact({
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        email: formData.email,
+        phone: formData.phone,
+        subject: formData.subject,
+        message: formData.message
+      });
+
+      setSubmitStatus({
+        type: 'success',
+        message: 'پیام شما با موفقیت ارسال شد. به زودی با شما تماس خواهیم گرفت.'
+      });
+      
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+    } catch (error: unknown) {
+      let errorMessage = 'خطا در ارسال پیام. لطفاً دوباره تلاش کنید.';
+      
+      if (error instanceof Error) {
+        // Handle specific error messages based on API response
+        if (error.message.includes('Rate limit exceeded') || error.message.includes('Too many')) {
+          errorMessage = '⏰ تعداد درخواست‌های شما بیش از حد مجاز است.\n\n🚫 حداکثر 5 پیام در هر ساعت قابل ارسال است.\n\n⏳ لطفاً تا یک ساعت دیگر صبر کنید و مجدداً تلاش کنید.';
+        } else if (error.message.includes('Validation failed')) {
+          errorMessage = '❌ اطلاعات وارد شده صحیح نیست:\n\n• نام باید حداقل 2 کاراکتر باشد\n• ایمیل باید معتبر باشد\n• پیام باید حداقل 10 کاراکتر باشد\n\nلطفاً اطلاعات را بررسی و مجدداً ارسال کنید.';
+        } else if (error.message.includes('Invalid JSON') || error.message.includes('400')) {
+          errorMessage = '❌ خطا در ارسال اطلاعات:\n\nلطفاً تمام فیلدهای الزامی را به درستی پر کنید و مجدداً تلاش کنید.';
+        } else if (error.message.includes('500')) {
+          errorMessage = '🔧 خطا در سرور:\n\nمشکل موقتی در سرور رخ داده است. لطفاً چند دقیقه دیگر مجدداً تلاش کنید.';
+        } else if (error.message.includes('Cannot connect') || error.message.includes('fetch')) {
+          errorMessage = '🌐 خطا در اتصال:\n\nامکان اتصال به سرور وجود ندارد. لطفاً اتصال اینترنت خود را بررسی کنید و مجدداً تلاش کنید.';
+        }
+      }
+      
+      setSubmitStatus({
+        type: 'error',
+        message: errorMessage
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -100,44 +184,77 @@ export default function ContactPage() {
               فرم تماس
             </h2>
             
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Status Message */}
+              {submitStatus.type && (
+                <div className={`p-4 rounded-lg ${
+                  submitStatus.type === 'success' 
+                    ? 'bg-green-50 border border-green-200' 
+                    : 'bg-red-50 border border-red-200'
+                }`}>
+                  <div className={`text-sm ${
+                    submitStatus.type === 'success' 
+                      ? 'text-green-800' 
+                      : 'text-red-800'
+                  }`}>
+                    {submitStatus.message.split('\n').map((line, index) => (
+                      <div key={index} className={index > 0 ? 'mt-1' : ''}>
+                        {line}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-                    نام
+                    نام <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
                     id="firstName"
                     name="firstName"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-500 focus:border-transparent"
                     placeholder="نام خود را وارد کنید"
+                    required
+                    disabled={isSubmitting}
                   />
                 </div>
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-                    نام خانوادگی
+                    نام خانوادگی <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
                     id="lastName"
                     name="lastName"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-500 focus:border-transparent"
                     placeholder="نام خانوادگی خود را وارد کنید"
+                    required
+                    disabled={isSubmitting}
                   />
                 </div>
               </div>
 
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  ایمیل
+                  ایمیل <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-500 focus:border-transparent"
                   placeholder="ایمیل خود را وارد کنید"
+                  required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -149,8 +266,11 @@ export default function ContactPage() {
                   type="tel"
                   id="phone"
                   name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-500 focus:border-transparent"
                   placeholder="شماره تلفن خود را وارد کنید"
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -161,7 +281,10 @@ export default function ContactPage() {
                 <select
                   id="subject"
                   name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-500 focus:border-transparent"
+                  disabled={isSubmitting}
                 >
                   <option value="">موضوع را انتخاب کنید</option>
                   <option value="product-inquiry">استعلام محصول</option>
@@ -175,23 +298,58 @@ export default function ContactPage() {
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  پیام
+                  پیام <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   rows={6}
+                  value={formData.message}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-500 focus:border-transparent"
                   placeholder="پیام خود را اینجا بنویسید..."
+                  required
+                  disabled={isSubmitting}
+                  minLength={10}
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full btn-primary text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all"
+                disabled={isSubmitting}
+                className={`w-full py-3 px-6 rounded-lg font-semibold transition-all ${
+                  isSubmitting 
+                    ? 'bg-gray-400 cursor-not-allowed text-white' 
+                    : 'btn-primary text-white hover:shadow-lg'
+                }`}
               >
-                ارسال پیام
+                {isSubmitting ? 'در حال ارسال...' : 'ارسال پیام'}
               </button>
+              
+              <p className="text-sm text-gray-500 text-center">
+                <span className="text-red-500">*</span> فیلدهای الزامی
+              </p>
+
+              {/* Rate Limiting Information */}
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    <svg className="h-5 w-5 text-blue-400 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div className="mr-3">
+                    <h4 className="text-sm font-medium text-blue-800 mb-1">
+                      اطلاعات مهم درباره ارسال پیام
+                    </h4>
+                    <div className="text-sm text-blue-700 space-y-1">
+                      <p>• حداکثر 5 پیام در هر ساعت قابل ارسال است</p>
+                      <p>• پاسخ به پیام‌ها معمولاً کمتر از 24 ساعت طول می‌کشد</p>
+                      <p>• برای مسائل فوری می‌توانید با شماره تلفن تماس بگیرید</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
           </div>
         </div>

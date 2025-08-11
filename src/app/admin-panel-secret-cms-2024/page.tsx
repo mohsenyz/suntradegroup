@@ -1,18 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
-import { DocumentTextIcon, CubeIcon, Cog6ToothIcon, DocumentArrowDownIcon, CloudArrowUpIcon } from '@heroicons/react/24/outline';
+import React, { useState, useEffect } from 'react';
+import { DocumentTextIcon, CubeIcon, Cog6ToothIcon, DocumentArrowDownIcon, CloudArrowUpIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 import { CMSProvider, useCMSContext } from '@/components/cms/CMSContext';
 import TextsManagement from '@/components/cms/TextsManagement';
 import ProductsManagement from '@/components/cms/ProductsManagement';
 import CategoriesManagement from '@/components/cms/CategoriesManagement';
 import BrandsManagement from '@/components/cms/BrandsManagement';
+import ContactsManagement from '@/components/cms/ContactsManagement';
 import ExportManagement from '@/components/cms/ExportManagement';
 
 function AdminCMSContent() {
   const [activeTab, setActiveTab] = useState('texts');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
   const { 
     saveAllChanges, 
     hasChanges, 
@@ -23,14 +25,65 @@ function AdminCMSContent() {
     backendInitialized 
   } = useCMSContext();
 
-  // Simple authentication
+  // Check for existing session on mount
+  useEffect(() => {
+    const checkAuth = () => {
+      try {
+        const authData = localStorage.getItem('cms-auth');
+        if (authData) {
+          const { timestamp, authenticated } = JSON.parse(authData);
+          const now = Date.now();
+          const sessionTimeout = 4 * 60 * 60 * 1000; // 4 hours
+          
+          if (authenticated && (now - timestamp) < sessionTimeout) {
+            setIsAuthenticated(true);
+          } else {
+            // Session expired, clear it
+            localStorage.removeItem('cms-auth');
+          }
+        }
+      } catch (error) {
+        console.error('Auth check error:', error);
+        localStorage.removeItem('cms-auth');
+      }
+      setIsAuthLoading(false);
+    };
+
+    checkAuth();
+  }, []);
+
+  // Authentication handler
   const handleAuth = () => {
     if (password === 'suntradegroup2024') {
+      const authData = {
+        authenticated: true,
+        timestamp: Date.now()
+      };
+      localStorage.setItem('cms-auth', JSON.stringify(authData));
       setIsAuthenticated(true);
     } else {
       alert('رمز عبور اشتباه است');
     }
   };
+
+  // Logout handler
+  const handleLogout = () => {
+    localStorage.removeItem('cms-auth');
+    setIsAuthenticated(false);
+    setPassword('');
+  };
+
+  // Show loading while checking authentication
+  if (isAuthLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center" dir="rtl">
+        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">در حال بررسی احراز هویت...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
@@ -87,6 +140,9 @@ function AdminCMSContent() {
                     🔴 سرور غیرفعال
                   </span>
                 )}
+                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                  🔐 جلسه فعال (4 ساعت)
+                </span>
               </div>
             </div>
             <div className="flex items-center space-x-4 space-x-reverse">
@@ -122,6 +178,12 @@ function AdminCMSContent() {
                   <span>{isSaving ? 'در حال ذخیره...' : 'ذخیره همه تغییرات'}</span>
                 </button>
               )}
+              <button
+                onClick={handleLogout}
+                className="bg-red-100 text-red-700 px-4 py-2 rounded-md hover:bg-red-200 transition-colors text-sm"
+              >
+                خروج از پنل
+              </button>
               <button
                 onClick={() => window.location.href = '/'}
                 className="bg-gray-100 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200 transition-colors"
@@ -215,6 +277,17 @@ function AdminCMSContent() {
                 مدیریت برندها
               </button>
               <button
+                onClick={() => setActiveTab('contacts')}
+                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'contacts'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <EnvelopeIcon className="h-5 w-5 inline-block ml-2" />
+                مدیریت پیام‌ها
+              </button>
+              <button
                 onClick={() => setActiveTab('export')}
                 className={`py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === 'export'
@@ -234,6 +307,7 @@ function AdminCMSContent() {
             {activeTab === 'products' && <ProductsManagement />}
             {activeTab === 'categories' && <CategoriesManagement />}
             {activeTab === 'brands' && <BrandsManagement />}
+            {activeTab === 'contacts' && <ContactsManagement />}
             {activeTab === 'export' && <ExportManagement />}
           </div>
         </div>

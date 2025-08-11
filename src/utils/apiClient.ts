@@ -105,6 +105,49 @@ export class JsonApiClient {
     return await this.makeRequest('/init', 'POST', { data });
   }
 
+  // Submit contact form (no authentication required)
+  async submitContact(contactData: {
+    name: string;
+    email: string;
+    message: string;
+    subject?: string;
+    phone?: string;
+  }): Promise<{ success: boolean; message: string; id?: string }> {
+    const url = `${this.baseUrl}/contact`;
+    
+    const options: RequestInit = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(contactData),
+    };
+
+    try {
+      console.log(`[API] POST ${url}`);
+      const response = await fetch(url, options);
+      
+      if (!response.ok) {
+        let errorData;
+        try {
+          errorData = await response.json();
+        } catch {
+          errorData = { message: `HTTP ${response.status}: ${response.statusText}` };
+        }
+        
+        console.error(`[API Error] POST ${url}:`, errorData);
+        throw new Error(errorData.message || errorData.messages?.join(', ') || `HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json() as { success: boolean; message: string; id?: string };
+      console.log(`[API Success] POST ${url}`);
+      return result;
+    } catch (error) {
+      console.error('[API] Contact submission failed:', error);
+      throw error;
+    }
+  }
+
   // Check if backend is initialized
   async checkInitialization(): Promise<{ initialized: boolean; missing: string[] }> {
     try {
@@ -208,5 +251,26 @@ export const jsonApi = {
   // Save brands
   async saveBrands(brands: unknown) {
     return await apiClient.saveFile('brands', brands);
+  },
+
+  // Submit contact form
+  async submitContact(contactData: {
+    name: string;
+    email: string;
+    message: string;
+    subject?: string;
+    phone?: string;
+  }) {
+    return await apiClient.submitContact(contactData);
+  },
+
+  // Load contacts (admin only)
+  async loadContacts() {
+    return await apiClient.getFile('contacts');
+  },
+
+  // Save contacts (admin only)
+  async saveContacts(contacts: unknown) {
+    return await apiClient.saveFile('contacts', contacts);
   }
 };

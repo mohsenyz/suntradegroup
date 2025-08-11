@@ -21,10 +21,14 @@ interface CMSContextType {
   originalCategoriesData: Record<string, unknown>;
   brandsData: Record<string, unknown>;
   originalBrandsData: Record<string, unknown>;
+  contactsData: Record<string, unknown>;
+  originalContactsData: Record<string, unknown>;
   updateTextsData: (file: string, data: Record<string, unknown>) => void;
   updateProductsData: (data: Record<string, unknown>) => void;
+  setCurrentProductsData: (data: Record<string, unknown>) => void;
   updateCategoriesData: (data: Record<string, unknown>) => void;
   updateBrandsData: (data: Record<string, unknown>) => void;
+  updateContactsData: (data: Record<string, unknown>) => void;
   saveAllChanges: () => Promise<void>;
   loadData: () => Promise<void>;
   hasChanges: () => boolean;
@@ -64,6 +68,8 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
   const [originalCategoriesData, setOriginalCategoriesData] = useState<Record<string, unknown>>({});
   const [brandsData, setBrandsData] = useState<Record<string, unknown>>({});
   const [originalBrandsData, setOriginalBrandsData] = useState<Record<string, unknown>>({});
+  const [contactsData, setContactsData] = useState<Record<string, unknown>>({});
+  const [originalContactsData, setOriginalContactsData] = useState<Record<string, unknown>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isInitializing, setIsInitializing] = useState(false);
@@ -107,6 +113,16 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
       } catch (error) {
         console.warn('Failed to load brands:', error);
       }
+
+      // Load contacts
+      try {
+        const contacts = await jsonApi.loadContacts();
+        updateContactsData(contacts as Record<string, unknown>);
+      } catch (error) {
+        console.warn('Failed to load contacts:', error);
+        // Initialize empty contacts if none exist
+        updateContactsData({ contacts: [] });
+      }
     } catch (error) {
       console.error('Failed to load CMS data:', error);
     } finally {
@@ -128,6 +144,11 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
           if (JSON.stringify(data) !== JSON.stringify(originalTextsData[file as keyof typeof originalTextsData])) {
             await jsonApi.saveTexts(file, data);
             console.log(`${file} texts saved successfully`);
+            // Update original data after successful save
+            setOriginalTextsData(prev => ({
+              ...prev,
+              [file]: data
+            }));
           }
         } catch (error) {
           console.error(`Failed to save ${file} texts:`, error);
@@ -140,6 +161,8 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
         if (JSON.stringify(productsData) !== JSON.stringify(originalProductsData)) {
           await jsonApi.saveProducts(productsData);
           console.log('Products saved successfully');
+          // Update original data after successful save
+          setOriginalProductsData(productsData);
         }
       } catch (error) {
         console.error('Failed to save products:', error);
@@ -151,6 +174,8 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
         if (JSON.stringify(categoriesData) !== JSON.stringify(originalCategoriesData)) {
           await jsonApi.saveCategories(categoriesData);
           console.log('Categories saved successfully');
+          // Update original data after successful save
+          setOriginalCategoriesData(categoriesData);
         }
       } catch (error) {
         console.error('Failed to save categories:', error);
@@ -162,16 +187,28 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
         if (JSON.stringify(brandsData) !== JSON.stringify(originalBrandsData)) {
           await jsonApi.saveBrands(brandsData);
           console.log('Brands saved successfully');
+          // Update original data after successful save
+          setOriginalBrandsData(brandsData);
         }
       } catch (error) {
         console.error('Failed to save brands:', error);
         errors.push('brands');
       }
 
+      // Save contacts if changed
+      try {
+        if (JSON.stringify(contactsData) !== JSON.stringify(originalContactsData)) {
+          await jsonApi.saveContacts(contactsData);
+          console.log('Contacts saved successfully');
+          // Update original data after successful save
+          setOriginalContactsData(contactsData);
+        }
+      } catch (error) {
+        console.error('Failed to save contacts:', error);
+        errors.push('contacts');
+      }
+
       if (errors.length === 0) {
-        // Reload fresh data from server after successful save
-        await loadData();
-        
         alert('تمام تغییرات با موفقیت در سرور ذخیره شد!');
       } else {
         alert(`خطا در ذخیره: ${errors.join(', ')}`);
@@ -200,7 +237,8 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
     return (
       JSON.stringify(productsData) !== JSON.stringify(originalProductsData) ||
       JSON.stringify(categoriesData) !== JSON.stringify(originalCategoriesData) ||
-      JSON.stringify(brandsData) !== JSON.stringify(originalBrandsData)
+      JSON.stringify(brandsData) !== JSON.stringify(originalBrandsData) ||
+      JSON.stringify(contactsData) !== JSON.stringify(originalContactsData)
     );
   };
 
@@ -304,6 +342,11 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const setCurrentProductsData = (data: Record<string, unknown>) => {
+    setProductsData(data);
+    // Don't update original data - this is for user changes
+  };
+
   const updateCategoriesData = (data: Record<string, unknown>) => {
     setCategoriesData(data);
     
@@ -319,6 +362,15 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
     // Set original data only if it's empty (first load)
     if (Object.keys(originalBrandsData).length === 0) {
       setOriginalBrandsData(data);
+    }
+  };
+
+  const updateContactsData = (data: Record<string, unknown>) => {
+    setContactsData(data);
+    
+    // Set original data only if it's empty (first load)
+    if (Object.keys(originalContactsData).length === 0) {
+      setOriginalContactsData(data);
     }
   };
 
@@ -344,10 +396,14 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
       originalCategoriesData,
       brandsData,
       originalBrandsData,
+      contactsData,
+      originalContactsData,
       updateTextsData,
       updateProductsData,
+      setCurrentProductsData,
       updateCategoriesData,
       updateBrandsData,
+      updateContactsData,
       saveAllChanges,
       loadData,
       hasChanges,

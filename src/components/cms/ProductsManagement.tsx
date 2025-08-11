@@ -15,7 +15,7 @@ import {
 
 // Products Management Component
 export default function ProductsManagement() {
-  const { productsData, updateProductsData } = useCMSContext();
+  const { productsData, updateProductsData, setCurrentProductsData } = useCMSContext();
   const [loading, setLoading] = useState(true);
   const [editingItem, setEditingItem] = useState<number | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -61,13 +61,14 @@ export default function ProductsManagement() {
       return;
     }
     
-    const newData = { ...productsData };
+    // Create a deep copy to avoid mutating original data
+    const newData = JSON.parse(JSON.stringify(productsData));
     const productToAdd = {
       ...newProduct,
       id: Date.now()
     };
     (newData.products as Array<unknown>).push(productToAdd);
-    updateProductsData(newData);
+    setCurrentProductsData(newData);
     
     setNewProduct({
       name: '',
@@ -109,21 +110,23 @@ export default function ProductsManagement() {
   };
 
   const updateProduct = (index: number, field: string, value: unknown) => {
-    const newData = { ...productsData };
+    // Create a deep copy to avoid mutating original data
+    const newData = JSON.parse(JSON.stringify(productsData));
     const products = newData.products as Array<Record<string, unknown>>;
     if (products && products[index]) {
-      products[index] = { ...products[index], [field]: value };
-      updateProductsData(newData);
+      products[index][field] = value;
+      setCurrentProductsData(newData);
     }
   };
 
   const deleteProduct = (index: number) => {
     if (confirm('آیا از حذف این محصول اطمینان دارید؟')) {
-      const newData = { ...productsData };
+      // Create a deep copy to avoid mutating original data
+      const newData = JSON.parse(JSON.stringify(productsData));
       const products = newData.products as Array<unknown>;
       if (products) {
         products.splice(index, 1);
-        updateProductsData(newData);
+        setCurrentProductsData(newData);
       }
     }
   };
