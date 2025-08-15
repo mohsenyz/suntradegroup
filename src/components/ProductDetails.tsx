@@ -228,10 +228,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
               اطلاعات برند
             </h3>
             <p className="text-golden-700">
-              {(product.brand || product.brand_name) ? (
+              {product.brand ? (
                 <>
-                  این محصول توسط برند <strong>{product.brand || product.brand_name}</strong> تولید شده است.
-                  برای مشاهده سایر محصولات این برند، <a href={`/brands/${(product.brand || product.brand_name).toLowerCase().replace(/\s+/g, '-')}`} className="text-golden-600 underline">اینجا کلیک کنید</a>.
+                  این محصول توسط برند <strong>{product.brand}</strong> تولید شده است.
+                  برای مشاهده سایر محصولات این برند، <a href={`/brands/${product.brand.toLowerCase().replace(/\s+/g, '-')}`} className="text-golden-600 underline">اینجا کلیک کنید</a>.
                 </>
               ) : (
                 'این محصول فاقد برند مشخص است.'
