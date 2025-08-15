@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const buildTime = process.env.BUILD_TIME || new Date().toISOString();
+const buildVersion = process.env.npm_package_version || '0.1.0';
+
 export const metadata: Metadata = {
   title: "سان ترد گروپ - ابزار و یراق آلات باکیفیت",
   description: "شرکت سان ترد گروپ با بیش از ربع قرن تجربه در تولید و توزیع ابزار و یراق آلات",
@@ -12,6 +15,11 @@ export const metadata: Metadata = {
     description: "تولیدکننده و توزیع‌کننده ابزار و یراق آلات باکیفیت",
     type: "website",
     locale: "fa_IR",
+  },
+  other: {
+    'build-time': buildTime,
+    'build-version': buildVersion,
+    'generator': 'Next.js 15.3.5'
   }
 };
 
@@ -28,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <head>
+        {/* Build Info: {buildTime} v{buildVersion} */}
         <link rel="icon" href="/images/logo.webp" type="image/webp" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

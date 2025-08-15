@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "BUILD_TIME=$(date -u +\"%Y-%m-%dT%H:%M:%S.%3NZ\") next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build",
+    "export": "BUILD_TIME=$(date -u +\"%Y-%m-%dT%H:%M:%S.%3NZ\") next build",
     "serve": "npx serve out",
     "generate-images": "node generate-placeholders.js",
     "dev:api": "./dev-api.sh",

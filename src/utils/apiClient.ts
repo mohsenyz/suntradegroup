@@ -39,8 +39,6 @@ export class JsonApiClient {
       options.body = JSON.stringify(data);
     }
 
-    console.log(`Making ${method} request to ${url} with options:`, options);
-
     try {
       console.log(`[API] ${method} ${url}`);
       const response = await fetch(url, options);
@@ -54,7 +52,6 @@ export class JsonApiClient {
         }
         
         console.error(`[API Error] ${method} ${url}:`, errorData);
-        console.error(`[API Error] Full response:`, response);
         throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
       }
 
@@ -105,9 +102,6 @@ export class JsonApiClient {
 
   // Initialize backend with data
   async initializeBackend(data: Record<string, unknown>): Promise<unknown> {
-    console.log('Making API request to /init with data:', { data });
-    console.log('Using baseUrl:', this.baseUrl);
-    console.log('Using password:', this.password);
     return await this.makeRequest('/init', 'POST', { data });
   }
 
