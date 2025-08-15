@@ -132,7 +132,7 @@ const Search: React.FC<SearchProps> = ({
           name: product.name,
           slug: `/products/${product.slug}`,
           description: product.shortDescription,
-          image: product.mainImage,
+          image: product.mainImage || product.main_image || '/images/placeholder.jpg',
           category: product.category,
           brand: product.brand
         });
