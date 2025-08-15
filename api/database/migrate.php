@@ -11,14 +11,18 @@ class DataMigrator {
         $this->dataPath = __DIR__ . '/../data/';
     }
     
-    public function migrate($dryRun = false) {
+    public function migrate($dryRun = false, $silent = false) {
         try {
-            echo "Starting data migration" . ($dryRun ? " (DRY RUN)" : "") . "...\n";
+            if (!$silent) {
+                echo "Starting data migration" . ($dryRun ? " (DRY RUN)" : "") . "...\n";
+            }
             
             // Create backup of existing database if not dry run
             if (!$dryRun) {
                 $backupPath = $this->db->backup();
-                echo "✓ Database backup created: {$backupPath}\n";
+                if (!$silent) {
+                    echo "✓ Database backup created: {$backupPath}\n";
+                }
             }
             
             // Start transaction
@@ -27,30 +31,36 @@ class DataMigrator {
             }
             
             // Step 1: Migrate categories and brands first (referenced by products)
-            $this->migrateCategories($dryRun);
-            $this->migrateBrands($dryRun);
+            $this->migrateCategories($dryRun, $silent);
+            $this->migrateBrands($dryRun, $silent);
             
             // Step 2: Migrate company info and UI texts
-            $this->migrateCompanyInfo($dryRun);
-            $this->migrateUITexts($dryRun);
+            $this->migrateCompanyInfo($dryRun, $silent);
+            $this->migrateUITexts($dryRun, $silent);
             
             // Step 3: Migrate products (depends on categories and brands)
-            $this->migrateProducts($dryRun);
+            $this->migrateProducts($dryRun, $silent);
             
             // Step 4: Migrate contacts and rate limits
-            $this->migrateContacts($dryRun);
-            $this->migrateRateLimits($dryRun);
+            $this->migrateContacts($dryRun, $silent);
+            $this->migrateRateLimits($dryRun, $silent);
             
             // Commit transaction
             if (!$dryRun) {
                 $this->db->commit();
-                echo "\n✓ All data migrated successfully!\n";
+                if (!$silent) {
+                    echo "\n✓ All data migrated successfully!\n";
+                }
             } else {
-                echo "\n✓ Dry run completed - no data was actually migrated.\n";
+                if (!$silent) {
+                    echo "\n✓ Dry run completed - no data was actually migrated.\n";
+                }
             }
             
             // Show final statistics
-            $this->showMigrationStatistics();
+            if (!$silent) {
+                $this->showMigrationStatistics();
+            }
             
             return true;
             
@@ -58,13 +68,17 @@ class DataMigrator {
             if (!$dryRun && $this->db->getConnection()->inTransaction()) {
                 $this->db->rollback();
             }
-            echo "\n❌ Migration failed: " . $e->getMessage() . "\n";
+            if (!$silent) {
+                echo "\n❌ Migration failed: " . $e->getMessage() . "\n";
+            }
             return false;
         }
     }
     
-    private function migrateCategories($dryRun) {
-        echo "\nMigrating categories...\n";
+    private function migrateCategories($dryRun, $silent = false) {
+        if (!$silent) {
+            echo "\nMigrating categories...\n";
+        }
         
         // Load categories from multiple sources
         $sources = [
@@ -117,8 +131,10 @@ class DataMigrator {
         }
     }
     
-    private function migrateBrands($dryRun) {
-        echo "\nMigrating brands...\n";
+    private function migrateBrands($dryRun, $silent = false) {
+        if (!$silent) {
+            echo "\nMigrating brands...\n";
+        }
         
         // Load brands from multiple sources
         $sources = [
@@ -174,8 +190,10 @@ class DataMigrator {
         }
     }
     
-    private function migrateProducts($dryRun) {
-        echo "\nMigrating products...\n";
+    private function migrateProducts($dryRun, $silent = false) {
+        if (!$silent) {
+            echo "\nMigrating products...\n";
+        }
         
         $productsFile = $this->dataPath . 'products.json';
         if (!file_exists($productsFile)) {
@@ -292,8 +310,10 @@ class DataMigrator {
         }
     }
     
-    private function migrateContacts($dryRun) {
-        echo "\nMigrating contacts...\n";
+    private function migrateContacts($dryRun, $silent = false) {
+        if (!$silent) {
+            echo "\nMigrating contacts...\n";
+        }
         
         $contactsFile = $this->dataPath . 'contacts.json';
         if (!file_exists($contactsFile)) {
@@ -337,8 +357,10 @@ class DataMigrator {
         }
     }
     
-    private function migrateUITexts($dryRun) {
-        echo "\nMigrating UI texts...\n";
+    private function migrateUITexts($dryRun, $silent = false) {
+        if (!$silent) {
+            echo "\nMigrating UI texts...\n";
+        }
         
         $textFiles = [
             'common' => $this->dataPath . 'texts-common.json',
@@ -376,8 +398,10 @@ class DataMigrator {
         }
     }
     
-    private function migrateCompanyInfo($dryRun) {
-        echo "\nMigrating company info...\n";
+    private function migrateCompanyInfo($dryRun, $silent = false) {
+        if (!$silent) {
+            echo "\nMigrating company info...\n";
+        }
         
         $productsFile = $this->dataPath . 'products.json';
         if (!file_exists($productsFile)) {
@@ -407,8 +431,10 @@ class DataMigrator {
         }
     }
     
-    private function migrateRateLimits($dryRun) {
-        echo "\nMigrating rate limits...\n";
+    private function migrateRateLimits($dryRun, $silent = false) {
+        if (!$silent) {
+            echo "\nMigrating rate limits...\n";
+        }
         
         $rateLimitsFile = $this->dataPath . 'rate_limits.json';
         if (!file_exists($rateLimitsFile)) {

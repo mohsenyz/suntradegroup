@@ -205,8 +205,8 @@ if ($path === 'init' && $method === 'POST') {
         $productCount = $db->fetch("SELECT COUNT(*) as count FROM products");
         
         if ($productCount['count'] == 0) {
-            // Run migration
-            $success = $migrator->migrate();
+            // Run migration in silent mode
+            $success = $migrator->migrate(false, true);
             
             if ($success) {
                 echo json_encode([
