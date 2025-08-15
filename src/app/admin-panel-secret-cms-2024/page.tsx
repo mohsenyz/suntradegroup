@@ -131,11 +131,57 @@ function AdminCMSContent() {
     <div className="min-h-screen bg-gray-50" dir="rtl">
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">پنل مدیریت محتوا</h1>
+          <div className="py-4 space-y-3">
+            {/* Title and Main Actions Row */}
+            <div className="flex justify-between items-start">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">پنل مدیریت محتوا</h1>
+                <p className="text-gray-600 text-sm mt-1">سیستم مدیریت فایل‌های JSON</p>
+              </div>
               <div className="flex items-center space-x-2 space-x-reverse">
-                <p className="text-gray-600">سیستم مدیریت فایل‌های JSON</p>
+                {!backendInitialized && (
+                  <button
+                    onClick={initializeBackend}
+                    disabled={isInitializing}
+                    className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors text-sm flex items-center space-x-2 space-x-reverse disabled:bg-gray-400"
+                  >
+                    <CloudArrowUpIcon className="h-4 w-4" />
+                    <span>{isInitializing ? 'در حال راه‌اندازی...' : 'راه‌اندازی سرور'}</span>
+                  </button>
+                )}
+                {backendInitialized && (
+                  <button
+                    onClick={saveAllChanges}
+                    disabled={isSaving || isLoading || !hasChanges()}
+                    className={`px-4 py-2 rounded-md transition-colors text-sm flex items-center space-x-2 space-x-reverse ${
+                      hasChanges() && !isSaving && !isLoading
+                        ? 'bg-blue-600 text-white hover:bg-blue-700'
+                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    }`}
+                    data-testid="save-all-changes-button"
+                  >
+                    <CloudArrowUpIcon className="h-4 w-4" />
+                    <span>{isSaving ? 'در حال ذخیره...' : 'ذخیره همه تغییرات'}</span>
+                  </button>
+                )}
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-100 text-red-700 px-3 py-2 rounded-md hover:bg-red-200 transition-colors text-sm"
+                >
+                  خروج از پنل
+                </button>
+                <button
+                  onClick={() => window.location.href = '/'}
+                  className="bg-gray-100 text-gray-700 px-3 py-2 rounded-md hover:bg-gray-200 transition-colors text-sm"
+                >
+                  بازگشت به سایت
+                </button>
+              </div>
+            </div>
+            
+            {/* Status Indicators and Build Info Row */}
+            <div className="flex justify-between items-center pt-2 border-t border-gray-100">
+              <div className="flex items-center space-x-2 space-x-reverse">
                 {backendInitialized ? (
                   <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full" data-testid="server-status-connected">
                     🟢 سرور متصل
@@ -148,55 +194,18 @@ function AdminCMSContent() {
                 <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
                   🔐 جلسه فعال (4 ساعت)
                 </span>
+                {hasChanges() && (
+                  <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">
+                    تغییرات ذخیره نشده
+                  </span>
+                )}
               </div>
-            </div>
-            <div className="flex items-center space-x-4 space-x-reverse">
-              <BuildInfo />
-              <span className="text-sm text-gray-500">
-                آخرین بروزرسانی: {new Date().toLocaleDateString('fa-IR')}
-              </span>
-              {hasChanges() && (
-                <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">
-                  تغییرات ذخیره نشده
+              <div className="flex items-center space-x-3 space-x-reverse">
+                <BuildInfo />
+                <span className="text-sm text-gray-500">
+                  آخرین بروزرسانی: {new Date().toLocaleDateString('fa-IR')}
                 </span>
-              )}
-              {!backendInitialized && (
-                <button
-                  onClick={initializeBackend}
-                  disabled={isInitializing}
-                  className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors text-sm flex items-center space-x-2 space-x-reverse disabled:bg-gray-400"
-                >
-                  <CloudArrowUpIcon className="h-4 w-4" />
-                  <span>{isInitializing ? 'در حال راه‌اندازی...' : 'راه‌اندازی سرور'}</span>
-                </button>
-              )}
-              {backendInitialized && (
-                <button
-                  onClick={saveAllChanges}
-                  disabled={isSaving || isLoading || !hasChanges()}
-                  className={`px-4 py-2 rounded-md transition-colors text-sm flex items-center space-x-2 space-x-reverse ${
-                    hasChanges() && !isSaving && !isLoading
-                      ? 'bg-blue-600 text-white hover:bg-blue-700'
-                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                  }`}
-                  data-testid="save-all-changes-button"
-                >
-                  <CloudArrowUpIcon className="h-4 w-4" />
-                  <span>{isSaving ? 'در حال ذخیره...' : 'ذخیره همه تغییرات'}</span>
-                </button>
-              )}
-              <button
-                onClick={handleLogout}
-                className="bg-red-100 text-red-700 px-4 py-2 rounded-md hover:bg-red-200 transition-colors text-sm"
-              >
-                خروج از پنل
-              </button>
-              <button
-                onClick={() => window.location.href = '/'}
-                className="bg-gray-100 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200 transition-colors"
-              >
-                بازگشت به سایت
-              </button>
+              </div>
             </div>
           </div>
         </div>
