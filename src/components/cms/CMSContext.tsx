@@ -301,7 +301,9 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
       };
 
       // Initialize backend
+      console.log('Calling apiClient.initializeBackend with:', localData);
       const result = await apiClient.initializeBackend(localData) as { success: boolean; initialized?: string[]; message?: string };
+      console.log('API result:', result);
       
       if (result.success) {
         setBackendInitialized(true);
