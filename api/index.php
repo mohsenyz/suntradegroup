@@ -25,7 +25,20 @@ function authenticate() {
     global $PASSWORD;
     
     $headers = getallheaders();
-    $provided_password = $headers['X-Password'] ?? $_POST['password'] ?? $_GET['password'] ?? '';
+    
+    // Handle case-insensitive headers (LiteSpeed converts to lowercase)
+    $provided_password = '';
+    foreach ($headers as $name => $value) {
+        if (strtolower($name) === 'x-password') {
+            $provided_password = $value;
+            break;
+        }
+    }
+    
+    // Fallback to POST/GET parameters
+    if (empty($provided_password)) {
+        $provided_password = $_POST['password'] ?? $_GET['password'] ?? '';
+    }
     
     if ($provided_password !== $PASSWORD) {
         http_response_code(401);
