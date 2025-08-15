@@ -134,6 +134,9 @@ const Footer = () => {
           <p className="text-gray-400">
             © ۱۴۰۳ سان ترد گروپ. تمامی حقوق محفوظ است.
           </p>
+          <p className="text-gray-500 text-xs mt-2">
+            آخرین به‌روزرسانی: ۲۵ مرداد ۱۴۰۳ - ۱۵:۳۰
+          </p>
         </div>
       </div>
     </footer>

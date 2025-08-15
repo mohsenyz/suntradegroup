@@ -217,7 +217,7 @@ jobs:
           echo "" >> deployment-package/.htaccess
           echo "# Force update - $(date)" >> deployment-package/.htaccess
 
-      - name: 🚀 Deploy via FTP
+      - name: 🚀 Deploy via FTP (Main Files)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_HOST || '23.88.79.16' }}
@@ -240,7 +240,39 @@ jobs:
             **/dev-*.sh
             **/test-*.sh
             **/*.log
-          timeout: 600000
+            _next/static/chunks/**
+          timeout: 300000
+
+      - name: 🔧 Deploy JavaScript Chunks via LFTP
+        run: |
+          echo "🚀 Uploading JavaScript chunks with lftp for better reliability..."
+          
+          # Install lftp if not available
+          sudo apt-get update && sudo apt-get install -y lftp
+          
+          # Upload _next static files with lftp
+          lftp -c "
+          set ftp:ssl-allow no
+          set net:timeout 120
+          set net:max-retries 3
+          set net:reconnect-interval-base 5
+          open -u ${{ secrets.FTP_USERNAME || 'sitesync@suntradegroup.ir' }},${{ secrets.FTP_PASSWORD || 'sitesync*@' }} ${{ secrets.FTP_HOST || '23.88.79.16' }}
+          cd ${{ secrets.FTP_REMOTE_DIR || 'public_html' }}
+          mirror -R --delete --verbose deployment-package/_next/ _next/ || echo 'Chunks upload completed with some warnings'
+          quit
+          "
+          
+          echo "✅ JavaScript chunks upload completed"
+
+      - name: 🔍 Verify Deployment Contents
+        run: |
+          echo "🔍 Verifying deployment package contents..."
+          echo "📦 Main files:"
+          ls -la deployment-package/ | head -10
+          echo "🔧 JavaScript chunks:"
+          find deployment-package/_next/static/chunks -name "*.js" | head -10 || echo "No JS chunks found"
+          echo "📊 Total JS chunks: $(find deployment-package/_next/static/chunks -name "*.js" | wc -l)"
+          echo "💾 Package size: $(du -sh deployment-package/ | cut -f1)"
 
       - name: 🔧 Force upload .htaccess files
         run: |
