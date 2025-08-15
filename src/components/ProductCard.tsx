@@ -45,7 +45,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div className="product-card bg-white rounded-lg shadow-md overflow-hidden group">
       <div className="relative h-48 overflow-hidden">
         <Image
-          src={product.mainImage}
+          src={product.mainImage || product.main_image}
           alt={product.name}
           fill
           className="object-cover group-hover:scale-110 transition-transform duration-300"

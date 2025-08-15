@@ -15,18 +15,29 @@ export async function loginToCMS(page: Page, retries: number = 3): Promise<void>
       // Wait for page to be ready
       await page.waitForLoadState('networkidle', { timeout: 10000 });
       
-      // Find password input with multiple selectors
-      const passwordInput = page.locator('input[type="password"], input[placeholder*="رمز"], input[placeholder*="password"]').first();
+      // Check if already logged in by looking for the server status indicator
+      const serverStatus = page.getByTestId('server-status-connected');
+      try {
+        await serverStatus.waitFor({ timeout: 2000 });
+        // Already logged in, no need to login again
+        console.log(`✅ Already logged in on attempt ${attempt}`);
+        return;
+      } catch {
+        // Not logged in, proceed with login
+      }
+      
+      // Find password input using stable selector
+      const passwordInput = page.getByTestId('cms-password-input');
       await passwordInput.waitFor({ timeout: 5000 });
       
       await passwordInput.fill('suntradegroup2024');
       
-      // Find login button
-      const loginButton = page.getByRole('button', { name: 'ورود' });
+      // Find login button using stable selector
+      const loginButton = page.getByTestId('cms-login-button');
       await loginButton.click();
       
       // Wait for successful login
-      await expect(page.locator('text=🟢 سرور متصل')).toBeVisible({ timeout: 10000 });
+      await expect(page.getByTestId('server-status-connected')).toBeVisible({ timeout: 10000 });
       
       console.log(`✅ CMS login successful on attempt ${attempt}`);
       return;
@@ -49,7 +60,7 @@ export async function loginToCMS(page: Page, retries: number = 3): Promise<void>
 export async function saveChanges(page: Page): Promise<void> {
   console.log('🔄 Attempting to save changes...');
   
-  const saveButton = page.getByRole('button', { name: 'ذخیره همه تغییرات' });
+  const saveButton = page.getByTestId('save-all-changes-button');
   
   // Wait for save button to be visible
   await saveButton.waitFor({ timeout: 5000 });

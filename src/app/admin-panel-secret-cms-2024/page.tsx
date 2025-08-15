@@ -101,6 +101,7 @@ function AdminCMSContent() {
                 رمز عبور:
               </label>
               <input
+                id="cms-password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -108,11 +109,14 @@ function AdminCMSContent() {
                 placeholder="رمز عبور پنل مدیریت را وارد کنید"
                 onKeyDown={(e) => e.key === 'Enter' && handleAuth()}
                 dir="rtl"
+                data-testid="cms-password-input"
               />
             </div>
             <button
+              id="cms-login-btn"
               onClick={handleAuth}
               className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+              data-testid="cms-login-button"
             >
               ورود
             </button>
@@ -132,11 +136,11 @@ function AdminCMSContent() {
               <div className="flex items-center space-x-2 space-x-reverse">
                 <p className="text-gray-600">سیستم مدیریت فایل‌های JSON</p>
                 {backendInitialized ? (
-                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full" data-testid="server-status-connected">
                     🟢 سرور متصل
                   </span>
                 ) : (
-                  <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">
+                  <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full" data-testid="server-status-disconnected">
                     🔴 سرور غیرفعال
                   </span>
                 )}
@@ -173,6 +177,7 @@ function AdminCMSContent() {
                       ? 'bg-blue-600 text-white hover:bg-blue-700'
                       : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   }`}
+                  data-testid="save-all-changes-button"
                 >
                   <CloudArrowUpIcon className="h-4 w-4" />
                   <span>{isSaving ? 'در حال ذخیره...' : 'ذخیره همه تغییرات'}</span>
@@ -239,6 +244,7 @@ function AdminCMSContent() {
                     ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
+                data-testid="tab-texts"
               >
                 <DocumentTextIcon className="h-5 w-5 inline-block ml-2" />
                 مدیریت متون
@@ -250,6 +256,7 @@ function AdminCMSContent() {
                     ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
+                data-testid="tab-products"
               >
                 <CubeIcon className="h-5 w-5 inline-block ml-2" />
                 مدیریت محصولات
@@ -261,6 +268,7 @@ function AdminCMSContent() {
                     ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
+                data-testid="tab-categories"
               >
                 <Cog6ToothIcon className="h-5 w-5 inline-block ml-2" />
                 مدیریت دسته‌بندی‌ها
@@ -272,6 +280,7 @@ function AdminCMSContent() {
                     ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
+                data-testid="tab-brands"
               >
                 <Cog6ToothIcon className="h-5 w-5 inline-block ml-2" />
                 مدیریت برندها
@@ -283,6 +292,7 @@ function AdminCMSContent() {
                     ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
+                data-testid="tab-contacts"
               >
                 <EnvelopeIcon className="h-5 w-5 inline-block ml-2" />
                 مدیریت پیام‌ها
@@ -294,6 +304,7 @@ function AdminCMSContent() {
                     ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
+                data-testid="tab-export"
               >
                 <DocumentArrowDownIcon className="h-5 w-5 inline-block ml-2" />
                 خروجی و پیش‌نمایش

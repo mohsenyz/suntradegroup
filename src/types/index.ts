@@ -30,6 +30,7 @@ export interface Product {
   currency: string;
   images: string[];
   mainImage: string;
+  main_image?: string; // Database field fallback
   shortDescription: string;
   fullDescription: string;
   properties: Record<string, string> | object;

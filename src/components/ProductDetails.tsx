@@ -78,14 +78,24 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
             <h1 className="text-3xl font-bold text-gray-800 mb-2">
               {product.name}
             </h1>
-            <p className="text-lg text-gray-600 mb-4">
-              {product.shortDescription}
-            </p>
+            {product.shortDescription && (
+              <p className="text-lg text-gray-600 mb-4">
+                {product.shortDescription}
+              </p>
+            )}
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-sm text-gray-600">برند:</span>
-              <span className="text-golden-600 font-semibold">{product.brand}</span>
-              <span className="text-sm text-gray-600">دسته:</span>
-              <span className="text-golden-600 font-semibold">{getCategoryName(product.category)}</span>
+              {(product.brand || product.brand_name) && (
+                <>
+                  <span className="text-sm text-gray-600">برند:</span>
+                  <span className="text-golden-600 font-semibold">{product.brand || product.brand_name}</span>
+                </>
+              )}
+              {product.category && (
+                <>
+                  <span className="text-sm text-gray-600">دسته:</span>
+                  <span className="text-golden-600 font-semibold">{getCategoryName(product.category)}</span>
+                </>
+              )}
             </div>
             
             <div className="text-3xl font-bold text-golden-600 mb-4">
@@ -146,7 +156,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
               {Object.entries(getDisplayProperties()).map(([key, value]) => (
                 <div key={key} className="bg-gray-50 p-3 rounded-lg">
                   <div className="text-sm text-gray-600">{key}</div>
-                  <div className="font-semibold text-gray-800">{value as string}</div>
+                  <div className="font-semibold text-gray-800">
+                    {typeof value === 'object' && value !== null ? JSON.stringify(value, null, 2) : String(value)}
+                  </div>
                 </div>
               ))}
             </div>
@@ -182,11 +194,15 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
             توضیحات کامل
           </h2>
           <div className="prose prose-lg text-gray-700 leading-relaxed">
-            {product.fullDescription.split('\n').map((paragraph, index) => (
-              <p key={index} className="mb-4">
-                {paragraph}
-              </p>
-            ))}
+            {product.fullDescription ? (
+              product.fullDescription.split('\n').map((paragraph, index) => (
+                <p key={index} className="mb-4">
+                  {paragraph}
+                </p>
+              ))
+            ) : (
+              <p className="text-gray-500 italic">توضیحات کاملی برای این محصول ارائه نشده است.</p>
+            )}
           </div>
         </div>
 
@@ -199,7 +215,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
               {Object.entries(product.specifications).map(([key, value]) => (
                 <div key={key} className="flex justify-between items-center border-b border-gray-200 pb-2">
                   <span className="text-gray-600">{key}:</span>
-                  <span className="font-semibold text-gray-800">{value}</span>
+                  <span className="font-semibold text-gray-800">
+                    {typeof value === 'object' && value !== null ? JSON.stringify(value, null, 2) : String(value)}
+                  </span>
                 </div>
               ))}
             </div>
@@ -210,8 +228,14 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
               اطلاعات برند
             </h3>
             <p className="text-golden-700">
-              این محصول توسط برند <strong>{product.brand}</strong> تولید شده است.
-              برای مشاهده سایر محصولات این برند، <a href={`/brands/${product.brand.toLowerCase().replace(/\s+/g, '-')}`} className="text-golden-600 underline">اینجا کلیک کنید</a>.
+              {(product.brand || product.brand_name) ? (
+                <>
+                  این محصول توسط برند <strong>{product.brand || product.brand_name}</strong> تولید شده است.
+                  برای مشاهده سایر محصولات این برند، <a href={`/brands/${(product.brand || product.brand_name).toLowerCase().replace(/\s+/g, '-')}`} className="text-golden-600 underline">اینجا کلیک کنید</a>.
+                </>
+              ) : (
+                'این محصول فاقد برند مشخص است.'
+              )}
             </p>
           </div>
         </div>

@@ -6,9 +6,9 @@ const PASSWORD = 'suntradegroup2024';
 // Helper function to login to the CMS
 async function loginToCMS(page: Page) {
   await page.goto(CMS_URL);
-  await page.getByRole('textbox', { name: 'رمز عبور پنل مدیریت را وارد کنید' }).fill(PASSWORD);
-  await page.getByRole('button', { name: 'ورود' }).click();
-  await expect(page.locator('text=🟢 سرور متصل')).toBeVisible();
+  await page.getByTestId('cms-password-input').fill(PASSWORD);
+  await page.getByTestId('cms-login-button').click();
+  await expect(page.getByTestId('server-status-connected')).toBeVisible();
 }
 
 test.describe('CMS Simple Tests', () => {
@@ -17,25 +17,25 @@ test.describe('CMS Simple Tests', () => {
     
     // Check login form is visible
     await expect(page.getByText('پنل مدیریت محتوا')).toBeVisible();
-    await expect(page.getByRole('textbox', { name: 'رمز عبور پنل مدیریت را وارد کنید' })).toBeVisible();
+    await expect(page.getByTestId('cms-password-input')).toBeVisible();
     
     // Fill password and login
-    await page.getByRole('textbox', { name: 'رمز عبور پنل مدیریت را وارد کنید' }).fill(PASSWORD);
-    await page.getByRole('button', { name: 'ورود' }).click();
+    await page.getByTestId('cms-password-input').fill(PASSWORD);
+    await page.getByTestId('cms-login-button').click();
     
     // Should show connected status
-    await expect(page.locator('text=🟢 سرور متصل')).toBeVisible();
+    await expect(page.getByTestId('server-status-connected')).toBeVisible();
   });
 
   test('should display main navigation tabs', async ({ page }) => {
     await loginToCMS(page);
     
     // Check all navigation tabs are visible
-    await expect(page.getByRole('button', { name: 'مدیریت متون' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'مدیریت محصولات' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'مدیریت دسته‌بندی‌ها' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'مدیریت برندها' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'خروجی و پیش‌نمایش' })).toBeVisible();
+    await expect(page.getByTestId('tab-texts')).toBeVisible();
+    await expect(page.getByTestId('tab-products')).toBeVisible();
+    await expect(page.getByTestId('tab-categories')).toBeVisible();
+    await expect(page.getByTestId('tab-brands')).toBeVisible();
+    await expect(page.getByTestId('tab-export')).toBeVisible();
   });
 
   test('should show text management fields', async ({ page }) => {
@@ -55,7 +55,7 @@ test.describe('CMS Simple Tests', () => {
     await loginToCMS(page);
     
     // Click products tab
-    await page.getByRole('button', { name: 'مدیریت محصولات' }).click();
+    await page.getByTestId('tab-products').click();
     
     // Should show products interface
     await expect(page.getByText('تعداد محصولات:')).toBeVisible();
@@ -66,7 +66,7 @@ test.describe('CMS Simple Tests', () => {
     await loginToCMS(page);
     
     // Click categories tab
-    await page.getByRole('button', { name: 'مدیریت دسته‌بندی‌ها' }).click();
+    await page.getByTestId('tab-categories').click();
     
     // Should show categories
     await expect(page.getByText('تعداد دسته‌بندی‌ها:')).toBeVisible();
@@ -78,10 +78,10 @@ test.describe('CMS Simple Tests', () => {
     await loginToCMS(page);
     
     // Should show server connected
-    await expect(page.locator('text=🟢 سرور متصل')).toBeVisible();
+    await expect(page.getByTestId('server-status-connected')).toBeVisible();
     
     // Should show save button (either enabled or disabled is fine)
-    const saveButton = page.getByRole('button', { name: 'ذخیره همه تغییرات' });
+    const saveButton = page.getByTestId('save-all-changes-button');
     await expect(saveButton).toBeVisible();
     
     // Just verify the button exists and has the right text - state doesn't matter for this test

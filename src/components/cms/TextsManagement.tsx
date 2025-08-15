@@ -103,6 +103,7 @@ function TextEditor({ data, onChange, prefix = '' }: {
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-h-[100px] text-right"
             dir="rtl"
             placeholder={fieldInfo.placeholder}
+            data-testid={`text-field-${currentPath.replace(/\./g, '-')}`}
           />
           <div className="text-xs text-gray-500 mt-1">
             مسیر فیلد: <code className="bg-gray-100 px-1 rounded">{currentPath}</code>

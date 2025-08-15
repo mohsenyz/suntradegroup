@@ -1,13 +1,33 @@
 <?php
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Password');
 
-$dataFile = __DIR__ . '/data/categories.json';
+// Handle preflight OPTIONS request
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 
-if (file_exists($dataFile)) {
-    $data = file_get_contents($dataFile);
-    echo $data;
-} else {
+// Include database class
+require_once __DIR__ . '/database/Database.php';
+
+try {
+    $db = Database::getInstance();
+    
+    $categories = $db->fetchAll("SELECT slug as id, name, slug FROM categories ORDER BY name");
+    
+    echo json_encode([
+        'categories' => $categories,
+        'source' => 'database',
+        'timestamp' => date('Y-m-d H:i:s')
+    ]);
+    
+} catch (Exception $e) {
+    error_log("Categories API error: " . $e->getMessage());
+    
+    // Fallback data if database fails
     echo json_encode([
         'categories' => [
             ['id' => 'nails-saws', 'name' => 'میخ و اره', 'slug' => 'nails-saws'],
@@ -16,7 +36,8 @@ if (file_exists($dataFile)) {
             ['id' => 'mesh-chains', 'name' => 'توری و زنجیر', 'slug' => 'mesh-chains'],
             ['id' => 'ropes-threads', 'name' => 'طناب و نخ', 'slug' => 'ropes-threads']
         ],
-        'status' => 'fallback_data',
+        'status' => 'error_fallback',
+        'error' => 'Database connection failed',
         'timestamp' => date('Y-m-d H:i:s')
     ]);
 }

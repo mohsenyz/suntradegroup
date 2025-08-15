@@ -177,7 +177,9 @@ export const jsonApi = {
   // Load products
   async loadProducts() {
     try {
-      return await apiClient.getFile('products');
+      const response = await apiClient.getFile('products');
+      // Extract data from wrapper if it exists
+      return (response as any)?.data || response;
     } catch {
       console.warn('Failed to load products from API, using local fallback');
       // Fallback to local data

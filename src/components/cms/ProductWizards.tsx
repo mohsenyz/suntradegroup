@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 // Brand Selector Component
 export function BrandSelector({ value, brands, onChange }: { value: number; brands: Array<Record<string, unknown>>; onChange: (brandId: number) => void }) {
@@ -165,12 +165,100 @@ export function PropertiesWizard({ properties, onChange }: { properties: Record<
 // Images Wizard Component
 export function ImagesWizard({ images, onChange }: { images: string[]; onChange: (images: string[]) => void }) {
   const [newImage, setNewImage] = useState('');
+  const [availableImages, setAvailableImages] = useState<Array<{filename: string; url: string; width: number; height: number}>>([]);
+  const [uploading, setUploading] = useState(false);
+  const [loadingAvailable, setLoadingAvailable] = useState(false);
+  const [showImageBrowser, setShowImageBrowser] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Load available images on component mount
+  useEffect(() => {
+    loadAvailableImages();
+  }, []);
+
+  const loadAvailableImages = async () => {
+    setLoadingAvailable(true);
+    try {
+      const response = await fetch('http://localhost:8080/upload.php');
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          setAvailableImages(data.images);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load available images:', error);
+    }
+    setLoadingAvailable(false);
+  };
+
+  const handleFileUpload = async (file: File) => {
+    setUploading(true);
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      const response = await fetch('http://localhost:8080/upload.php', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-Password': 'suntradegroup2024'
+        }
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        // Add the new image to the product images
+        const newImageUrl = result.webp_url || result.url;
+        if (!images.includes(newImageUrl)) {
+          onChange([...images, newImageUrl]);
+        }
+        
+        // Refresh available images list
+        await loadAvailableImages();
+        
+        alert(`تصویر با موفقیت آپلود شد!\nنام فایل: ${result.filename}\nابعاد: ${result.dimensions.width} × ${result.dimensions.height}`);
+      } else {
+        alert(`خطا در آپلود تصویر: ${result.message}`);
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert('خطا در آپلود تصویر. لطفا دوباره تلاش کنید.');
+    }
+    
+    setUploading(false);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const files = Array.from(e.dataTransfer.files);
+    const imageFile = files.find(file => file.type.startsWith('image/'));
+    
+    if (imageFile) {
+      handleFileUpload(imageFile);
+    }
+  };
 
   const addImage = () => {
     if (newImage.trim() && !images.includes(newImage.trim())) {
       onChange([...images, newImage.trim()]);
       setNewImage('');
     }
+  };
+
+  const addImageFromBrowser = (imageUrl: string) => {
+    if (!images.includes(imageUrl)) {
+      onChange([...images, imageUrl]);
+    }
+    setShowImageBrowser(false);
   };
 
   const removeImage = (index: number) => {
@@ -188,13 +276,149 @@ export function ImagesWizard({ images, onChange }: { images: string[]; onChange:
     }
   };
 
+  const deleteImageFromServer = async (filename: string) => {
+    if (!confirm('آیا از حذف این تصویر از سرور اطمینان دارید؟')) {
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:8080/upload.php', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Password': 'suntradegroup2024'
+        },
+        body: JSON.stringify({ filename })
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        alert('تصویر با موفقیت حذف شد');
+        await loadAvailableImages();
+      } else {
+        alert(`خطا در حذف تصویر: ${result.message}`);
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
+      alert('خطا در حذف تصویر');
+    }
+  };
+
   return (
     <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
       <h4 className="font-medium text-gray-900 mb-3">🖼️ مدیریت تصاویر محصول</h4>
       
-      {/* Add new image */}
+      {/* Upload section */}
       <div className="mb-4 p-4 bg-white rounded border">
-        <h5 className="text-sm font-medium text-gray-700 mb-3">افزودن تصویر جدید:</h5>
+        <h5 className="text-sm font-medium text-gray-700 mb-3">آپلود تصویر جدید:</h5>
+        
+        {/* Drag and drop area */}
+        <div 
+          className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
+            uploading ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
+          }`}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+        >
+          {uploading ? (
+            <div className="flex items-center justify-center">
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 ml-3"></div>
+              <span className="text-blue-600">در حال آپلود...</span>
+            </div>
+          ) : (
+            <>
+              <div className="text-4xl mb-2">📤</div>
+              <p className="text-gray-600 mb-2">فایل تصویر را اینجا رها کنید یا کلیک کنید</p>
+              <p className="text-xs text-gray-500">حداکثر 10 مگابایت - فرمت‌های JPG, PNG, WebP, GIF</p>
+            </>
+          )}
+          
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                handleFileUpload(file);
+              }
+            }}
+          />
+        </div>
+        
+        <div className="flex gap-3 mt-3">
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:bg-gray-400 transition-colors text-sm"
+          >
+            📁 انتخاب فایل
+          </button>
+          
+          <button
+            onClick={() => setShowImageBrowser(!showImageBrowser)}
+            className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors text-sm"
+          >
+            🖼️ انتخاب از گالری
+          </button>
+        </div>
+      </div>
+
+      {/* Image browser */}
+      {showImageBrowser && (
+        <div className="mb-4 p-4 bg-white rounded border">
+          <div className="flex justify-between items-center mb-3">
+            <h5 className="text-sm font-medium text-gray-700">گالری تصاویر موجود:</h5>
+            <button
+              onClick={() => setShowImageBrowser(false)}
+              className="text-gray-500 hover:text-gray-700"
+            >
+              ✕
+            </button>
+          </div>
+          
+          {loadingAvailable ? (
+            <div className="text-center py-4">
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mx-auto"></div>
+              <p className="text-gray-600 mt-2">در حال بارگذاری...</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-64 overflow-y-auto">
+              {availableImages.map((img, index) => (
+                <div key={index} className="relative group">
+                  <img
+                    src={img.url}
+                    alt={img.filename}
+                    className="w-full h-20 object-cover rounded border cursor-pointer hover:opacity-75"
+                    onClick={() => addImageFromBrowser(img.url)}
+                  />
+                  <div className="absolute top-1 right-1 bg-black bg-opacity-50 text-white text-xs px-1 rounded">
+                    {img.width}×{img.height}
+                  </div>
+                  <button
+                    onClick={() => deleteImageFromServer(img.filename)}
+                    className="absolute top-1 left-1 bg-red-500 text-white text-xs px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    🗑️
+                  </button>
+                </div>
+              ))}
+              
+              {availableImages.length === 0 && (
+                <div className="col-span-full text-center py-4 text-gray-500">
+                  هیچ تصویری در گالری موجود نیست
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Manual URL input */}
+      <div className="mb-4 p-4 bg-white rounded border">
+        <h5 className="text-sm font-medium text-gray-700 mb-3">یا آدرس تصویر را وارد کنید:</h5>
         <div className="flex gap-3">
           <input
             type="text"
@@ -213,57 +437,97 @@ export function ImagesWizard({ images, onChange }: { images: string[]; onChange:
         </div>
       </div>
 
-      {/* Images list */}
-      <div className="space-y-2">
+      {/* Current images list with previews */}
+      <div className="space-y-3">
+        <h5 className="text-sm font-medium text-gray-700">تصاویر محصول ({images.length}):</h5>
+        
         {images.map((image, index) => (
-          <div key={index} className="flex items-center gap-2 bg-white p-3 rounded border">
-            <span className="text-sm text-gray-600 w-8">🖼️</span>
-            <input
-              type="text"
-              value={image}
-              onChange={(e) => {
-                const newImages = [...images];
-                newImages[index] = e.target.value;
-                onChange(newImages);
-              }}
-              className="flex-1 px-3 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 text-right text-sm"
-              placeholder="آدرس تصویر"
-              dir="rtl"
-            />
-            <div className="flex gap-1">
+          <div key={index} className="flex items-center gap-3 bg-white p-3 rounded border">
+            {/* Image preview */}
+            <div className="w-16 h-16 flex-shrink-0 border rounded overflow-hidden bg-gray-100">
+              <img
+                src={image}
+                alt={`تصویر ${index + 1}`}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const parent = target.parentElement;
+                  if (parent) {
+                    parent.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-400 text-xs">❌</div>';
+                  }
+                }}
+              />
+            </div>
+            
+            {/* Image info and URL */}
+            <div className="flex-1">
+              <div className="text-xs text-gray-500 mb-1">
+                {index === 0 && <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs ml-2">تصویر اصلی</span>}
+                تصویر {index + 1}
+              </div>
+              <input
+                type="text"
+                value={image}
+                onChange={(e) => {
+                  const newImages = [...images];
+                  newImages[index] = e.target.value;
+                  onChange(newImages);
+                }}
+                className="w-full px-3 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 text-right text-sm"
+                placeholder="آدرس تصویر"
+                dir="rtl"
+              />
+            </div>
+            
+            {/* Action buttons */}
+            <div className="flex flex-col gap-1">
               <button
                 onClick={() => moveImage(index, 'up')}
                 disabled={index === 0}
-                className="px-2 py-1 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors text-sm disabled:bg-gray-300"
+                className="px-2 py-1 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors text-xs disabled:bg-gray-300"
               >
                 ↑
               </button>
               <button
                 onClick={() => moveImage(index, 'down')}
                 disabled={index === images.length - 1}
-                className="px-2 py-1 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors text-sm disabled:bg-gray-300"
+                className="px-2 py-1 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors text-xs disabled:bg-gray-300"
               >
                 ↓
               </button>
               <button
                 onClick={() => removeImage(index)}
-                className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition-colors text-sm"
+                className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition-colors text-xs"
               >
                 🗑️
               </button>
             </div>
           </div>
         ))}
+
+        {images.length === 0 && (
+          <div className="text-center py-8 text-gray-500 bg-white rounded border border-dashed">
+            <div className="text-4xl mb-2">🖼️</div>
+            <p>هیچ تصویری اضافه نشده است</p>
+            <p className="text-sm mt-1">تصویر آپلود کنید یا از گالری انتخاب کنید</p>
+          </div>
+        )}
       </div>
 
-      {images.length === 0 && (
-        <div className="text-center py-4 text-gray-500 bg-white rounded border border-dashed">
-          هیچ تصویری اضافه نشده است
+      <div className="mt-4 text-xs text-gray-600 bg-blue-50 p-3 rounded">
+        <div className="flex items-start gap-2">
+          <span>💡</span>
+          <div>
+            <p><strong>راهنما:</strong></p>
+            <ul className="list-disc list-inside mt-1 space-y-1">
+              <li>اولین تصویر به عنوان تصویر اصلی نمایش داده می‌شود</li>
+              <li>تصاویر به صورت خودکار بهینه‌سازی و به WebP تبدیل می‌شوند</li>
+              <li>حداکثر اندازه فایل: 10 مگابایت</li>
+              <li>فرمت‌های مجاز: JPG, PNG, WebP, GIF</li>
+            </ul>
+          </div>
         </div>
-      )}
-
-      <div className="mt-3 text-xs text-gray-600 bg-blue-50 p-2 rounded">
-        💡 راهنما: تصاویر محصول را به ترتیب اولویت نمایش اضافه کنید. اولین تصویر به عنوان تصویر اصلی نمایش داده می‌شود
       </div>
     </div>
   );
@@ -720,6 +984,83 @@ export function TechnicalSpecsWizard({ specs, onChange }: { specs: Record<string
 
       <div className="mt-3 text-xs text-gray-600 bg-blue-50 p-2 rounded">
         💡 راهنما: مشخصات فنی دقیق محصول مانند ابعاد، وزن، قدرت، ولتاژ و ...
+      </div>
+    </div>
+  );
+}
+
+// SEO Wizard Component
+export function SEOWizard({ seoData, onChange }: { seoData: { title?: string; description?: string; keywords?: string } | null; onChange: (seoData: { title?: string; description?: string; keywords?: string }) => void }) {
+  const data = seoData || { title: '', description: '', keywords: '' };
+
+  const updateSEOField = (field: string, value: string) => {
+    onChange({ ...data, [field]: value });
+  };
+
+  return (
+    <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+      <h4 className="font-medium text-gray-900 mb-3">🎯 تنظیمات SEO محصول</h4>
+      
+      <div className="space-y-4">
+        {/* SEO Title */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            📝 عنوان SEO
+          </label>
+          <input
+            type="text"
+            value={data.title || ''}
+            onChange={(e) => updateSEOField('title', e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+            placeholder="عنوان محصول برای موتورهای جستجو"
+            dir="rtl"
+            maxLength={60}
+          />
+          <div className="mt-1 text-xs text-gray-500 text-left">
+            {(data.title || '').length}/60 کاراکتر
+          </div>
+        </div>
+
+        {/* SEO Description */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            📖 توضیحات SEO
+          </label>
+          <textarea
+            value={data.description || ''}
+            onChange={(e) => updateSEOField('description', e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+            placeholder="توضیح کوتاه محصول برای موتورهای جستجو"
+            dir="rtl"
+            rows={3}
+            maxLength={160}
+          />
+          <div className="mt-1 text-xs text-gray-500 text-left">
+            {(data.description || '').length}/160 کاراکتر
+          </div>
+        </div>
+
+        {/* SEO Keywords */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            🏷️ کلیدواژه‌های SEO
+          </label>
+          <input
+            type="text"
+            value={data.keywords || ''}
+            onChange={(e) => updateSEOField('keywords', e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+            placeholder="کلیدواژه‌ها را با کاما جدا کنید"
+            dir="rtl"
+          />
+          <div className="mt-1 text-xs text-gray-500">
+            مثال: اره سامورایی, ابزار ساختمانی, برند سان
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-4 text-xs text-gray-600 bg-blue-50 p-3 rounded">
+        💡 راهنما: این اطلاعات برای بهینه‌سازی محصول در موتورهای جستجو استفاده می‌شود
       </div>
     </div>
   );

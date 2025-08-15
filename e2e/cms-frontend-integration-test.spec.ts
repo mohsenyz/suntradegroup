@@ -5,9 +5,9 @@ const PASSWORD = 'suntradegroup2024';
 
 async function loginToCMS(page: Page) {
   await page.goto(CMS_URL);
-  await page.getByRole('textbox', { name: 'رمز عبور پنل مدیریت را وارد کنید' }).fill(PASSWORD);
-  await page.getByRole('button', { name: 'ورود' }).click();
-  await expect(page.locator('text=🟢 سرور متصل')).toBeVisible();
+  await page.getByTestId('cms-password-input').fill(PASSWORD);
+  await page.getByTestId('cms-login-button').click();
+  await expect(page.getByTestId('server-status-connected')).toBeVisible();
 }
 
 test.describe('CMS to Frontend Integration Test', () => {
@@ -15,7 +15,7 @@ test.describe('CMS to Frontend Integration Test', () => {
     // Step 1: Login to CMS and make a change
     await loginToCMS(page);
     
-    await page.getByRole('button', { name: 'مدیریت محصولات' }).click();
+    await page.getByTestId('tab-products').click();
     await page.waitForSelector('text=✏️ ویرایش', { timeout: 10000 });
     await page.locator('button:has-text("✏️ ویرایش")').first().click();
     await page.waitForSelector('input[type="text"]', { timeout: 5000 });
@@ -28,7 +28,7 @@ test.describe('CMS to Frontend Integration Test', () => {
     await nameInput.fill(testName);
     
     // Save the change
-    const saveButton = page.getByRole('button', { name: 'ذخیره همه تغییرات' });
+    const saveButton = page.getByTestId('save-all-changes-button');
     await expect(saveButton).toBeEnabled({ timeout: 5000 });
     await saveButton.click();
     await page.waitForTimeout(3000);

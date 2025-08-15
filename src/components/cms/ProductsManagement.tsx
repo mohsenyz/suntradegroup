@@ -10,7 +10,8 @@ import {
   KeywordsWizard, 
   KeyFeaturesWizard, 
   VariantsWizard, 
-  TechnicalSpecsWizard 
+  TechnicalSpecsWizard,
+  SEOWizard
 } from './ProductWizards';
 
 // Products Management Component
@@ -146,7 +147,9 @@ export default function ProductsManagement() {
       'keyFeatures': { label: 'ویژگی‌های کلیدی', hint: 'مهم‌ترین ویژگی‌های محصول', placeholder: '', type: 'keyFeatures' },
       'variants': { label: 'تنوع محصول', hint: 'انواع مختلف محصول (سایز، رنگ، مدل)', placeholder: '', type: 'variants' },
       'technicalSpecs': { label: 'مشخصات فنی', hint: 'مشخصات فنی دقیق محصول', placeholder: '', type: 'technicalSpecs' },
-      'properties': { label: 'ویژگی‌های محصول', hint: 'ویژگی‌های عمومی محصول', placeholder: '', type: 'properties' }
+      'specifications': { label: 'مشخصات فنی', hint: 'مشخصات فنی دقیق محصول', placeholder: '', type: 'technicalSpecs' },
+      'properties': { label: 'ویژگی‌های محصول', hint: 'ویژگی‌های عمومی محصول', placeholder: '', type: 'properties' },
+      'seo_data': { label: 'تنظیمات SEO', hint: 'اطلاعات سئو برای بهینه‌سازی در موتورهای جستجو', placeholder: '', type: 'seo' }
     };
 
     return productFields[field] || { 
@@ -202,8 +205,24 @@ export default function ProductsManagement() {
           <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
             <h4 className="font-medium text-gray-900 mb-3">📝 {fieldInfo.label}</h4>
             <textarea
-              value={String(value || '')}
-              onChange={(e) => isNewProduct ? updateNewProduct(field, e.target.value) : updateProduct(index, field, e.target.value)}
+              value={typeof value === 'object' && value !== null ? JSON.stringify(value, null, 2) : String(value || '')}
+              onChange={(e) => {
+                // Try to parse JSON if it looks like JSON, otherwise treat as string
+                let newValue: unknown = e.target.value;
+                try {
+                  if (e.target.value.trim().startsWith('{') || e.target.value.trim().startsWith('[')) {
+                    newValue = JSON.parse(e.target.value);
+                  }
+                } catch {
+                  // If parsing fails, keep as string
+                  newValue = e.target.value;
+                }
+                if (isNewProduct) {
+                  updateNewProduct(field, newValue);
+                } else {
+                  updateProduct(index, field, newValue);
+                }
+              }}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[120px] text-right"
               placeholder={fieldInfo.placeholder}
               dir="rtl"
@@ -262,13 +281,21 @@ export default function ProductsManagement() {
           />
         );
 
+      case 'seo':
+        return (
+          <SEOWizard
+            seoData={value as { title?: string; description?: string; keywords?: string } || null}
+            onChange={(seoData) => isNewProduct ? updateNewProduct(field, seoData) : updateProduct(index, field, seoData)}
+          />
+        );
+
       case 'number':
         return (
           <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
             <h4 className="font-medium text-gray-900 mb-3">🔢 {fieldInfo.label}</h4>
             <input
               type="number"
-              value={String(value || '')}
+              value={typeof value === 'object' && value !== null ? JSON.stringify(value) : String(value || '')}
               onChange={(e) => isNewProduct ? updateNewProduct(field, Number(e.target.value)) : updateProduct(index, field, Number(e.target.value))}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
               placeholder={fieldInfo.placeholder}
@@ -286,8 +313,24 @@ export default function ProductsManagement() {
             <h4 className="font-medium text-gray-900 mb-3">📝 {fieldInfo.label}</h4>
             <input
               type="text"
-              value={String(value || '')}
-              onChange={(e) => isNewProduct ? updateNewProduct(field, e.target.value) : updateProduct(index, field, e.target.value)}
+              value={typeof value === 'object' && value !== null ? JSON.stringify(value) : String(value || '')}
+              onChange={(e) => {
+                // Try to parse JSON if it looks like JSON, otherwise treat as string
+                let newValue: unknown = e.target.value;
+                try {
+                  if (e.target.value.startsWith('{') || e.target.value.startsWith('[')) {
+                    newValue = JSON.parse(e.target.value);
+                  }
+                } catch {
+                  // If parsing fails, keep as string
+                  newValue = e.target.value;
+                }
+                if (isNewProduct) {
+                  updateNewProduct(field, newValue);
+                } else {
+                  updateProduct(index, field, newValue);
+                }
+              }}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
               placeholder={fieldInfo.placeholder}
               dir="rtl"
