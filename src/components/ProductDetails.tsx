@@ -84,10 +84,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
               </p>
             )}
             <div className="flex items-center gap-4 mb-4">
-              {(product.brand || product.brand_name) && (
+              {product.brand && (
                 <>
                   <span className="text-sm text-gray-600">برند:</span>
-                  <span className="text-golden-600 font-semibold">{product.brand || product.brand_name}</span>
+                  <span className="text-golden-600 font-semibold">{product.brand}</span>
                 </>
               )}
               {product.category && (
