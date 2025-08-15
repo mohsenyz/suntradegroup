@@ -9,6 +9,7 @@ import CategoriesManagement from '@/components/cms/CategoriesManagement';
 import BrandsManagement from '@/components/cms/BrandsManagement';
 import ContactsManagement from '@/components/cms/ContactsManagement';
 import ExportManagement from '@/components/cms/ExportManagement';
+import BuildInfo from '@/components/cms/BuildInfo';
 
 function AdminCMSContent() {
   const [activeTab, setActiveTab] = useState('texts');
@@ -150,6 +151,7 @@ function AdminCMSContent() {
               </div>
             </div>
             <div className="flex items-center space-x-4 space-x-reverse">
+              <BuildInfo />
               <span className="text-sm text-gray-500">
                 آخرین بروزرسانی: {new Date().toLocaleDateString('fa-IR')}
               </span>
