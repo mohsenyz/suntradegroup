@@ -16,7 +16,7 @@ import {
 
 // Products Management Component
 export default function ProductsManagement() {
-  const { productsData, updateProductsData, setCurrentProductsData } = useCMSContext();
+  const { productsData, setCurrentProductsData } = useCMSContext();
   const [loading, setLoading] = useState(true);
   const [editingItem, setEditingItem] = useState<number | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);

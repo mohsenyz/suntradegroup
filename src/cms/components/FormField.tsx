@@ -8,7 +8,7 @@ interface FormFieldProps {
   label: string;
   type?: 'text' | 'textarea' | 'number' | 'email' | 'tel';
   placeholder?: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<Record<string, unknown>>;
   error?: FieldError;
   required?: boolean;
   disabled?: boolean;

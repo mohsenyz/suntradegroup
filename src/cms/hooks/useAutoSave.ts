@@ -2,8 +2,8 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useUIStore } from '../stores/ui';
 
 interface UseAutoSaveOptions {
-  onSave: (data: any) => Promise<void>;
-  data: any;
+  onSave: (data: Record<string, unknown>) => Promise<void>;
+  data: Record<string, unknown>;
   delay?: number;
   enabled?: boolean;
 }

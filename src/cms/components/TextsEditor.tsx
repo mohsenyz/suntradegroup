@@ -136,7 +136,7 @@ export const TextsEditor: React.FC<TextsEditorProps> = ({ category }) => {
         
         {filteredEntries.length === 0 && (
           <div className="text-center py-8 text-gray-500">
-            هیچ نتیجه‌ای برای "{searchTerm}" یافت نشد
+            هیچ نتیجه‌ای برای &ldquo;{searchTerm}&rdquo; یافت نشد
           </div>
         )}
       </form>
@@ -145,8 +145,8 @@ export const TextsEditor: React.FC<TextsEditorProps> = ({ category }) => {
 };
 
 // Helper functions
-function flattenObject(obj: any, prefix = ''): Record<string, any> {
-  const flattened: Record<string, any> = {};
+function flattenObject(obj: Record<string, unknown>, prefix = ''): Record<string, unknown> {
+  const flattened: Record<string, unknown> = {};
 
   for (const [key, value] of Object.entries(obj)) {
     const newKey = prefix ? `${prefix}.${key}` : key;
@@ -161,8 +161,8 @@ function flattenObject(obj: any, prefix = ''): Record<string, any> {
   return flattened;
 }
 
-function unflattenObject(obj: Record<string, any>): any {
-  const unflattened: any = {};
+function unflattenObject(obj: Record<string, unknown>): Record<string, unknown> {
+  const unflattened: Record<string, unknown> = {};
 
   for (const [key, value] of Object.entries(obj)) {
     const keys = key.split('.');

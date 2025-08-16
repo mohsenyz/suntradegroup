@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { 
-  TextsData, 
   ProductsData, 
   CategoriesData, 
   BrandsData, 
@@ -41,7 +40,7 @@ async function apiRequest<T>(endpoint: string, options?: RequestInit): Promise<T
 // API Functions
 export const api = {
   // Get data
-  getTexts: async (category: string): Promise<ApiResponse<any>> => 
+  getTexts: async (category: string): Promise<ApiResponse<Record<string, unknown>>> => 
     apiRequest(`/texts-${category}`),
   
   getProducts: async (): Promise<ApiResponse<ProductsData>> => 
@@ -54,7 +53,7 @@ export const api = {
     apiRequest('/brands'),
 
   // Save data
-  saveTexts: async (category: string, data: any): Promise<SaveResponse> => 
+  saveTexts: async (category: string, data: Record<string, unknown>): Promise<SaveResponse> => 
     apiRequest('/', {
       method: 'POST',
       body: JSON.stringify({ filename: `texts-${category}`, data }),
@@ -134,7 +133,7 @@ export const useSaveTexts = (category: string) => {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: (data: any) => api.saveTexts(category, data),
+    mutationFn: (data: Record<string, unknown>) => api.saveTexts(category, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.texts(category) });
     },

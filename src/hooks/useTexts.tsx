@@ -121,7 +121,7 @@ export function useTexts() {
           } else {
             throw new Error('API response not ok');
           }
-        } catch (apiErr) {
+        } catch {
           console.warn('[useTexts] API failed, falling back to static files');
           const commonResponse = await import('../data/texts/common.json');
           setCommonTexts(commonResponse.default);
