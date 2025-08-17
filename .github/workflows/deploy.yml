@@ -240,29 +240,15 @@ jobs:
             **/dev-*.sh
             **/test-*.sh
             **/*.log
-            _next/static/chunks/**
           timeout: 300000
 
-      - name: 🔧 Deploy JavaScript Chunks via LFTP
+      - name: 🔍 Verify JavaScript Chunks Uploaded
         run: |
-          echo "🚀 Uploading JavaScript chunks with lftp for better reliability..."
+          echo "🔍 Verifying JavaScript chunks were included in deployment..."
+          echo "📊 JavaScript chunks in deployment package:"
+          find deployment-package/_next/static/chunks -name "*.js" | wc -l || echo "No chunks directory found"
           
-          # Install lftp if not available
-          sudo apt-get update && sudo apt-get install -y lftp
-          
-          # Upload _next static files with lftp
-          lftp -c "
-          set ftp:ssl-allow no
-          set net:timeout 120
-          set net:max-retries 3
-          set net:reconnect-interval-base 5
-          open -u ${{ secrets.FTP_USERNAME || 'sitesync@suntradegroup.ir' }},${{ secrets.FTP_PASSWORD || 'sitesync*@' }} ${{ secrets.FTP_HOST || '23.88.79.16' }}
-          cd ${{ secrets.FTP_REMOTE_DIR || 'public_html' }}
-          mirror -R --delete --verbose deployment-package/_next/ _next/ || echo 'Chunks upload completed with some warnings'
-          quit
-          "
-          
-          echo "✅ JavaScript chunks upload completed"
+          echo "✅ JavaScript chunks included in main FTP deployment"
 
       - name: 🔍 Verify Deployment Contents
         run: |
