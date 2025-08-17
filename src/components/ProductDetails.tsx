@@ -98,23 +98,19 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
               )}
             </div>
             
-            <div className="text-3xl font-bold text-golden-600 mb-4">
-              {product.currency === "تماس بگیرید" ? (
-                product.currency
-              ) : (
-                <>
-                  {formatPrice(getDisplayPrice())} {product.currency}
-                  {selectedVariant && selectedVariant.priceModifier !== 0 && (
-                    <div className="text-sm text-gray-600 font-normal">
-                      قیمت پایه: {formatPrice(product.basePrice)} {product.currency}
-                      <span className={`ml-2 ${selectedVariant.priceModifier > 0 ? 'text-red-600' : 'text-green-600'}`}>
-                        ({selectedVariant.priceModifier > 0 ? '+' : ''}{formatPrice(selectedVariant.priceModifier)} {product.currency})
-                      </span>
-                    </div>
-                  )}
-                </>
-              )}
-            </div>
+            {product.currency !== "تماس بگیرید" && (
+              <div className="text-3xl font-bold text-golden-600 mb-4">
+                {formatPrice(getDisplayPrice())} {product.currency}
+                {selectedVariant && selectedVariant.priceModifier !== 0 && (
+                  <div className="text-sm text-gray-600 font-normal">
+                    قیمت پایه: {formatPrice(product.basePrice)} {product.currency}
+                    <span className={`ml-2 ${selectedVariant.priceModifier > 0 ? 'text-red-600' : 'text-green-600'}`}>
+                      ({selectedVariant.priceModifier > 0 ? '+' : ''}{formatPrice(selectedVariant.priceModifier)} {product.currency})
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
             
             <div className={`inline-block px-4 py-2 rounded-full text-sm font-semibold mb-6 ${
               product.currency === "تماس بگیرید"
