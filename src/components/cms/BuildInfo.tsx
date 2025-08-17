@@ -5,8 +5,9 @@ interface BuildInfoProps {
 }
 
 const BuildInfo: React.FC<BuildInfoProps> = ({ className = '' }) => {
-  const buildTime = process.env.BUILD_TIME || new Date().toISOString();
+  const buildTime = process.env.BUILD_TIME;
   const buildVersion = process.env.npm_package_version || '0.1.0';
+  const isDevelopment = !buildTime;
   
   // Format build time for display
   const formatBuildTime = (isoString: string) => {
@@ -47,8 +48,8 @@ const BuildInfo: React.FC<BuildInfoProps> = ({ className = '' }) => {
     }
   };
 
-  const formattedTime = formatBuildTime(buildTime);
-  const timeSince = getTimeSinceBuild(buildTime);
+  const formattedTime = buildTime ? formatBuildTime(buildTime) : '';
+  const timeSince = buildTime ? getTimeSinceBuild(buildTime) : '';
 
   return (
     <div className={`flex items-center space-x-2 space-x-reverse text-xs ${className}`}>
@@ -57,9 +58,9 @@ const BuildInfo: React.FC<BuildInfoProps> = ({ className = '' }) => {
       </span>
       <span 
         className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full cursor-help" 
-        title={`آخرین به‌روزرسانی: ${formattedTime}`}
+        title={isDevelopment ? "حالت توسعه" : `آخرین به‌روزرسانی: ${formattedTime}`}
       >
-        📅 {timeSince}
+        📅 {isDevelopment ? "حالت توسعه" : timeSince}
       </span>
     </div>
   );
