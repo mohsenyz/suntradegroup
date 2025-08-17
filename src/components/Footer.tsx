@@ -9,6 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 import data from '@/data/products.json';
 import { ProductData } from '@/types';
+import BuildInfo from '@/components/cms/BuildInfo';
 
 const Footer = () => {
   const productData = data as ProductData;
@@ -134,9 +135,9 @@ const Footer = () => {
           <p className="text-gray-400">
             © ۱۴۰۳ سان ترد گروپ. تمامی حقوق محفوظ است.
           </p>
-          <p className="text-gray-500 text-xs mt-2">
-            آخرین به‌روزرسانی: ۲۵ مرداد ۱۴۰۳ - ۲۱:۴۵ (Fixed Chunks)
-          </p>
+          <div className="mt-2 flex justify-center">
+            <BuildInfo className="text-gray-500" />
+          </div>
         </div>
       </div>
     </footer>
