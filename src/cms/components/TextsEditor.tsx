@@ -16,7 +16,7 @@ export const TextsEditor: React.FC<TextsEditorProps> = ({ category }) => {
   const saveTextsMutation = useSaveTexts(category);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { register, watch, setValue, handleSubmit } = useForm<Record<string, string>>({
+  const { register, watch, setValue, handleSubmit } = useForm<Record<string, unknown>>({
     defaultValues: {},
   });
 
@@ -152,7 +152,7 @@ function flattenObject(obj: Record<string, unknown>, prefix = ''): Record<string
     const newKey = prefix ? `${prefix}.${key}` : key;
 
     if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      Object.assign(flattened, flattenObject(value, newKey));
+      Object.assign(flattened, flattenObject(value as Record<string, unknown>, newKey));
     } else {
       flattened[newKey] = value;
     }
@@ -172,7 +172,7 @@ function unflattenObject(obj: Record<string, unknown>): Record<string, unknown> 
       if (!(keys[i] in current)) {
         current[keys[i]] = {};
       }
-      current = current[keys[i]];
+      current = current[keys[i]] as Record<string, unknown>;
     }
 
     current[keys[keys.length - 1]] = value;

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import ProductDetails from '@/components/ProductDetails';
 import { ProductData, Product } from '@/types';
 import { useProducts } from '@/hooks/useData';
