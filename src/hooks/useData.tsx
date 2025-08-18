@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { jsonApi } from '@/utils/apiClient';
+import { ProductData } from '@/types';
 
 // Frontend data provider hooks
 export function useProducts() {
-  const [products, setProducts] = useState<unknown>(null);
+  const [products, setProducts] = useState<ProductData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -18,7 +19,23 @@ export function useProducts() {
       } catch {
         console.error('Failed to load products from backend');
         setError('Failed to load products from backend');
-        setProducts({ products: [] });
+        setProducts({
+          products: [],
+          brands: [],
+          categories: [],
+          companyInfo: {
+            name: '',
+            description: '',
+            mission: '',
+            vision: '',
+            founded: '',
+            employees: '',
+            headquarters: '',
+            phone: '',
+            email: '',
+            website: ''
+          }
+        });
       } finally {
         setLoading(false);
       }

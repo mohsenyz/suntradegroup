@@ -29,7 +29,7 @@ const loadCategories = async () => {
 // Map category slug to display name (async)
 export const getCategoryName = async (slug: string): Promise<string> => {
   const categories = await loadCategories();
-  const category = categories.find(cat => cat.slug === slug);
+  const category = categories?.find(cat => cat.slug === slug);
   return category ? category.name : slug;
 };
 

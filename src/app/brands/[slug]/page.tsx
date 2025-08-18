@@ -25,10 +25,29 @@ async function getProductData(): Promise<ProductData | null> {
   // Fallback data
   return {
     products: [],
-    brands: [{ id: 'sun', slug: 'sun', name: 'سان', logo: '/images/brands/sun-logo.webp' }],
+    brands: [{ 
+      id: 'sun', 
+      slug: 'sun', 
+      name: 'سان', 
+      logo: '/images/brands/sun-logo.webp',
+      description: 'برند پیشرو در تولید ابزار و یراق آلات',
+      founded: '2020',
+      country: 'ایران'
+    }],
     categories: [],
-    companyInfo: { name: 'سان ترد گروپ', tagline: 'ابزار و یراق آلات' }
-  } as ProductData;
+    companyInfo: { 
+      name: 'سان ترد گروپ', 
+      description: 'شرکت پیشرو در ابزار و یراق آلات',
+      mission: 'ارائه بهترین محصولات',
+      vision: 'پیشرو در بازار ایران',
+      founded: '2020',
+      employees: '50+',
+      headquarters: 'تهران',
+      phone: '021-12345678',
+      email: 'info@suntradegroup.com',
+      website: 'suntradegroup.com'
+    }
+  };
 }
 
 async function getBrand(slug: string): Promise<Brand | null> {
@@ -71,7 +90,11 @@ export default async function BrandPage({ params }: BrandPageProps) {
     notFound();
   }
 
-  const productData = data as ProductData;
+  const productData = await getProductData();
+  if (!productData) {
+    notFound();
+  }
+  
   const brandProducts = productData.products.filter(
     product => product.brand === brand.name
   );

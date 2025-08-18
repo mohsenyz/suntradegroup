@@ -111,7 +111,7 @@ export function useTexts() {
         setLoading(true);
         
         // Load all text types from API only
-        const loadTextType = async (type: string, setter: (data: unknown) => void) => {
+        const loadTextType = async (type: string, setter: any) => {
           try {
             const apiResponse = await fetch(`http://localhost:8080/api/texts-${type}`);
             if (apiResponse.ok) {
