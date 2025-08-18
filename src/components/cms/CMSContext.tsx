@@ -262,23 +262,13 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
       // Load local data files
       const localData: Record<string, unknown> = {};
 
-      // Load products
-      try {
-        const productsResponse = await import('@/data/products.json');
-        localData.products = productsResponse.default;
-      } catch {
-        console.warn('No local products file found');
-      }
+      // Products - use empty default structure
+      localData.products = { products: [] };
 
-      // Load text files
+      // Text files - use empty default structures
       const textFiles = ['common', 'pages', 'forms'];
       for (const file of textFiles) {
-        try {
-          const textResponse = await import(`@/data/texts/${file}.json`);
-          localData[`texts-${file}`] = textResponse.default;
-        } catch {
-          console.warn(`No local ${file} texts file found`);
-        }
+        localData[`texts-${file}`] = {};
       }
 
       // Add default categories
@@ -295,8 +285,7 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
       // Add default brands
       localData.brands = {
         brands: [
-          { id: 'sun-brand', name: 'سان', slug: 'sun-brand', logo: '/images/brands/sun-brand-logo.webp' },
-          { id: 'moon-brand', name: 'مون', slug: 'moon-brand', logo: '/images/brands/moon-brand-logo.webp' }
+          { id: 'sun-brand', name: 'سان', slug: 'sun-brand', logo: '/images/brands/sun-brand-logo.webp' }
         ]
       };
 

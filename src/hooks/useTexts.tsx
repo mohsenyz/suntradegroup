@@ -110,31 +110,30 @@ export function useTexts() {
       try {
         setLoading(true);
         
-        // Try to load from API first, then fall back to static files
-        try {
-          const apiResponse = await fetch('http://localhost:8080/api/texts-common');
-          if (apiResponse.ok) {
-            const responseData = await apiResponse.json();
-            const commonData = responseData.data || responseData;
-            console.log('[useTexts] Loaded common texts from API successfully');
-            setCommonTexts(commonData);
-          } else {
-            throw new Error('API response not ok');
+        // Load all text types from API only
+        const loadTextType = async (type: string, setter: (data: unknown) => void) => {
+          try {
+            const apiResponse = await fetch(`http://localhost:8080/api/texts-${type}`);
+            if (apiResponse.ok) {
+              const responseData = await apiResponse.json();
+              const data = responseData.data || responseData;
+              console.log(`[useTexts] Loaded ${type} texts from API successfully`);
+              setter(data);
+            } else {
+              throw new Error('API response not ok');
+            }
+          } catch (err) {
+            console.error(`[useTexts] Failed to load ${type} texts from API:`, err);
+            setter({});
           }
-        } catch {
-          console.warn('[useTexts] API failed, falling back to static files');
-          const commonResponse = await import('../data/texts/common.json');
-          setCommonTexts(commonResponse.default);
-        }
+        };
 
-        // Load pages and forms from static files (CMS doesn't manage these yet)
-        const [pageResponse, formResponse] = await Promise.all([
-          import('../data/texts/pages.json'),
-          import('../data/texts/forms.json')
+        // Load all text types in parallel
+        await Promise.all([
+          loadTextType('common', setCommonTexts),
+          loadTextType('pages', setPageTexts),
+          loadTextType('forms', setFormTexts)
         ]);
-
-        setPageTexts(pageResponse.default);
-        setFormTexts(formResponse.default);
         setError(null);
       } catch (err) {
         console.error('Error loading texts:', err);

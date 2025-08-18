@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -7,13 +9,14 @@ import {
   MapPinIcon,
   GlobeAltIcon 
 } from '@heroicons/react/24/outline';
-import data from '@/data/products.json';
+import { useProducts } from '@/hooks/useData';
 import { ProductData } from '@/types';
 import BuildInfo from '@/components/cms/BuildInfo';
 
 const Footer = () => {
-  const productData = data as ProductData;
-  const categories = productData.categories || [];
+  const { products: productsData } = useProducts();
+  const productData = productsData as ProductData;
+  const categories = productData?.categories || [];
   
   return (
     <footer className="bg-gray-900 text-white">

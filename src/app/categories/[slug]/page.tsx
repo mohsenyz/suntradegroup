@@ -3,20 +3,50 @@ import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductGrid from '@/components/ProductGrid';
-import data from '@/data/products.json';
+// Removed static import - using API data instead
 import { ProductData, Category } from '@/types';
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
 }
 
+async function getProductData(): Promise<ProductData | null> {
+  try {
+    const response = await fetch('http://localhost:8080/api/products', {
+      cache: 'no-store'
+    });
+    if (response.ok) {
+      const result = await response.json();
+      return result.data || result;
+    }
+  } catch {
+    console.warn('API not available, using fallback data');
+  }
+  
+  // Fallback data
+  return {
+    products: [],
+    brands: [],
+    categories: [
+      { id: 'shovels-pickaxes', slug: 'shovels-pickaxes', name: 'بیل و کلنگ' },
+      { id: 'nails-saws', slug: 'nails-saws', name: 'میخ و اره' },
+      { id: 'locks-cylinders', slug: 'locks-cylinders', name: 'قفل و سیلندر' },
+      { id: 'mesh-chains', slug: 'mesh-chains', name: 'توری و زنجیر' },
+      { id: 'ropes-threads', slug: 'ropes-threads', name: 'ریسمانکار و سر رزوه' }
+    ],
+    companyInfo: { name: 'سان ترد گروپ', tagline: 'ابزار و یراق آلات' }
+  } as ProductData;
+}
+
 async function getCategory(slug: string): Promise<Category | null> {
-  const productData = data as ProductData;
+  const productData = await getProductData();
+  if (!productData) return null;
   return productData.categories.find(category => category.slug === slug) || null;
 }
 
 export async function generateStaticParams() {
-  const productData = data as ProductData;
+  const productData = await getProductData();
+  if (!productData) return [];
   return productData.categories.map((category) => ({
     slug: category.slug,
   }));

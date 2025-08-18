@@ -191,7 +191,7 @@ test.describe('Complete CMS→Frontend Integration', () => {
     await expect(page.locator('.bg-white').first()).toBeVisible({ timeout: 5000 });
     
     // Check for brand names
-    const hasBrands = await page.locator('h3:has-text("سان"), h3:has-text("مون")').first().isVisible();
+    const hasBrands = await page.locator('h3:has-text("سان")').first().isVisible();
     expect(hasBrands).toBe(true);
     
     console.log('✅ Brands page integration verified: brands loaded from API');

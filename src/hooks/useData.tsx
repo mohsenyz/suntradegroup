@@ -16,16 +16,9 @@ export function useProducts() {
         const data = await jsonApi.loadProducts();
         setProducts(data);
       } catch {
-        console.warn('Failed to load products from backend, using fallback');
-        setError('Failed to load from backend');
-        // Fallback to local data
-        try {
-          const response = await import('@/data/products.json');
-          setProducts(response.default);
-        } catch (fallbackErr) {
-          console.error('Failed to load products:', fallbackErr);
-          setError('Failed to load products');
-        }
+        console.error('Failed to load products from backend');
+        setError('Failed to load products from backend');
+        setProducts({ products: [] });
       } finally {
         setLoading(false);
       }
@@ -49,16 +42,9 @@ export function useTexts(category: string = 'common') {
         const data = await jsonApi.loadTexts(category);
         setTexts(data);
       } catch {
-        console.warn(`Failed to load texts-${category} from backend, using fallback`);
-        setError('Failed to load from backend');
-        // Fallback to local data
-        try {
-          const response = await import(`@/data/texts/${category}.json`);
-          setTexts(response.default);
-        } catch (fallbackErr) {
-          console.error(`Failed to load texts-${category}:`, fallbackErr);
-          setError(`Failed to load texts-${category}`);
-        }
+        console.error(`Failed to load texts-${category} from backend`);
+        setError(`Failed to load texts-${category} from backend`);
+        setTexts({});
       } finally {
         setLoading(false);
       }
@@ -122,8 +108,7 @@ export function useBrands() {
         // Fallback to default brands
         setBrands({
           brands: [
-            { id: 'sun-brand', name: 'سان', slug: 'sun-brand', logo: '/images/brands/sun-brand-logo.webp' },
-            { id: 'moon-brand', name: 'مون', slug: 'moon-brand', logo: '/images/brands/moon-brand-logo.webp' }
+            { id: 'sun-brand', name: 'سان', slug: 'sun-brand', logo: '/images/brands/sun-brand-logo.webp' }
           ]
         });
       } finally {

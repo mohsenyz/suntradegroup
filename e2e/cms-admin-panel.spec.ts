@@ -146,11 +146,11 @@ test.describe('CMS Admin Panel', () => {
     test('should show default categories', async ({ page }) => {
       await page.getByRole('button', { name: 'مدیریت دسته‌بندی‌ها' }).click();
       
-      // Check for expected categories (based on fallback data)
+      // Check for expected categories (based on current data)
       await expect(page.getByText('قفل و سیلندر')).toBeVisible();
       await expect(page.getByText('توری و زنجیر')).toBeVisible();
       await expect(page.getByText('میخ و اره')).toBeVisible();
-      await expect(page.getByText('طناب و نخ')).toBeVisible();
+      await expect(page.getByText('ریسمانکار و سر رزوه')).toBeVisible();
       await expect(page.getByText('بیل و کلنگ')).toBeVisible();
     });
   });

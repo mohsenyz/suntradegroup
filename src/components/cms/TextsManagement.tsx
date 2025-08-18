@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useCMSContext } from './CMSContext';
+import { jsonApi } from '@/utils/apiClient';
 
 // Recursive Text Editor Component
 function TextEditor({ data, onChange, prefix = '' }: { 
@@ -148,8 +149,8 @@ export default function TextsManagement() {
   const loadTextFile = async (fileName: string) => {
     setLoading(true);
     try {
-      const response = await import(`@/data/texts/${fileName}.json`);
-      updateTextsData(fileName, response.default);
+      const data = await jsonApi.loadTexts(fileName);
+      updateTextsData(fileName, data);
     } catch (error) {
       console.error('Error loading text file:', error);
       updateTextsData(fileName, {});

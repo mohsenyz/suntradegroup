@@ -5,14 +5,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Search from './Search';
-import productsData from '@/data/products.json';
 import { useTexts } from '@/hooks/useTexts';
+import { useProducts } from '@/hooks/useData';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { t, loading } = useTexts();
+  const { t, loading: textsLoading } = useTexts();
+  const { products: productsData, loading: productsLoading } = useProducts();
 
-  if (loading) {
+  if (textsLoading || productsLoading) {
     return (
       <header className="bg-white shadow-lg sticky top-0 z-50">
         <div className="container mx-auto px-4">
@@ -68,9 +69,9 @@ const Header = () => {
 
           <div className="hidden md:flex items-center space-x-4 space-x-reverse">
             <Search
-              products={productsData.products}
-              brands={productsData.brands}
-              categories={productsData.categories}
+              products={productsData?.products || []}
+              brands={productsData?.brands || []}
+              categories={productsData?.categories || []}
               className="w-80"
             />
           </div>
@@ -94,9 +95,9 @@ const Header = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
               <div className="mb-4">
                 <Search
-                  products={productsData.products}
-                  brands={productsData.brands}
-                  categories={productsData.categories}
+                  products={productsData?.products || []}
+                  brands={productsData?.brands || []}
+                  categories={productsData?.categories || []}
                   className="w-full"
                   onClose={() => setIsMenuOpen(false)}
                 />

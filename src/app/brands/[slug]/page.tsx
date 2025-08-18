@@ -3,20 +3,43 @@ import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductGrid from '@/components/ProductGrid';
-import data from '@/data/products.json';
 import { ProductData, Brand } from '@/types';
 
 interface BrandPageProps {
   params: Promise<{ slug: string }>;
 }
 
+async function getProductData(): Promise<ProductData | null> {
+  try {
+    const response = await fetch('http://localhost:8080/api/products', {
+      cache: 'no-store'
+    });
+    if (response.ok) {
+      const result = await response.json();
+      return result.data || result;
+    }
+  } catch {
+    console.warn('API not available, using fallback data');
+  }
+  
+  // Fallback data
+  return {
+    products: [],
+    brands: [{ id: 'sun', slug: 'sun', name: 'سان', logo: '/images/brands/sun-logo.webp' }],
+    categories: [],
+    companyInfo: { name: 'سان ترد گروپ', tagline: 'ابزار و یراق آلات' }
+  } as ProductData;
+}
+
 async function getBrand(slug: string): Promise<Brand | null> {
-  const productData = data as ProductData;
+  const productData = await getProductData();
+  if (!productData) return null;
   return productData.brands.find(brand => brand.slug === slug) || null;
 }
 
 export async function generateStaticParams() {
-  const productData = data as ProductData;
+  const productData = await getProductData();
+  if (!productData) return [];
   return productData.brands.map((brand) => ({
     slug: brand.slug,
   }));

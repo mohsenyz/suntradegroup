@@ -78,7 +78,7 @@ jobs:
         continue-on-error: true # Allow build to continue with warnings
 
       - name: 🔨 Build Next.js application
-        run: npx next build --no-lint
+        run: BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ") npx next build --no-lint
         env:
           NODE_ENV: production
 
@@ -312,7 +312,7 @@ jobs:
         run: npm ci --prefer-offline --no-audit
 
       - name: 🔨 Build for staging
-        run: npx next build --no-lint
+        run: BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ") npx next build --no-lint
         env:
           NODE_ENV: production
 

@@ -80,7 +80,7 @@ jobs:
       - name: 🔨 Build application
         run: |
           echo "🔨 Building with Node.js ${{ matrix.node-version }}..."
-          npm run build
+          BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ") npm run build
         env:
           NODE_ENV: production
 
@@ -224,7 +224,7 @@ jobs:
         run: npm ci --prefer-offline --no-audit
 
       - name: 🔨 Build for performance testing
-        run: npx next build --no-lint
+        run: BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ") npx next build --no-lint
 
       - name: 🚀 Start server for testing
         run: |

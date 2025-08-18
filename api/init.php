@@ -60,8 +60,7 @@ echo "✓ Categories data initialized\n";
 // Initialize brands
 $brandsData = [
     'brands' => [
-        ['id' => 'sun-brand', 'name' => 'سان', 'slug' => 'sun-brand', 'logo' => '/images/brands/sun-brand-logo.png'],
-        ['id' => 'moon-brand', 'name' => 'مون', 'slug' => 'moon-brand', 'logo' => '/images/brands/moon-brand-logo.png']
+        ['id' => 'sun-brand', 'name' => 'سان', 'slug' => 'sun-brand', 'logo' => '/images/brands/sun-brand-logo.png']
     ]
 ];
 file_put_contents($DATA_DIR . '/brands.json', json_encode($brandsData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));

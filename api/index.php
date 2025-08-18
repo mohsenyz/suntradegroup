@@ -256,7 +256,7 @@ switch ($method) {
             // List all data types
             authenticate();
             try {
-                $tables = ['categories', 'brands', 'products', 'contacts', 'ui_texts'];
+                $tables = ['categories', 'brands', 'products', 'category_banners', 'contacts', 'ui_texts'];
                 $dataList = [];
                 
                 foreach ($tables as $table) {
@@ -278,6 +278,9 @@ switch ($method) {
                             $fileList[] = ['name' => 'texts-pages'];
                             $fileList[] = ['name' => 'texts-forms'];
                             break;
+                        case 'category_banners':
+                            $fileList[] = ['name' => 'category-banners'];
+                            break;
                         default:
                             $fileList[] = ['name' => $item['name']];
                             break;
@@ -291,7 +294,7 @@ switch ($method) {
             }
         } else {
             // Get specific data
-            $publicEndpoints = ['products', 'categories', 'brands', 'texts-common', 'texts-pages', 'texts-forms'];
+            $publicEndpoints = ['products', 'categories', 'brands', 'category-banners', 'texts-common', 'texts-pages', 'texts-forms'];
             
             if (!in_array($path, $publicEndpoints)) {
                 authenticate();
@@ -371,6 +374,15 @@ switch ($method) {
                         echo json_encode([
                             'filename' => 'brands',
                             'data' => ['brands' => $brands],
+                            'source' => 'database'
+                        ]);
+                        break;
+                        
+                    case 'category-banners':
+                        $banners = $db->fetchAll("SELECT * FROM category_banners WHERE active = 1 ORDER BY display_order ASC");
+                        echo json_encode([
+                            'filename' => 'category-banners',
+                            'data' => $banners,
                             'source' => 'database'
                         ]);
                         break;
@@ -575,6 +587,25 @@ switch ($method) {
                     }
                     break;
                     
+                case 'category-banners':
+                    if (isset($input['data']) && is_array($input['data'])) {
+                        // Clear and rebuild category banners
+                        $db->query("DELETE FROM category_banners");
+                        
+                        foreach ($input['data'] as $index => $bannerData) {
+                            $banner = [
+                                'image' => $bannerData['image'],
+                                'category' => $bannerData['category'],
+                                'url' => $bannerData['url'],
+                                'alt' => $bannerData['alt'] ?? $bannerData['category'],
+                                'display_order' => $bannerData['display_order'] ?? ($index + 1),
+                                'active' => $bannerData['active'] ?? 1
+                            ];
+                            $db->insert('category_banners', $banner);
+                        }
+                    }
+                    break;
+                    
                 case 'texts-common':
                 case 'texts-forms':
                 case 'texts-pages':
@@ -641,6 +672,9 @@ switch ($method) {
                     break;
                 case 'brands':
                     $db->query("DELETE FROM brands");
+                    break;
+                case 'category-banners':
+                    $db->query("DELETE FROM category_banners");
                     break;
                 case 'contacts':
                     $db->query("DELETE FROM contacts");

@@ -114,6 +114,19 @@ CREATE TABLE IF NOT EXISTS company_info (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Category banners table
+CREATE TABLE IF NOT EXISTS category_banners (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    image TEXT NOT NULL,
+    category TEXT NOT NULL,
+    url TEXT NOT NULL,
+    alt TEXT,
+    display_order INTEGER DEFAULT 0,
+    active BOOLEAN DEFAULT 1,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Performance Indexes
 -- Categories indexes
 CREATE INDEX IF NOT EXISTS idx_categories_slug ON categories(slug);
@@ -154,6 +167,11 @@ CREATE INDEX IF NOT EXISTS idx_ui_texts_updated_at ON ui_texts(updated_at);
 CREATE INDEX IF NOT EXISTS idx_rate_limits_endpoint ON rate_limits(endpoint);
 CREATE INDEX IF NOT EXISTS idx_rate_limits_ip_address ON rate_limits(ip_address);
 CREATE INDEX IF NOT EXISTS idx_rate_limits_created_at ON rate_limits(created_at);
+
+-- Category banners indexes
+CREATE INDEX IF NOT EXISTS idx_category_banners_category ON category_banners(category);
+CREATE INDEX IF NOT EXISTS idx_category_banners_active ON category_banners(active);
+CREATE INDEX IF NOT EXISTS idx_category_banners_display_order ON category_banners(display_order);
 
 -- Triggers for updated_at timestamps
 CREATE TRIGGER IF NOT EXISTS trigger_categories_updated_at 
@@ -202,4 +220,10 @@ CREATE TRIGGER IF NOT EXISTS trigger_company_info_updated_at
     AFTER UPDATE ON company_info
     BEGIN
         UPDATE company_info SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
+    END;
+
+CREATE TRIGGER IF NOT EXISTS trigger_category_banners_updated_at 
+    AFTER UPDATE ON category_banners
+    BEGIN
+        UPDATE category_banners SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
     END;
