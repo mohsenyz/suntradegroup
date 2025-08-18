@@ -64,14 +64,19 @@ export async function generateStaticParams() {
         slug: brand.slug,
       }));
     }
-  } catch {
-    console.warn('API not available during build, using fallback brand params');
+  } catch (error) {
+    console.error('API failed during build:', error);
   }
   
-  // Return fallback brand slugs for static export when API is not available
-  return [
-    { slug: 'sun' }
-  ];
+  // Only provide fallback params during build time (CI/CD environment)
+  if (process.env.NODE_ENV === 'production' && process.env.BUILD_TIME) {
+    console.warn('API not available during build, using minimal fallback brand params for static export');
+    return [{ slug: 'sun' }];
+  }
+  
+  // If we're not in build mode and API failed, return empty array
+  console.error('API unavailable and not in build mode - no static params generated');
+  return [];
 }
 
 export async function generateMetadata({ params }: BrandPageProps): Promise<Metadata> {

@@ -60,19 +60,26 @@ export async function generateStaticParams() {
         slug: product.slug,
       }));
     }
-  } catch {
-    console.warn('API not available during build, using fallback product params');
+  } catch (error) {
+    console.error('API failed during build:', error);
   }
   
-  // Return fallback product slugs for static export when API is not available
-  // This ensures the build doesn't fail in CI/CD environments
-  return [
-    { slug: 'steel-spade-shovel-black-gold-sun' },
-    { slug: 'galvanized-steel-nails-sun' },
-    { slug: 'mason-line-sun' },
-    { slug: 'padlock-sun' },
-    { slug: 'cylinder-7cm-full-brass-5-keys-sun' }
-  ];
+  // Only provide fallback params during build time (CI/CD environment)
+  // In production, this should fail if API is unavailable
+  if (process.env.NODE_ENV === 'production' && process.env.BUILD_TIME) {
+    console.warn('API not available during build, using minimal fallback product params for static export');
+    return [
+      { slug: 'steel-spade-shovel-black-gold-sun' },
+      { slug: 'galvanized-steel-nails-sun' },
+      { slug: 'mason-line-sun' },
+      { slug: 'padlock-sun' },
+      { slug: 'cylinder-7cm-full-brass-5-keys-sun' }
+    ];
+  }
+  
+  // If we're not in build mode and API failed, return empty array
+  console.error('API unavailable and not in build mode - no static params generated');
+  return [];
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {

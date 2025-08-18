@@ -93,18 +93,25 @@ export async function generateStaticParams() {
         slug: category.slug,
       }));
     }
-  } catch {
-    console.warn('API not available during build, using fallback category params');
+  } catch (error) {
+    console.error('API failed during build:', error);
   }
   
-  // Return fallback category slugs for static export when API is not available
-  return [
-    { slug: 'shovels-pickaxes' },
-    { slug: 'nails-saws' },
-    { slug: 'locks-cylinders' },
-    { slug: 'mesh-chains' },
-    { slug: 'ropes-threads' }
-  ];
+  // Only provide fallback params during build time (CI/CD environment)
+  if (process.env.NODE_ENV === 'production' && process.env.BUILD_TIME) {
+    console.warn('API not available during build, using minimal fallback category params for static export');
+    return [
+      { slug: 'shovels-pickaxes' },
+      { slug: 'nails-saws' },
+      { slug: 'locks-cylinders' },
+      { slug: 'mesh-chains' },
+      { slug: 'ropes-threads' }
+    ];
+  }
+  
+  // If we're not in build mode and API failed, return empty array
+  console.error('API unavailable and not in build mode - no static params generated');
+  return [];
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
