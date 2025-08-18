@@ -86,11 +86,25 @@ async function getCategory(slug: string): Promise<Category | null> {
 }
 
 export async function generateStaticParams() {
-  const productData = await getProductData();
-  if (!productData) return [];
-  return productData.categories.map((category) => ({
-    slug: category.slug,
-  }));
+  try {
+    const productData = await getProductData();
+    if (productData && productData.categories.length > 0) {
+      return productData.categories.map((category) => ({
+        slug: category.slug,
+      }));
+    }
+  } catch {
+    console.warn('API not available during build, using fallback category params');
+  }
+  
+  // Return fallback category slugs for static export when API is not available
+  return [
+    { slug: 'shovels-pickaxes' },
+    { slug: 'nails-saws' },
+    { slug: 'locks-cylinders' },
+    { slug: 'mesh-chains' },
+    { slug: 'ropes-threads' }
+  ];
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {

@@ -57,11 +57,21 @@ async function getBrand(slug: string): Promise<Brand | null> {
 }
 
 export async function generateStaticParams() {
-  const productData = await getProductData();
-  if (!productData) return [];
-  return productData.brands.map((brand) => ({
-    slug: brand.slug,
-  }));
+  try {
+    const productData = await getProductData();
+    if (productData && productData.brands.length > 0) {
+      return productData.brands.map((brand) => ({
+        slug: brand.slug,
+      }));
+    }
+  } catch {
+    console.warn('API not available during build, using fallback brand params');
+  }
+  
+  // Return fallback brand slugs for static export when API is not available
+  return [
+    { slug: 'sun' }
+  ];
 }
 
 export async function generateMetadata({ params }: BrandPageProps): Promise<Metadata> {

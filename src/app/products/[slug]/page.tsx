@@ -55,17 +55,24 @@ async function getProduct(slug: string): Promise<Product | null> {
 export async function generateStaticParams() {
   try {
     const productData = await getProductData();
-    if (productData) {
+    if (productData && productData.products.length > 0) {
       return productData.products.map((product: Product) => ({
         slug: product.slug,
       }));
     }
   } catch {
-    console.warn('API not available during build, returning empty params');
+    console.warn('API not available during build, using fallback product params');
   }
   
-  // Return empty array if API is not available - pages will be generated on-demand
-  return [];
+  // Return fallback product slugs for static export when API is not available
+  // This ensures the build doesn't fail in CI/CD environments
+  return [
+    { slug: 'steel-spade-shovel-black-gold-sun' },
+    { slug: 'galvanized-steel-nails-sun' },
+    { slug: 'mason-line-sun' },
+    { slug: 'padlock-sun' },
+    { slug: 'cylinder-7cm-full-brass-5-keys-sun' }
+  ];
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
